@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SPRT2002 Prac Book",
+    "section": "",
+    "text": "Introduction\nThis lab book will be used over the semester to aid in your learning. This is to be used in conjunction with material on vUWS.\nPlease refer to the learning guide, which you can find on vUWS.\n\nImportant notes\n\nPre screening must be completed before being able to participate in practical activties\nData collected over the practicals will be used in your professional reports due in Weeks 9 and 14.\nRegarding assessments, an attempt must be made in ALL assessments to be able to pass the unit.\nCome to class prepared to exercise.\n\n\nLink for Week 1 class\nhttps://docs.google.com/forms/d/e/1FAIpQLScsx7j4a4IhDOkz475ubmXi_Vct8zBGioWnaSWpHPFB45qnKw/viewform?usp=sf_link"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "Practical1.html",
+    "href": "Practical1.html",
+    "title": "1  Practical 1",
+    "section": "",
+    "text": "2 Descriptive statistics recap\nAn essential component of being a sport and exercise scientist is the ability to summarise results collected from groups or individuals correctly. Luckily many of summary statistics that you will need are things that you would have covered in yr 8 and 10 mathematics. These are parameters such as mean, median, mode, standard deviation (SD) and coefficient of variation (CV%).\nAn important aspect to remember is the idea of data we collect from a group we being considered a “sample” from the population. To help build your intuition around this, lets say i wanted to summarise the sprint test results collected from SPRT2002. Now lets say I only used one practical class sprint times to reflect the full cohort of SPRT2002. It would be reasonable for you to say that I am using a sample from the full cohort to represent the sprint capability. This situation effectively anytime we collect data from a group as there always some of the population of interest using missing from our sample.\nThe visual below allows you to randomly sample data from a distribution. Have a play around with both the sample size and population SD sliders and see what you notice."
+  },
+  {
+    "objectID": "Practical1.html#visual-aids",
+    "href": "Practical1.html#visual-aids",
+    "title": "1  Practical 1",
+    "section": "1.4 Visual aids",
+    "text": "1.4 Visual aids\n\n  \n    Add 20 Samples\n    Reset\n  \n  \n\n\n\n\n\n\n\nThis interactive visualization demonstrates how sample size affects our estimation of the population mean and the precision of that estimate.\n\n  \n    Sample Size: 5\n    \n  \n  \n    Population SD: 10\n    \n  \n  \n    Draw New Sample\n    Clear All\n  \n  \n\n\n\n\n\n\n\n1.4.1 Reflection\nWhat do you notice from playing around with the above plot?\n\n\n\n\n\n\nClick below\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat function loads a package that is already on your computer? install.packageinstall.packageslibrarylibraries\nTest"
+  },
+  {
+    "objectID": "Practical1.html#end",
+    "href": "Practical1.html#end",
+    "title": "1  Practical 1",
+    "section": "1.2 End",
+    "text": "1.2 End"
+  },
+  {
+    "objectID": "Practical1.html#understanding-sampling-distributions-and-standard-error",
+    "href": "Practical1.html#understanding-sampling-distributions-and-standard-error",
+    "title": "Sampling Distribution and Standard Error",
+    "section": "1.2 Understanding Sampling Distributions and Standard Error",
+    "text": "1.2 Understanding Sampling Distributions and Standard Error\nThis interactive visualization demonstrates how sample size affects our estimation of the population mean and the precision of that estimate.\n\n```{=html}\n\n\n&lt;div class=\"slider-container\"&gt;\n  &lt;label for=\"sampleSize\"&gt;\n    Sample Size: &lt;span id=\"sampleSizeValue\"&gt;30&lt;/span&gt;\n  &lt;/label&gt;\n  &lt;input type=\"range\" id=\"sampleSize\" min=\"5\" max=\"100\" value=\"30\"&gt;\n&lt;/div&gt;\n&lt;div class=\"button-panel\"&gt;\n  &lt;button id=\"drawSample\"&gt;Draw New Sample&lt;/button&gt;\n  &lt;button id=\"reset\"&gt;Reset&lt;/button&gt;\n  &lt;button id=\"toggleCI\"&gt;Show Confidence Intervals&lt;/button&gt;\n&lt;/div&gt;\n\n\n\n\n\n\n  Add Data Point\n  \n\n\n\n\n\n\n\ntest\nTest"
+  },
+  {
+    "objectID": "Practical1.html#learning-outcome",
+    "href": "Practical1.html#learning-outcome",
+    "title": "1  Practical 1",
+    "section": "1.1 Learning Outcome:",
+    "text": "1.1 Learning Outcome:\n\nUnderstand measurement accuracy concepts and their application to exercise testing and measurement\nEvaluate the feasibility of different tests according to environmental conditions and client characteristics\nDemonstrate basic data processing and analytical techniques for calculating distribution based statistics (Mean, Standard Deviation)\n\n\n1.1.1 Assessments:\nThis is the first of three lab weeks (weeks 2, 3 and 4) where the data you collect will be used for your first professional report assessment (1-page report). HELPFUL TIP: The more attention you pay to the quality of your data during this final lab, the better your report will be\n\n\n1.1.2 Background:\nMaximal sprinting speed and its derivate acceleration have both been shown to be key discriminators in playing status across many sports. Whilst, performing a maximal sprint test would give the most valid insight into these qualities, it may not always be possible to perform this test in a practical environment due factors such as, perceived risk of injury and cost of equipment (timing gates, radar gun etc). Hence, identifying cost effective test that may give insight into these qualities is of interest.\nTwo commonly used test that are used as both proxy measures of acceleration and sprinting speed respectively are the standing broad jump (SBJ) and assessment of lower limb stiffness. Whilst a number of techniques for measuring lower limb stiffness exist, the test we will focus on today is the drop jump test.\nPART 1 of today will involve collecting data across a 0-10m sprint test, standing broad jump and drop jump test (look to get at least two trials across each test). Data collected from this will be uploaded on vUWS where we’ll then look do PART 2 aims of today which involve calculating basic summary statistics that represent the mean and spread/deviation of the data."
+  },
+  {
+    "objectID": "Practical1.html#practical-procedures-part-1",
+    "href": "Practical1.html#practical-procedures-part-1",
+    "title": "1  Practical 1",
+    "section": "1.2 Practical Procedures (PART 1):",
+    "text": "1.2 Practical Procedures (PART 1):\n\n1.2.1 Broad Jump\nAfter completing a standardised warm-up administered by the tutor, you will complete a series of maximal effort horizontal jumps. The individual being tested needs to stand behind a marker on the ground, with their toes directly in line with the marker. They are then permitted to do a counter-movement before they jump. By this we mean that the individual is allowed to bend their knees and trunk and to swing their arms before take-off to help them generate power. The landing must be on both feet, and the effort should be repeated if the individual falls backwards or takes a step before take-off. The standard procedure is for a two-foot take off and landing, where distance between the toes and the first landing point (or heel-strike) identified by the assessor is recorded. Continue until everyone has completed all efforts. Be sure to record the maximal distance achieved.\n\n\n1.2.2 Max speed assessment\nData Collection: You will be required to gather into groups of 4 or 5, and establish a testing order within the group. After completing the standardised warm-up administered by the tutor, you will complete a pre-determined number of maximal sprint efforts over a 10m distance (with a timing gate at 5m also). Your times will be recorded automatically by electronic timing gates (Swift SpeedLight TimingTM Gates) as well as by your group members (handheld stopwatches). Be sure to record all times so that you are able to match each electronic timer score with those recorded by your peers with the stopwatch. Continue until everyone has completed all efforts.\n\n\n1.2.3 Drop Jump assessment\n\n Stand on a box or elevated platform behind.\nPlace your hands on your hips.\nKeep your chest up and look forward.\nStep off the box; then.\nLand on the plates with both feet at the same time;\nImmediately jump as high as possible; then\nLand softly, remaining completely still on the jump mat.\nRecord RSI from device"
+  },
+  {
+    "objectID": "Practical1.html#practical-procedures-part-2",
+    "href": "Practical1.html#practical-procedures-part-2",
+    "title": "1  Practical 1",
+    "section": "1.3 Practical Procedures (PART 2):",
+    "text": "1.3 Practical Procedures (PART 2):\nREMEMBER: the data you collect today and over the previous week’s labs will be used for your first 1-page report…so be attentive and ask questions during PART 2 of the lab session!\nUse lecture material as a reference point to calculate mean and standard deviation of data collected. ( you may use excel functions but also have a go going step by step through calculations)\n\nPractice plotting data has a histogram.\nCalculate the mean, sd and CV%\nCalculate Z – Scores (Also outlined in lecture material)\n\nReflection Question:\n\nWhy is important to understand how your data is distributed?\n\nWhy is the practical reason for us transforming numbers into a Zscore?\n\nWhen trying to describe a distribution what are the most important components we would want to know?"
+  },
+  {
+    "objectID": "Practical1.html#test-your-learning",
+    "href": "Practical1.html#test-your-learning",
+    "title": "1  Practical 1",
+    "section": "2.1 Test your learning",
+    "text": "2.1 Test your learning\nQuestion 1\nIf you calculate a mean from a sample of 100 participants, this mean is:\n\n Always exactly equal to the true population mean Always lower than the true population mean Not related to the true population mean An estimate of the true population mean\n\nQuestion 2\nWhen the population standard deviation increases, what happens to the standard error of the mean?\n\n It decreases It stays the same It becomes zero It increases\n\nQuestion 3\nA researcher collects vertical jump data from 25 athletes and calculates a 95% confidence interval of [45cm, 55cm]. This means: 95% of all athletes’ jumps fall between 45cm and 55cmThe true population mean definitely lies between 45cm and 55cm95% of individual jump heights in this sample fall between 45cm and 55cmIf we repeated this sampling process many times, about 95% of the calculated intervals would contain the true population mean\nQuestion 4\nIf you have a sample mean of 50 and a standard error of 2, what is the 68% confidence interval?\n\n [46, 54] [47, 53] [49, 51] [48, 52]\n\nQuestion 5\nWhich of the following would NOT reduce the standard error of the mean?\n\n Increasing the sample size Reducing measurement error Using more precise equipment Calculating the median instead of the mean\n\nQuestion 6\nThe coefficient of variation (CV%) is 15% for a group of athletes’ sprint times. This indicates:\n\n The data varies by exactly 15 seconds 15% of the data points are outliers The confidence interval is 15% wide The standard deviation is 15% of the mean value"
+  }
+]
