@@ -223,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1.2" class="anchored" data-anchor-id="practical-procedures-part-1"><span class="header-section-number">1.2</span> <u><strong><em>Practical Procedures (PART 1)</em></strong></u><strong><em>:</em></strong></h2>
 <p>Before completing each assessment as a group discuss what you think would be an appropriate warm up and then action the warm up together before completing trials.</p>
 <p>For each assessment make at least one individual is updating the results into the Google form below.</p>
-<p><a href="https://docs.google.com/forms/d/e/1FAIpQLScmLb6ehAbiynlVfg4veQo0S_QyQEwYGfoPRejP6zkODvk12g/viewform" class="uri">https://docs.google.com/forms/d/e/1FAIpQLScmLb6ehAbiynlVfg4veQo0S_QyQEwYGfoPRejP6zkODvk12g/viewform</a></p>
+<p><a href="https://docs.google.com/spreadsheets/d/1ovjxRvN4N5482ikOBO_SK1qetU6CBPnkArYUs_rRigM/edit?usp=sharing" class="uri">https://docs.google.com/spreadsheets/d/1ovjxRvN4N5482ikOBO_SK1qetU6CBPnkArYUs_rRigM/edit?usp=sharing</a></p>
 <section id="broad-jump" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="broad-jump"><span class="header-section-number">1.2.1</span> Broad Jump</h3>
 <p><a href="https://www.youtube.com/watch?v=n0UeHxglMJ4" class="uri">https://www.youtube.com/watch?v=n0UeHxglMJ4</a></p>
@@ -601,10 +601,12 @@ updateDisplay(0);
 <h1 data-number="2"><span class="header-section-number">2</span> Descriptive statistics recap</h1>
 <p><strong>Material discussed below was discussed in more detail in the week 2 lecture.</strong></p>
 <p>An essential component of being a sport and exercise scientist is the ability to summarise results collected from groups or individuals correctly. Luckily many of summary statistics that you will need are things that you would have covered in yr 8 and 10 mathematics. These are parameters such as <strong>mean, median, mode</strong>, <strong>standard deviation (SD)</strong> and <strong>coefficient of variation (CV%)</strong>.</p>
-<p>An important aspect to remember is the idea of data we collect from a group we being considered a “sample” from the population. To help build your intuition around this, lets say i wanted to summarise the sprint test results collected from SPRT2002. Now imagine I only used one practical class sprint times to reflect the full cohort of SPRT2002. It would be reasonable for you to say that I am only using a sample from the full cohort to represent the sprint capability. This situation arises effectively anytime we collect data from a group as there always some of the population of interest using missing from our sample.</p>
-<p>The visual below allows you to randomly sample data from a distribution. Have a play around with both the sample size and population SD sliders and see what you notice.</p>
+<p>An important aspect to remember is the idea that data we collect from a group consider a “sample” from the population. To help build your intuition around this, lets say I wanted to summarise the sprint test results collected from SPRT2002. Now imagine I only used one practical class sprint times to reflect the full cohort of SPRT2002. It would be reasonable for you to say that I am only using a sample from the full cohort to represent the sprint capability. This situation arises effectively any time we collect data from a group as there always some of the population of interest using missing from our sample.</p>
 <section id="fig1" class="level3" data-number="2.0.1">
 <h3 data-number="2.0.1" class="anchored" data-anchor-id="fig1"><span class="header-section-number">2.0.1</span> Fig1</h3>
+<p>The visualization below demonstrates random sampling from a normal distribution with a fixed population mean of 50. You can adjust the population standard deviation using the slider, which changes the spread of the underlying distribution.</p>
+<p>When you click “Add Samples,” the tool draws a random sample from this population (visualized as green dots falling from the distribution curve), then calculates and displays key sample statistics including the mean, median, standard deviation, standard error, confidence intervals, range, and coefficient of variation.</p>
+<p>This interactive demonstration illustrates an important statistical concept: in real-world research however, we never know the true population parameters (mean and SD). Instead, we only work with sample statistics to make inferences about the unknown population. By repeatedly drawing different samples, you can observe how sample statistics vary around the true population values, highlighting concepts like sampling variability and estimation precision</p>
 <div class="viz-container">
   <div class="controls">
     <div class="slider-container">
@@ -854,6 +856,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (samples.length > 0) {
       const mean = d3.mean(samples);
       const sd = d3.deviation(samples);
+      const se = sd/Math.sqrt(samples.length);
+      const LL = mean - se*1.96
+      const UL = mean + se*1.96
       const min = d3.min(samples);
       const max = d3.max(samples);
       const range = max - min;
@@ -863,9 +868,13 @@ document.addEventListener('DOMContentLoaded', function() {
       const mode = d3.mode(samples.map(x => Math.round(x)));
 
       const annotations = [
-        `Sample Mean (x̄) = ${mean.toFixed(1)}`,
-        `Sample Median = ${median.toFixed(1)}`,
-        `Sample SD (s) = ${sd.toFixed(1)}`,
+        `Sample statistics`,
+        `Mean (x̄) = ${mean.toFixed(1)}`,
+        `Median = ${median.toFixed(1)}`,
+        `SD = ${sd.toFixed(1)}`,
+        `SE = ${se.toFixed(1)}`,
+        `95% LL = ${LL.toFixed(1)}`,
+        `95% UL = ${UL.toFixed(1)}`,
         `Min = ${min.toFixed(1)}`,
         `Max = ${max.toFixed(1)}`,
         `Range = ${range.toFixed(1)}`,
@@ -1000,15 +1009,15 @@ document.getElementById("downloadCSV").addEventListener("click", downloadCSV);
 <section id="reflection" class="level4" data-number="2.0.1.1">
 <h4 data-number="2.0.1.1" class="anchored" data-anchor-id="reflection"><span class="header-section-number">2.0.1.1</span> Reflection</h4>
 <p>What did you notice when you changed the population SD slider and sampled again?</p>
-<p>Assuming a normal distribution (Bell curve) what proportion of the observations are contained between -1 to +1SD units around the mean? What about -2 to +2SD units and like wise -3 to +3SD?</p>
 <p>Did you notice anything about the stability and or precision of the sample mean and SD estimates when sampling from lower sample sizes e.g.&nbsp;5 to higher sample sizes e.g.&nbsp;100? (The below interactive visual may help emphasize this relationship)</p>
-<p>Were you able to replicate the sample based parameters in excel (mean,median,SD,CV% and create a Zscore for each participant)?</p>
-<p>To best utilise the visualization below,either leave one of the slider values constant while you change the value of the other slider.<br>
-For example, you may draw 10 samples with the sample size set to 30 and population SD set to 10, then change the sample size value to 50 draw 10 values, then 5, then 100 etc. You may flip this process around then altering the SD values leaving the sample size set at a constant value. Each time have a think about how you might describe what you are seeing.</p>
+<p>Download the data using the “Download Data” button and see if you are able to replicate the sample based parameters in excel (mean,median,SD,CV% and create a Zscore for each participant)?</p>
 </section>
 </section>
 <section id="fig2" class="level3" data-number="2.0.2">
 <h3 data-number="2.0.2" class="anchored" data-anchor-id="fig2"><span class="header-section-number">2.0.2</span> Fig2</h3>
+<p>The figure below is just an extension of the figure above and may help better show how sample estimates may vary around the true population mean, and how the amount they vary are a function of both the sample size and SD.</p>
+<p>To best utilise the visualization below,either leave one of the slider values constant while you change the value of the other slider.<br>
+For example, you may draw 10 samples with the sample size set to 30 and population SD set to 10, then change the sample size value to 50 draw 10 values, then 5, then 100 etc. You may flip this process around then altering the SD values leaving the sample size set at a constant value. Each time have a think about how you might describe what you are seeing.</p>
 <div class="visualization-container">
   <div class="control-group">
     <label>Sample Size: <span id="sampleSizeValue">30</span></label>
@@ -1022,6 +1031,7 @@ For example, you may draw 10 samples with the sample size set to 30 and populati
     <button id="addData">Draw New Sample</button>
     <button id="clearAll">Clear All</button>
     <button id="toggleCI">Toggle 95% CI</button>
+    <button id="toggleSamplePoints">Toggle Sample Points</button>
   </div>
   <div id="plot"></div>
 </div>
@@ -1076,6 +1086,7 @@ button:hover {
     margin-bottom: 15px;
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .ci-line {
@@ -1088,6 +1099,18 @@ button:hover {
 
 .ci-line.missed {
     stroke: rgba(255, 0, 0, 0.3);
+}
+
+.sample-point {
+    fill: rgba(70, 130, 180, 0.2);
+    r: 2;
+}
+
+.mean-point {
+    fill: steelblue;
+    r: 4;
+    stroke: white;
+    stroke-width: 1;
 }
 </style>
 
@@ -1103,6 +1126,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentSD = 10;
     let previousSampleSize = 30;
     let showCI = false;
+    let showSamplePoints = false;
 
     // Create SVG container
     const svg = d3.select("#plot")
@@ -1111,7 +1135,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .attr("height", height);
 
     // Initial data
-    let data = [{time: 0, value: trueMean, sampleSize: 30, sd: currentSD, se: currentSD/Math.sqrt(30)}];
+    let data = [{time: 0, value: trueMean, sampleSize: 30, sd: currentSD, se: currentSD/Math.sqrt(30), samplePoints: []}];
     let sizeChangePoints = [{time: 0, sampleSize: 30, sd: currentSD}];
     let timePoint = 1;
 
@@ -1121,7 +1145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .range([margin.left, width - margin.right]);
 
     const y = d3.scaleLinear()
-        .domain([30, 70])
+        .domain([20, 80])
         .range([height - margin.bottom, margin.top]);
 
     // Add axes
@@ -1151,6 +1175,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create group for confidence intervals
     const ciGroup = svg.append("g")
         .attr("class", "ci-group");
+
+    // Create group for sample points
+    const samplePointsGroup = svg.append("g")
+        .attr("class", "sample-points-group");
 
     // Line generator
     const line = d3.line()
@@ -1224,6 +1252,35 @@ document.addEventListener('DOMContentLoaded', function() {
         ciLines.exit().remove();
     }
 
+    function updateSamplePoints() {
+        samplePointsGroup.selectAll("*").remove();
+        
+        if (!showSamplePoints) return;
+        
+        // Flatten the data to get all sample points
+        let allSamplePoints = [];
+        
+        data.forEach((d, timeIndex) => {
+            if (d.samplePoints && d.samplePoints.length > 0) {
+                d.samplePoints.forEach(point => {
+                    allSamplePoints.push({
+                        time: d.time,
+                        value: point
+                    });
+                });
+            }
+        });
+        
+        // Add sample points
+        samplePointsGroup.selectAll(".sample-point")
+            .data(allSamplePoints)
+            .enter()
+            .append("circle")
+            .attr("class", "sample-point")
+            .attr("cx", d => x(d.time))
+            .attr("cy", d => y(d.value));
+    }
+
     function normalRandom(mean, sd) {
         let u = 0, v = 0;
         while(u === 0) u = Math.random();
@@ -1231,25 +1288,28 @@ document.addEventListener('DOMContentLoaded', function() {
         return mean + sd * Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
     }
 
-    function calculateSampleMean(mean, sd, size) {
-        let sum = 0;
+    function generateSample(mean, sd, size) {
+        let sample = [];
         for(let i = 0; i < size; i++) {
-            sum += normalRandom(mean, sd);
+            sample.push(normalRandom(mean, sd));
         }
-        return sum / size;
+        return sample;
+    }
+
+    function calculateSampleMean(sample) {
+        return sample.reduce((sum, val) => sum + val, 0) / sample.length;
     }
 
     function updatePoints() {
-        const points = svg.selectAll("circle")
+        const points = svg.selectAll(".mean-point")
             .data(data);
 
         points.enter()
             .append("circle")
+            .attr("class", "mean-point")
             .merge(points)
             .attr("cx", d => x(d.time))
-            .attr("cy", d => y(d.value))
-            .attr("r", 4)
-            .attr("fill", "steelblue");
+            .attr("cy", d => y(d.value));
 
         points.exit().remove();
     }
@@ -1257,7 +1317,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function clearAll() {
         const sampleSize = +document.getElementById("sampleSize").value;
         const sd = +document.getElementById("sd").value;
-        data = [{time: 0, value: trueMean, sampleSize: sampleSize, sd: sd, se: sd/Math.sqrt(sampleSize)}];
+        data = [{time: 0, value: trueMean, sampleSize: sampleSize, sd: sd, se: sd/Math.sqrt(sampleSize), samplePoints: []}];
         sizeChangePoints = [{time: 0, sampleSize: sampleSize, sd: sd}];
         timePoint = 1;
         previousSampleSize = sampleSize;
@@ -1269,20 +1329,24 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePoints();
         updateSizeIndicators();
         updateConfidenceIntervals();
+        updateSamplePoints();
     }
 
     document.getElementById("addData").addEventListener("click", function() {
         const sampleSize = +document.getElementById("sampleSize").value;
         const sd = +document.getElementById("sd").value;
         
-        const newValue = calculateSampleMean(trueMean, sd, sampleSize);
+        const samplePoints = generateSample(trueMean, sd, sampleSize);
+        const newValue = calculateSampleMean(samplePoints);
         const se = sd/Math.sqrt(sampleSize);
+        
         data.push({
             time: timePoint, 
             value: newValue,
             sampleSize: sampleSize,
             sd: sd,
-            se: se
+            se: se,
+            samplePoints: samplePoints
         });
         timePoint++;
 
@@ -1293,6 +1357,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updatePoints();
         updateSizeIndicators();
         updateConfidenceIntervals();
+        updateSamplePoints();
     });
 
     document.getElementById("sampleSize").addEventListener("input", function() {
@@ -1347,6 +1412,11 @@ document.addEventListener('DOMContentLoaded', function() {
         showCI = !showCI;
         updateConfidenceIntervals();
     });
+    
+    document.getElementById("toggleSamplePoints").addEventListener("click", function() {
+        showSamplePoints = !showSamplePoints;
+        updateSamplePoints();
+    });
 
     updatePoints();
     updateSizeIndicators();
@@ -1355,7 +1425,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 <section id="reflection-1" class="level3" data-number="2.0.3">
 <h3 data-number="2.0.3" class="anchored" data-anchor-id="reflection-1"><span class="header-section-number">2.0.3</span> Reflection</h3>
-<p>Based on the above interactive visualistion, the figure below highlights the impact of changing the SD as a function of sample size. Relative to a measure we will call the standard error SE.</p>
+<p>Based on what you may noticed from changing both the sample size and standard devation (SD) in the above visualisation, the figure below looks summarise this relationship you may have observed. This summary will show how the SE - Standard error (discussed more below) changes as function of both the sample size and the size of the SD.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Click to expand">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1380,19 +1450,21 @@ Click to expand
 </div>
 </div>
 </div>
-<p>Looking at the above plot we can see that as sample size increases we see a reduction in a variable called the “standard error”. Likewise we can also see that larger SDs for a given sample size will have larger standard errors.</p>
+<p>Looking at the above plot we can see that as sample size increases we see a reduction in a variable called the “standard error - (SE)”. Likewise we can also see that larger SDs for a given sample size will have larger standard errors.</p>
+<p>Based on how the SE is calculated (discussed below) if you want to reduce SE by half, you could either:</p>
+<p>Reduce the SD by half (get a more homogeneous sample), OR Increase the sample size by a factor of 4 (Notice how there is diminishing returns in reducing the SE as the sample size gets larger)</p>
 </section>
 <section id="but-what-is-the-standard-error" class="level3" data-number="2.0.4">
 <h3 data-number="2.0.4" class="anchored" data-anchor-id="but-what-is-the-standard-error"><span class="header-section-number">2.0.4</span> But what is the standard error?</h3>
-<p>The standard error of the mean (<strong>SE</strong> and <strong>SEM</strong>) represents the expected variability of sample means if we were to repeatedly draw samples of the same size from the population. We could calculate the <strong>SE</strong> by taking the standard deviation of the sample means from the simulation above. However,unfortunately in research we often only ever have access to <strong>one</strong> sample to try and estimate a <strong>SE</strong> from. Luckily we can sill estimate a SE for one sample using the below formula</p>
+<p>The standard error of the mean (<strong>SE</strong> and <strong>SEM</strong>) represents the expected variability of sample means if we were to repeatedly draw samples of the same sample size from the population. We could calculate the <strong>SE</strong> by taking the standard deviation of the sample means from the simulation above. However,unfortunately in research we often only ever have access to <strong>one</strong> sample to try and estimate a <strong>SE</strong> from. Luckily we can sill estimate a SE for one sample using the below formula</p>
 <p><strong>Standard error of the mean (SE) = sample SD/ sqrt(N)</strong><br>
 where N is the number of participants.</p>
-<p>This in a similar fashion to how the sample SD is measure of dispersion/spread of observations around the mean, can be thought of as the level of variability a sample mean with some given sample size and sd would vary around the true population mean from repeated sampling.<br>
+<p>This in a similar fashion to how the sample SD is measure of dispersion/spread of observations around the mean, can be thought of as the level of variability a sample means with some given sample size and SD would vary around the true population mean from repeated sampling.<br>
 </p>
 </section>
 <section id="confidence-intervals" class="level3" data-number="2.0.5">
 <h3 data-number="2.0.5" class="anchored" data-anchor-id="confidence-intervals"><span class="header-section-number">2.0.5</span> Confidence intervals</h3>
-<p>Perhaps a simpler way to think of the standard error is a measure of confidence we have that our sample mean is reflective of the true population mean. In samples with lower number of participants we can be less confident that the sample mean is representative of the true population mean, whilst in higher sample size studies we can be more confident that the sample reflects the true population mean. One way we highlight this uncertainty/confidence is by using something called c<strong>onfidence intervals CI</strong>.</p>
+<p>Perhaps a simpler way to think of the SE is a measure of confidence we have that our sample mean would be reflective of the true population mean. In samples with lower number of participants we can be less confident that the sample mean is representative of the true population mean, whilst in higher sample size studies we can be more confident that the sample reflects the true population mean. One way we highlight this uncertainty/confidence is by using something called <strong>confidence intervals CI</strong>.</p>
 <p>The simplest <strong>confidence interval</strong> would be to just use the calculated standard error from earlier to set lower and upper limits around the sample mean.<br>
 For example,</p>
 <p><strong>sample mean</strong> = 40,<br>
@@ -1414,13 +1486,13 @@ Hint
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Think back to the normal distribution and how much the standard deviation tells us about the spread of datae.</p>
+<p>Think back to the normal distribution and how much the standard deviation tells us about the spread of data.</p>
 </div>
 </div>
 </div>
 <p>What is more commonly used however, is a 95% confidence interval which would be calculated by multiplying the <strong>SE</strong> by <strong>1.96</strong>.</p>
 <p>In our example above this would equate to<br>
-<strong>95% LL</strong> = 40 - (5*1.96=9.8) = 30.2,<br>
+<strong>95% LL</strong> = 40 - (5*1.96 = 9.8) = 30.2,<br>
 <strong>95% UL</strong> = 40 + (5*1.96 = 9.8) = 49.8.</p>
 <p>The interpretation of a 95% confidence interval is that if we were to repeat this sampling process many times and calculate the interval each time, about 95% of these intervals would contain the true population mean. Wider confidence intervals indicate more uncertainty in our estimate, while narrower intervals suggest greater precision. This is why larger sample sizes (which lead to smaller standard errors) result in narrower confidence intervals and more precise estimates of the population mean.</p>
 <p>To help visualize this, go back to Figure 2. You will notice a button called “Show Confidence Interval” which will display the 95% confidence interval around each sample mean, illustrating how the precision of our estimates changes with different sample sizes and population standard deviations</p>
@@ -1428,28 +1500,32 @@ Hint
 <section id="test-your-learning" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.1</span> Test your learning</h2>
 If you calculate a mean from a sample of 100 participants, this mean is:
-<div id="radio_TWUSUNRANK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TWUSUNRANK" value=""> <span>Always exactly equal to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_TWUSUNRANK" value=""> <span>Always lower than the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_TWUSUNRANK" value=""> <span>Not related to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_TWUSUNRANK" value="answer"> <span>An estimate of the true population mean</span></label>
+<div id="radio_LJUKMRYQDU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LJUKMRYQDU" value=""> <span>Always exactly equal to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_LJUKMRYQDU" value=""> <span>Always lower than the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_LJUKMRYQDU" value=""> <span>Not related to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_LJUKMRYQDU" value="answer"> <span>An estimate of the true population mean</span></label>
 </div>
 When the population standard deviation increases, what happens to the standard error of the mean?
-<div id="radio_PHHTAOXYJM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PHHTAOXYJM" value=""> <span>It decreases</span></label><label><input type="radio" autocomplete="off" name="radio_PHHTAOXYJM" value=""> <span>It stays the same</span></label><label><input type="radio" autocomplete="off" name="radio_PHHTAOXYJM" value=""> <span>It becomes zero</span></label><label><input type="radio" autocomplete="off" name="radio_PHHTAOXYJM" value="answer"> <span>It increases</span></label>
+<div id="radio_KNPYMAEQZK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KNPYMAEQZK" value=""> <span>It decreases</span></label><label><input type="radio" autocomplete="off" name="radio_KNPYMAEQZK" value=""> <span>It stays the same</span></label><label><input type="radio" autocomplete="off" name="radio_KNPYMAEQZK" value=""> <span>It becomes zero</span></label><label><input type="radio" autocomplete="off" name="radio_KNPYMAEQZK" value="answer"> <span>It increases</span></label>
 </div>
 A researcher collects vertical jump data from 25 athletes and calculates a 95% confidence interval of [45cm, 55cm]. This means:
-<div id="radio_OYGDBHEIKH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OYGDBHEIKH" value=""> <span>95% of all athletes' jumps fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_OYGDBHEIKH" value=""> <span>The true population mean definitely lies between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_OYGDBHEIKH" value=""> <span>95% of individual jump heights in this sample fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_OYGDBHEIKH" value="answer"> <span>If we repeated this sampling process many times, about 95% of the calculated intervals would contain the true population mean</span></label>
+<div id="radio_EPNBYBLXJZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EPNBYBLXJZ" value=""> <span>95% of all athletes' jumps fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_EPNBYBLXJZ" value=""> <span>The true population mean definitely lies between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_EPNBYBLXJZ" value=""> <span>95% of individual jump heights in this sample fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_EPNBYBLXJZ" value="answer"> <span>If we repeated this sampling process many times, about 95% of the calculated intervals would contain the true population mean</span></label>
 </div>
 If you have a sample mean of 50 and a standard error of 2, what is the 68% confidence interval?
-<div id="radio_TVGSLAZYKW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TVGSLAZYKW" value=""> <span>[46, 54]</span></label><label><input type="radio" autocomplete="off" name="radio_TVGSLAZYKW" value=""> <span>[47, 53]</span></label><label><input type="radio" autocomplete="off" name="radio_TVGSLAZYKW" value=""> <span>[49, 51]</span></label><label><input type="radio" autocomplete="off" name="radio_TVGSLAZYKW" value="answer"> <span>[48, 52]</span></label>
+<div id="radio_WILOULKLWH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WILOULKLWH" value=""> <span>[46, 54]</span></label><label><input type="radio" autocomplete="off" name="radio_WILOULKLWH" value=""> <span>[47, 53]</span></label><label><input type="radio" autocomplete="off" name="radio_WILOULKLWH" value=""> <span>[49, 51]</span></label><label><input type="radio" autocomplete="off" name="radio_WILOULKLWH" value="answer"> <span>[48, 52]</span></label>
 </div>
 Which of the following would NOT reduce the standard error of the mean?
-<div id="radio_FGELNLAWBA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FGELNLAWBA" value=""> <span>Increasing the sample size</span></label><label><input type="radio" autocomplete="off" name="radio_FGELNLAWBA" value=""> <span>Reducing measurement error</span></label><label><input type="radio" autocomplete="off" name="radio_FGELNLAWBA" value=""> <span>Using more precise equipment</span></label><label><input type="radio" autocomplete="off" name="radio_FGELNLAWBA" value="answer"> <span>Calculating the median instead of the mean</span></label>
+<div id="radio_ZMQMVXZFZX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZMQMVXZFZX" value=""> <span>Increasing the sample size</span></label><label><input type="radio" autocomplete="off" name="radio_ZMQMVXZFZX" value=""> <span>Reducing measurement error</span></label><label><input type="radio" autocomplete="off" name="radio_ZMQMVXZFZX" value=""> <span>Using more precise equipment</span></label><label><input type="radio" autocomplete="off" name="radio_ZMQMVXZFZX" value="answer"> <span>Calculating the median instead of the mean</span></label>
 </div>
 The coefficient of variation (CV%) is 15% for a group of athletes’ sprint times. This indicates:
-<div id="radio_DDVEGCOZOF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DDVEGCOZOF" value=""> <span>The data varies by exactly 15 seconds</span></label><label><input type="radio" autocomplete="off" name="radio_DDVEGCOZOF" value=""> <span>15% of the data points are outliers</span></label><label><input type="radio" autocomplete="off" name="radio_DDVEGCOZOF" value=""> <span>The confidence interval is 15% wide</span></label><label><input type="radio" autocomplete="off" name="radio_DDVEGCOZOF" value="answer"> <span>The standard deviation is 15% of the mean value</span></label>
+<div id="radio_DPXBGBZGKM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DPXBGBZGKM" value=""> <span>The data varies by exactly 15 seconds</span></label><label><input type="radio" autocomplete="off" name="radio_DPXBGBZGKM" value=""> <span>15% of the data points are outliers</span></label><label><input type="radio" autocomplete="off" name="radio_DPXBGBZGKM" value=""> <span>The confidence interval is 15% wide</span></label><label><input type="radio" autocomplete="off" name="radio_DPXBGBZGKM" value="answer"> <span>The standard deviation is 15% of the mean value</span></label>
+</div>
+Assuming a normal distribution (Bell curve) what proportion of the observations are contained between -1 to +1SD units around the mean?
+<div id="radio_JTFBFCOEDU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JTFBFCOEDU" value=""> <span>95%</span></label><label><input type="radio" autocomplete="off" name="radio_JTFBFCOEDU" value=""> <span>34%</span></label><label><input type="radio" autocomplete="off" name="radio_JTFBFCOEDU" value=""> <span>99%</span></label><label><input type="radio" autocomplete="off" name="radio_JTFBFCOEDU" value="answer"> <span>68%</span></label>
 </div>
 
 

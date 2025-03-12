@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -1090,47 +1056,40 @@ Click for interactive Bland-Altman plot
 <h2 data-number="2.6" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.6</span> Test your learning</h2>
 <p><br></p>
 What does a Bland-Altman plot show?
-<div id="radio_LOATPKBAEQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LOATPKBAEQ" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_LOATPKBAEQ" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_LOATPKBAEQ" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_LOATPKBAEQ" value=""> <span>The mean of both measurements plotted against time</span></label>
+<div id="radio_UPTWVPBXSL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value=""> <span>The mean of both measurements plotted against time</span></label>
 </div>
 What does the mean difference line (bias) in a Bland-Altman plot represent?
-<div id="radio_RIGCVHIEQR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RIGCVHIEQR" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_RIGCVHIEQR" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_RIGCVHIEQR" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_RIGCVHIEQR" value=""> <span>The reliability of the measurement</span></label>
+<div id="radio_OOUZAZUZKV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value=""> <span>The reliability of the measurement</span></label>
 </div>
 What does the Typical Error (TE) represent?
-<div id="radio_JJWNVUQGAR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JJWNVUQGAR" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_JJWNVUQGAR" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_JJWNVUQGAR" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_JJWNVUQGAR" value=""> <span>The correlation between measurements</span></label>
+<div id="radio_DZQRLOCOUT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value=""> <span>The correlation between measurements</span></label>
 </div>
 If you have a single measurement (e.g., 45 kg) and know the Typical Error (TE) is 2 kg, how would you construct a 95% confidence interval around this measurement?
-<div id="radio_CRNNASCITI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CRNNASCITI" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_CRNNASCITI" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_CRNNASCITI" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_CRNNASCITI" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
+<div id="radio_ZBKQCRDDIM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>opts5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"The athlete will score between 74.1-85.9 kg on 95% of future tests"</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">"95% of athletes with similar measured strength have a true strength in this range"</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">answer =</span> <span class="st">"If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength"</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>q5 <span class="ot">&lt;-</span> <span class="fu">longmcq</span>(opts5)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"If you measure an athlete's max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?"</span>, q5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>If you measure an athlete's max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent? &lt;div class='webex-radiogroup' id='radio_SPUDLAADDI'&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SPUDLAADDI" value=""&gt;&lt;/input&gt; &lt;span&gt;The athlete will score between 74.1-85.9 kg on 95% of future tests&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SPUDLAADDI" value=""&gt;&lt;/input&gt; &lt;span&gt;95% of athletes with similar measured strength have a true strength in this range&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SPUDLAADDI" value="answer"&gt;&lt;/input&gt; &lt;span&gt;If we could measure this athlete&amp;apos;s strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type="radio" autocomplete="off" name="radio_SPUDLAADDI" value=""&gt;&lt;/input&gt; &lt;span&gt;The athlete&amp;apos;s strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</code></pre>
-</div>
+If you measure an athlete’s max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?
+<div id="radio_APUSOIWJSK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
 </div>
 What does the Minimum Detectable Change (MDC95) represent?
-<div id="radio_TCOASEAADU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TCOASEAADU" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_TCOASEAADU" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_TCOASEAADU" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_TCOASEAADU" value=""> <span>The typical error multiplied by 0.68</span></label>
+<div id="radio_KCVPYZLIJL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value=""> <span>The typical error multiplied by 0.68</span></label>
 </div>
 When monitoring an individual’s changes over time, which criterion should you use to determine if a real change has occurred?
-<div id="radio_MVBBYQJQZV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MVBBYQJQZV" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_MVBBYQJQZV" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_MVBBYQJQZV" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_MVBBYQJQZV" value=""> <span>The change is significant if it exceeds the CV</span></label>
+<div id="radio_PMKTQQWWZC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value=""> <span>The change is significant if it exceeds the CV</span></label>
 </div>
 Why is the Coefficient of Variation (CVTE%) useful?
-<div id="radio_UDMFBUOTNB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UDMFBUOTNB" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_UDMFBUOTNB" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_UDMFBUOTNB" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_UDMFBUOTNB" value="answer"> <span>All of the above</span></label>
+<div id="radio_EKQOGOEXTM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value="answer"> <span>All of the above</span></label>
 </div>
 If you want to construct a 95% confidence interval around an individual’s measurement, you should use:
-<div id="radio_YFEOGKJTCH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YFEOGKJTCH" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_YFEOGKJTCH" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_YFEOGKJTCH" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_YFEOGKJTCH" value=""> <span>±2 × CV from the measured value</span></label>
+<div id="radio_EVSGUEYAYT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value=""> <span>±2 × CV from the measured value</span></label>
 </div>
 
 
