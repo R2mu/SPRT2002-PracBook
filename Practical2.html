@@ -158,10 +158,14 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#bland-altman-plot" id="toc-bland-altman-plot" class="nav-link" data-scroll-target="#bland-altman-plot"><span class="header-section-number">2.3.1</span> Bland-Altman plot</a></li>
   </ul></li>
-  <li><a href="#practical-procedures-part-1" id="toc-practical-procedures-part-1" class="nav-link" data-scroll-target="#practical-procedures-part-1"><span class="header-section-number">2.4</span> Practical Procedures (PART 1)</a></li>
+  <li><a href="#practical-procedures-part-1" id="toc-practical-procedures-part-1" class="nav-link" data-scroll-target="#practical-procedures-part-1"><span class="header-section-number">2.4</span> Practical Procedures (PART 1)</a>
+  <ul class="collapse">
+  <li><a href="#practical-procedures-reflection" id="toc-practical-procedures-reflection" class="nav-link" data-scroll-target="#practical-procedures-reflection"><span class="header-section-number">2.4.1</span> Practical Procedures reflection</a></li>
+  </ul></li>
   <li><a href="#section-2---typical-error-of-measurement" id="toc-section-2---typical-error-of-measurement" class="nav-link" data-scroll-target="#section-2---typical-error-of-measurement"><span class="header-section-number">2.5</span> Section 2 - Typical Error of Measurement</a>
   <ul class="collapse">
   <li><a href="#visual-1" id="toc-visual-1" class="nav-link" data-scroll-target="#visual-1"><span class="header-section-number">2.5.1</span> Visual 1</a></li>
+  <li><a href="#visual-2" id="toc-visual-2" class="nav-link" data-scroll-target="#visual-2"><span class="header-section-number">2.5.2</span> Visual 2</a></li>
   </ul></li>
   <li><a href="#test-your-learning" id="toc-test-your-learning" class="nav-link" data-scroll-target="#test-your-learning"><span class="header-section-number">2.6</span> Test your learning</a></li>
   </ul>
@@ -670,8 +674,15 @@ Click for interactive Bland-Altman plot
 <li><p>Continue the above until you have completed each testing station.</p></li>
 <li><p>Aim to perform at least 2 repetitions per station making sure to upload the results on the Google form link below. (This can be done by one person per group)</p></li>
 </ol>
-<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4jVdHDBLIQZTnTGmpQl3bJTBwAw2GDth9Nmw6qoA1fTERNw/viewform" class="uri">https://docs.google.com/forms/d/e/1FAIpQLSd4jVdHDBLIQZTnTGmpQl3bJTBwAw2GDth9Nmw6qoA1fTERNw/viewform</a></p>
 <p><br></p>
+<section id="practical-procedures-reflection" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="practical-procedures-reflection"><span class="header-section-number">2.4.1</span> Practical Procedures reflection</h3>
+<ol type="1">
+<li><p>What were the key differences you noticed between the technologies used?</p></li>
+<li><p>Based on your experience using the technologies which technology would you lean towards using and why?</p></li>
+</ol>
+<p><br></p>
+</section>
 </section>
 <section id="section-2---typical-error-of-measurement" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="section-2---typical-error-of-measurement"><span class="header-section-number">2.5</span> Section 2 - Typical Error of Measurement</h2>
@@ -1051,45 +1062,467 @@ Click for interactive Bland-Altman plot
     </script>
 </div>
 </section>
+<section id="visual-2" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored"><span class="header-section-number">2.5.2</span> Visual 2</h3>
+<p>The visual below looks to highlight the importance of wanting to minimise typical error. You hopefully feel comfortable with the idea that any measurement we collect has some uncertainty around it. That uncertainty may be due to biological variation, technology and or methodology error, which all limit our confidence in reporting a “true” measurement. We aim to represent this uncertainty in a similar fashion to what we did last week with the 95% Confidence interval.</p>
+<p>To calculate the CI around the score values (point A and B), we use a similar procedure that we did last week when calculate the 95% CI around a sample mean, with the only difference being instead of using a standard error, we will use something called the typical error.</p>
+<p>For example,</p>
+<p>Point A score = 50. For a given value of the Typical Error slider, e.g.&nbsp;3 the 95 % CI would be</p>
+<p>50 - (3 * 1.96) = <strong>44.1</strong> to 50 +(3 * 1.96) = <strong>55.9</strong></p>
+<p>This interval represents our uncertainty around where we believe the true measurement might be. From an interpretation perspective we <strong>can’t</strong> say the probability of the true value being between the lower limit and upper limit is 95%, rather that the method we used to create the interval has a 95% success rate in capturing true values over the long run.</p>
+<p>We can also calculate an uncertainty around the change score observed between these two measurements (A and B). Now that we are comparing two measurements that both come with uncertainty we have to consider that when calculating a CI for a change score we do so with the equation below.</p>
+<p>Change 95% LL (Point B - Point A observed values) - sqrt(2) * TE * 1.96<br>
+Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
+<p>The sqrt(2) is included because we now have two trials that both have a potential source of uncertainty. The addition of the sqrt(2) as you can see makes the CI larger for change scores than for individual observations.</p>
+<div class="diff-container" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <div id="diff-visualization">
+    <h2 style="text-align: center; margin-bottom: 15px;" class="anchored" data-anchor-id="visual-2">Interactive Difference Plot</h2>
+    
+    <div class="diff-controls-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 20px;">
+      <div class="diff-slider-container" style="width: 48%; margin-bottom: 10px; display: flex; align-items: center;">
+        <label for="diff-change-score-slider" style="width: 120px; margin-right: 10px; font-size: 0.9em;">Change Score:</label>
+        <input type="range" id="diff-change-score-slider" min="-30" max="30" step="1" value="-15" style="flex-grow: 1;">
+        <span id="diff-change-score-value" style="width: 30px; text-align: right; font-size: 0.9em;"></span>
+      </div>
+      
+      <div class="diff-slider-container" style="width: 48%; margin-bottom: 10px; display: flex; align-items: center;">
+        <label for="diff-typical-error-slider" style="width: 120px; margin-right: 10px; font-size: 0.9em;">Typical Error:</label>
+        <input type="range" id="diff-typical-error-slider" min="1" max="12" step="1" value="6" style="flex-grow: 1;">
+        <span id="diff-typical-error-value" style="width: 30px; text-align: right; font-size: 0.9em;"></span>
+      </div>
+      
+      <div class="diff-slider-container" style="width: 48%; margin-bottom: 10px; display: flex; align-items: center;">
+        <label for="diff-between-subject-sd-slider" style="width: 120px; margin-right: 10px; font-size: 0.9em;">Between-Subject SD:</label>
+        <input type="range" id="diff-between-subject-sd-slider" min="1" max="20" step="1" value="8" style="flex-grow: 1;">
+        <span id="diff-between-subject-sd-value" style="width: 30px; text-align: right; font-size: 0.9em;"></span>
+      </div>
+      
+      <div class="diff-slider-container" style="width: 48%; margin-bottom: 10px; display: flex; align-items: center;">
+        <label for="diff-sd-multiplier-slider" style="width: 120px; margin-right: 10px; font-size: 0.9em;">SD Multiplier:</label>
+        <input type="range" id="diff-sd-multiplier-slider" min="0.05" max="1.2" step="0.01" value="0.5" style="flex-grow: 1;">
+        <span id="diff-sd-multiplier-value" style="width: 30px; text-align: right; font-size: 0.9em;"></span>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-bottom: 10px; display: flex; justify-content: center; gap: 30px;">
+      <label style="font-size: 0.9em;">
+        <input type="checkbox" id="diff-show-ci-toggle" checked=""> Show Confidence Intervals
+      </label>
+      <label style="font-size: 0.9em;">
+        <input type="checkbox" id="diff-show-swc-toggle" checked=""> Show SWC
+      </label>
+    </div>
+    
+    <div id="diff-chart" style="width: 100%; height: 400px; margin-bottom: 20px;"></div>
+  </div>
+
+  <script>
+    (function() {  // Wrap in IIFE to avoid global scope pollution
+      // Set up dimensions
+      const margin = {top: 40, right: 80, bottom: 60, left: 60}; // Increased right margin
+      const width = 520 - margin.left - margin.right; // Increased overall width
+      const height = 400 - margin.top - margin.bottom;
+
+      // Create SVG
+      const svg = d3.select("#diff-chart")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+      
+      // Fixed score A
+      const scoreA = 50;
+      
+      // Calculate confidence intervals
+      const calculateCI = (score, te) => {
+        return [score - te * 1.96, score + te * 1.96];
+      };
+      
+      // Calculate difference confidence interval
+      const calculateDifferenceCI = (changeScore, te) => {
+        const diffTE = te * Math.sqrt(2);
+        return [changeScore - diffTE * 1.96, changeScore + diffTE * 1.96];
+      };
+      
+      // Calculate MDC (Minimal Detectable Change)
+      const calculateMDC = (te) => {
+        return te * Math.sqrt(2) * 1.96;
+      };
+      
+      // Calculate the smallest worthwhile change range
+      const calculateSWC = (sd, multiplier) => {
+        const swc = sd * multiplier;
+        return [-swc, swc];
+      };
+      
+      function updateVisualization() {
+        // Get current values from sliders
+        const changeScore = +d3.select("#diff-change-score-slider").property("value");
+        const typicalError = +d3.select("#diff-typical-error-slider").property("value");
+        const betweenSubjectSD = +d3.select("#diff-between-subject-sd-slider").property("value");
+        const sdMultiplier = +d3.select("#diff-sd-multiplier-slider").property("value");
+        const showCI = d3.select("#diff-show-ci-toggle").property("checked");
+        const showSWC = d3.select("#diff-show-swc-toggle").property("checked");
+        
+        // Calculate score B from change score
+        const scoreB = scoreA + changeScore;
+        
+        // Calculate CIs
+        const ciA = calculateCI(scoreA, typicalError);
+        const ciB = calculateCI(scoreB, typicalError);
+        const ciDiff = calculateDifferenceCI(changeScore, typicalError);
+        
+        // Clear previous elements
+        svg.selectAll("*").remove();
+        
+        // Fixed ranges with equivalent unit scaling
+        const leftAxisMin = 0;
+        const leftAxisMax = 100;
+        
+        // Make difference axis use the same unit scale, but centered at 0 = scoreA (50)
+        const rightAxisMin = -50;  // This will be scoreA - 50
+        const rightAxisMax = 50;   // This will be scoreA + 50
+        
+        // Set up scales
+        const xScale = d3.scaleBand()
+          .domain(['A', 'B', 'Difference'])
+          .range([0, width])
+          .padding(0.4);
+        
+        const yScaleLeft = d3.scaleLinear()
+          .domain([leftAxisMin, leftAxisMax])
+          .range([height, 0]);
+        
+        const yScaleRight = d3.scaleLinear()
+          .domain([rightAxisMin, rightAxisMax])
+          .range([height, 0]);
+        
+        // Add axes
+        const xAxis = d3.axisBottom(xScale);
+        svg.append("g")
+          .attr("transform", `translate(0,${height})`)
+          .call(xAxis)
+          .style("font-size", "14px");
+        
+        const yAxisLeft = d3.axisLeft(yScaleLeft);
+        svg.append("g")
+          .call(yAxisLeft)
+          .style("font-size", "12px");
+        
+        const yAxisRight = d3.axisRight(yScaleRight);
+        svg.append("g")
+          .attr("transform", `translate(${width},0)`)
+          .call(yAxisRight)
+          .style("font-size", "12px");
+        
+        // Add axis labels
+        svg.append("text")
+          .attr("x", -margin.left + 20)
+          .attr("y", height / 2)
+          .attr("transform", `rotate(-90, ${-margin.left + 20}, ${height / 2})`)
+          .style("text-anchor", "middle")
+          .text("Dependent variable");
+        
+        svg.append("text")
+          .attr("x", width + margin.right - 30)
+          .attr("y", height / 2)
+          .attr("transform", `rotate(-90, ${width + margin.right - 30}, ${height / 2})`)
+          .style("text-anchor", "middle")
+          .text("Difference");
+        
+        // Add SWC gray box before other elements so it appears in the background
+        if (showSWC) {
+          const swcRange = calculateSWC(betweenSubjectSD, sdMultiplier);
+          const xDiff = xScale('Difference') + xScale.bandwidth() / 2;
+          
+          // Add SWC gray box - extending all the way to the right edge
+          svg.append("rect")
+            .attr("x", xDiff - 10)
+            .attr("y", yScaleRight(swcRange[1]))
+            .attr("width", width - (xDiff - 10))
+            .attr("height", yScaleRight(swcRange[0]) - yScaleRight(swcRange[1]))
+            .attr("fill", "gray")
+            .attr("opacity", 0.3);
+            
+          // SWC labels - positioning directly at the SWC values on the secondary y-axis
+          svg.append("text")
+            .attr("x", width - 5)
+            .attr("y", yScaleRight(swcRange[1]))
+            .attr("text-anchor", "end")
+            .attr("dominant-baseline", "middle")
+            .style("font-size", "10px")
+            .text(`${swcRange[1].toFixed(1)}`);
+            
+          svg.append("text")
+            .attr("x", width - 5)
+            .attr("y", yScaleRight(swcRange[0]))
+            .attr("text-anchor", "end")
+            .attr("dominant-baseline", "middle")
+            .style("font-size", "10px")
+            .text(`${swcRange[0].toFixed(1)}`);
+        }
+        
+        // Add data points and error bars for A & B
+        const pointGroups = ['A', 'B'];
+        pointGroups.forEach(group => {
+          const x = xScale(group) + xScale.bandwidth() / 2;
+          const score = group === 'A' ? scoreA : scoreB;
+          const ci = group === 'A' ? ciA : ciB;
+          
+          if (showCI) {
+            // Error bar
+            svg.append("line")
+              .attr("x1", x)
+              .attr("x2", x)
+              .attr("y1", yScaleLeft(ci[0]))
+              .attr("y2", yScaleLeft(ci[1]))
+              .attr("stroke", "black")
+              .attr("stroke-width", 1.5);
+              
+            // Top cap
+            svg.append("line")
+              .attr("x1", x - 5)
+              .attr("x2", x + 5)
+              .attr("y1", yScaleLeft(ci[1]))
+              .attr("y2", yScaleLeft(ci[1]))
+              .attr("stroke", "black")
+              .attr("stroke-width", 1.5);
+              
+            // Bottom cap
+            svg.append("line")
+              .attr("x1", x - 5)
+              .attr("x2", x + 5)
+              .attr("y1", yScaleLeft(ci[0]))
+              .attr("y2", yScaleLeft(ci[0]))
+              .attr("stroke", "black")
+              .attr("stroke-width", 1.5);
+          }
+          
+          // Data point
+          svg.append("circle")
+            .attr("cx", x)
+            .attr("cy", yScaleLeft(score))
+            .attr("r", 5)
+            .attr("fill", "black");
+          
+          // Mean value - moved to the left side
+          svg.append("text")
+            .attr("x", x - 10)
+            .attr("y", yScaleLeft(score))
+            .attr("text-anchor", "end")
+            .attr("dominant-baseline", "middle")
+            .style("font-size", "12px")
+            .text(`${score.toFixed(1)}`);
+          
+          if (showCI) {
+            // Upper CI - keep on right side
+            svg.append("text")
+              .attr("x", x + 10)
+              .attr("y", yScaleLeft(ci[1]))
+              .attr("text-anchor", "start")
+              .attr("dominant-baseline", "middle")
+              .style("font-size", "10px")
+              .text(`${ci[1].toFixed(1)}`);
+              
+            // Lower CI - keep on right side
+            svg.append("text")
+              .attr("x", x + 10)
+              .attr("y", yScaleLeft(ci[0]))
+              .attr("text-anchor", "start")
+              .attr("dominant-baseline", "middle")
+              .style("font-size", "10px")
+              .text(`${ci[0].toFixed(1)}`);
+          }
+        });
+        
+        // Add the difference point and error bar
+        const xDiff = xScale('Difference') + xScale.bandwidth() / 2;
+        
+        if (showCI) {
+          // Error bar for difference
+          svg.append("line")
+            .attr("x1", xDiff)
+            .attr("x2", xDiff)
+            .attr("y1", yScaleRight(ciDiff[0]))
+            .attr("y2", yScaleRight(ciDiff[1]))
+            .attr("stroke", "black")
+            .attr("stroke-width", 1.5);
+            
+          // Top cap
+          svg.append("line")
+            .attr("x1", xDiff - 5)
+            .attr("x2", xDiff + 5)
+            .attr("y1", yScaleRight(ciDiff[1]))
+            .attr("y2", yScaleRight(ciDiff[1]))
+            .attr("stroke", "black")
+            .attr("stroke-width", 1.5);
+            
+          // Bottom cap
+          svg.append("line")
+            .attr("x1", xDiff - 5)
+            .attr("x2", xDiff + 5)
+            .attr("y1", yScaleRight(ciDiff[0]))
+            .attr("y2", yScaleRight(ciDiff[0]))
+            .attr("stroke", "black")
+            .attr("stroke-width", 1.5);
+        }
+        
+        // Calculate reference lines to properly align with the right axis
+        const scoreARef = ((scoreA - leftAxisMin) / (leftAxisMax - leftAxisMin)) * (rightAxisMax - rightAxisMin) + rightAxisMin;
+        const scoreBRef = ((scoreB - leftAxisMin) / (leftAxisMax - leftAxisMin)) * (rightAxisMax - rightAxisMin) + rightAxisMin;
+        
+        // Difference point (triangle) - aligned with change value
+        svg.append("path")
+          .attr("d", d3.symbol().type(d3.symbolTriangle).size(100))
+          .attr("transform", `translate(${xDiff}, ${yScaleRight(changeScore)})`)
+          .attr("fill", "black");
+        
+        // Change value - keep on right side
+        svg.append("text")
+          .attr("x", xDiff + 10)
+          .attr("y", yScaleRight(changeScore))
+          .attr("text-anchor", "start")
+          .attr("dominant-baseline", "middle")
+          .style("font-size", "12px")
+          .text(`${changeScore.toFixed(1)}`);
+        
+        if (showCI) {
+          // Upper CI for difference - keep on right side
+          svg.append("text")
+            .attr("x", xDiff + 10)
+            .attr("y", yScaleRight(ciDiff[1]))
+            .attr("text-anchor", "start")
+            .attr("dominant-baseline", "middle")
+            .style("font-size", "10px")
+            .text(`${ciDiff[1].toFixed(1)}`);
+            
+          // Lower CI for difference - keep on right side
+          svg.append("text")
+            .attr("x", xDiff + 10)
+            .attr("y", yScaleRight(ciDiff[0]))
+            .attr("text-anchor", "start")
+            .attr("dominant-baseline", "middle")
+            .style("font-size", "10px")
+            .text(`${ciDiff[0].toFixed(1)}`);
+        }
+        
+        // Add horizontal reference line from A to Difference - aligned with points
+        svg.append("line")
+          .attr("x1", xScale('A') + xScale.bandwidth() / 2)
+          .attr("x2", xDiff)
+          .attr("y1", yScaleLeft(scoreA))
+          .attr("y2", yScaleRight(scoreARef))
+          .attr("stroke", "black")
+          .attr("stroke-width", 1)
+          .attr("stroke-dasharray", "3,3");
+        
+        // Add horizontal reference line from B to Difference - aligned with points
+        svg.append("line")
+          .attr("x1", xScale('B') + xScale.bandwidth() / 2)
+          .attr("x2", xDiff)
+          .attr("y1", yScaleLeft(scoreB))
+          .attr("y2", yScaleRight(scoreBRef))
+          .attr("stroke", "black")
+          .attr("stroke-width", 1)
+          .attr("stroke-dasharray", "3,3");
+          
+        if (showCI) {
+          // Add MDC value text - just the value
+          const mdc = calculateMDC(typicalError);
+          svg.append("text")
+            .attr("x", width - 10)
+            .attr("y", 20)
+            .attr("text-anchor", "end")
+            .style("font-size", "12px")
+            .text(`MDC95: ${mdc.toFixed(1)}`);
+          
+         const swc = calculateSWC(betweenSubjectSD, sdMultiplier);
+          const swcPositive = Math.abs(swc[1]); 
+          svg.append("text")
+            .attr("x", width - 10)
+            .attr("y", 40)
+            .attr("text-anchor", "end")
+            .style("font-size", "12px")
+            .text(`MCID95: ${(mdc + swcPositive).toFixed(1)}`);
+            
+            
+            
+        }
+          
+        // Update slider value displays
+        d3.select("#diff-change-score-value").text(changeScore);
+        d3.select("#diff-typical-error-value").text(typicalError);
+        d3.select("#diff-between-subject-sd-value").text(betweenSubjectSD);
+        d3.select("#diff-sd-multiplier-value").text(sdMultiplier.toFixed(2));
+      }
+      
+      // Initialize the visualization
+      updateVisualization();
+      
+      // Set up event listeners for sliders and toggle
+      d3.selectAll(".diff-container input").on("input change", updateVisualization);
+      
+      // Initialize slider value displays
+      d3.selectAll(".diff-container input[type='range']").each(function() {
+        const id = this.id;
+        const value = this.value;
+        const valueId = `#${id.replace("slider", "value")}`;
+        
+        if (id.includes("sd-multiplier")) {
+          d3.select(valueId).text(parseFloat(value).toFixed(2));
+        } else {
+          d3.select(valueId).text(value);
+        }
+      });
+    })();
+  </script>
+</div>
+<p>Two more measures we discussed in the lecture that can also be calculated from an understanding of TE are the minimal detectable change <strong>MDC</strong> and minimal clinically import difference <strong>MCID</strong>. Both of these are commonly reported to a 95% confidence level so will be multiplied by 1.96 respectively.</p>
+<p><strong>MDC_95</strong> = TE * sqrt(2) * 1.96<br>
+<strong>MCID_95</strong> = MDC_95 + <strong>SWC</strong></p>
+<p>Whilst there are may ways we can identify a value considered the <strong>smallest worthwhile change (SWC)</strong>, a commonly used method is to multiply the between subject SD by some factor. In exercise and sport science a commonly used factor is 0.2.</p>
+<p>So SWC = SD * 0.2</p>
+</section>
 </section>
 <section id="test-your-learning" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.6</span> Test your learning</h2>
 <p><br></p>
 What does a Bland-Altman plot show?
-<div id="radio_UPTWVPBXSL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UPTWVPBXSL" value=""> <span>The mean of both measurements plotted against time</span></label>
+<div id="radio_EWTWWGGMMP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value=""> <span>The mean of both measurements plotted against time</span></label>
 </div>
 What does the mean difference line (bias) in a Bland-Altman plot represent?
-<div id="radio_OOUZAZUZKV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_OOUZAZUZKV" value=""> <span>The reliability of the measurement</span></label>
+<div id="radio_UEYRKMOGGP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value=""> <span>The reliability of the measurement</span></label>
 </div>
 What does the Typical Error (TE) represent?
-<div id="radio_DZQRLOCOUT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_DZQRLOCOUT" value=""> <span>The correlation between measurements</span></label>
+<div id="radio_XNGCOSCJOR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value=""> <span>The correlation between measurements</span></label>
 </div>
 If you have a single measurement (e.g., 45 kg) and know the Typical Error (TE) is 2 kg, how would you construct a 95% confidence interval around this measurement?
-<div id="radio_ZBKQCRDDIM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_ZBKQCRDDIM" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
+<div id="radio_PDESKVODUK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
 </div>
 If you measure an athlete’s max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?
-<div id="radio_APUSOIWJSK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_APUSOIWJSK" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
+<div id="radio_QVLVNXTKVZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
 </div>
 What does the Minimum Detectable Change (MDC95) represent?
-<div id="radio_KCVPYZLIJL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_KCVPYZLIJL" value=""> <span>The typical error multiplied by 0.68</span></label>
+<div id="radio_IQEFDCOAYG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value=""> <span>The typical error multiplied by 0.68</span></label>
 </div>
 When monitoring an individual’s changes over time, which criterion should you use to determine if a real change has occurred?
-<div id="radio_PMKTQQWWZC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_PMKTQQWWZC" value=""> <span>The change is significant if it exceeds the CV</span></label>
+<div id="radio_UHZJXHDHSI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value=""> <span>The change is significant if it exceeds the CV</span></label>
 </div>
 Why is the Coefficient of Variation (CVTE%) useful?
-<div id="radio_EKQOGOEXTM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_EKQOGOEXTM" value="answer"> <span>All of the above</span></label>
+<div id="radio_SJPTTREFBY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value="answer"> <span>All of the above</span></label>
 </div>
 If you want to construct a 95% confidence interval around an individual’s measurement, you should use:
-<div id="radio_EVSGUEYAYT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_EVSGUEYAYT" value=""> <span>±2 × CV from the measured value</span></label>
+<div id="radio_TECDKOSKCY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value=""> <span>±2 × CV from the measured value</span></label>
 </div>
 
 
