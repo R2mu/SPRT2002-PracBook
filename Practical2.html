@@ -693,7 +693,10 @@ Click for interactive Bland-Altman plot
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="visual-1"><span class="header-section-number">2.5.1</span> Visual 1</h3>
 <div class="rel-container" style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px;">
     <div id="rel-visualization">
-        <div id="rel-reliability-metrics" style="text-align: right; margin-bottom: 10px; font-family: monospace; background-color: #f5f5f5; padding: 10px; border-radius: 5px;"></div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <div id="rel-descriptive-stats" style="text-align: left; font-family: monospace; background-color: #f5f5f5; padding: 10px; border-radius: 5px; width: 48%;"></div>
+            <div id="rel-reliability-metrics" style="text-align: right; font-family: monospace; background-color: #f5f5f5; padding: 10px; border-radius: 5px; width: 48%;"></div>
+        </div>
         <div class="rel-controls-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
             <div class="rel-column" style="width: 48%;">
                 <div class="rel-slider-container" style="margin-bottom: 10px; display: flex; align-items: center;">
@@ -904,6 +907,38 @@ Click for interactive Bland-Altman plot
                 return { sem, mdc, cv };
             }
 
+            // Function to calculate descriptive statistics
+            function calculateDescriptiveStats(data) {
+                const allMeasurements = data.flat();
+                const mean = d3.mean(allMeasurements);
+                const median = d3.median(allMeasurements);
+                const sd = d3.deviation(allMeasurements);
+                const min = d3.min(allMeasurements);
+                const max = d3.max(allMeasurements);
+                const cv = (sd / mean) * 100;
+                
+                // Calculate by-trial stats
+                const trialMeans = [];
+                const trialSDs = [];
+                
+                for (let j = 0; j < data[0].length; j++) {
+                    const trialValues = data.map(subject => subject[j]);
+                    trialMeans.push(d3.mean(trialValues));
+                    trialSDs.push(d3.deviation(trialValues));
+                }
+                
+                return { 
+                    mean, 
+                    median, 
+                    sd, 
+                    min, 
+                    max, 
+                    cv,
+                    trialMeans,
+                    trialSDs
+                };
+            }
+
             // Function to convert data to CSV
             function convertToCSV(data, numTrials) {
                 let csvContent = "SubjectID," + Array.from({length: numTrials}, (_, i) => `Trial${i+1}`).join(",") + "\n";
@@ -948,10 +983,16 @@ Click for interactive Bland-Altman plot
                 currentData = data;
                 currentNumTrials = numTrials;
                 
-    const { sem, mdc, cv } = calculateReliabilityMetrics(data, numTrials);
+                const { sem, mdc, cv } = calculateReliabilityMetrics(data, numTrials);
+                const stats = calculateDescriptiveStats(data);
                 
+                // Update reliability metrics with subscript for CV
                 d3.select("#rel-reliability-metrics")
-                    .html(`<strong>Reliability Metrics:</strong><br>TE  = ${sem.toFixed(2)} units<br>MDC = ${mdc.toFixed(2)} units<br>CV = ${cv.toFixed(2)}%`);
+                    .html(`<strong>Reliability Metrics:</strong><br>TE = ${sem.toFixed(2)} units<br>MDC = ${mdc.toFixed(2)} units<br>CV<sub>TE</sub> = ${cv.toFixed(2)}%`);
+                
+                // Update descriptive statistics
+                d3.select("#rel-descriptive-stats")
+                    .html(`<strong>Descriptive Statistics:</strong><br>Mean = ${stats.mean.toFixed(1)} units<br>SD = ${stats.sd.toFixed(1)} units<br>CV = ${stats.cv.toFixed(1)}%<br>Range = ${stats.min.toFixed(1)} - ${stats.max.toFixed(1)}`);
 
                 // Update scales
                 x.domain([0.5, numTrials + 0.5]);
@@ -1068,7 +1109,7 @@ Click for interactive Bland-Altman plot
 <p>To calculate the CI around the score values (point A and B), we use a similar procedure that we did last week when calculate the 95% CI around a sample mean, with the only difference being instead of using a standard error, we will use something called the typical error.</p>
 <p>For example,</p>
 <p>Point A score = 50. For a given value of the Typical Error slider, e.g.&nbsp;3 the 95 % CI would be</p>
-<p>50 - (3 * 1.96) = <strong>44.1</strong> to 50 +(3 * 1.96) = <strong>55.9</strong></p>
+<p>50 - (3 * 1.96) = <strong>44.1</strong> to 50 + (3 * 1.96) = <strong>55.9</strong></p>
 <p>This interval represents our uncertainty around where we believe the true measurement might be. From an interpretation perspective we <strong>can’t</strong> say the probability of the true value being between the lower limit and upper limit is 95%, rather that the method we used to create the interval has a 95% success rate in capturing true values over the long run.</p>
 <p>We can also calculate an uncertainty around the change score observed between these two measurements (A and B). Now that we are comparing two measurements that both come with uncertainty we have to consider that when calculating a CI for a change score we do so with the equation below.</p>
 <p>Change 95% LL (Point B - Point A observed values) - sqrt(2) * TE * 1.96<br>
@@ -1481,48 +1522,50 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
 <p>Two more measures we discussed in the lecture that can also be calculated from an understanding of TE are the minimal detectable change <strong>MDC</strong> and minimal clinically import difference <strong>MCID</strong>. Both of these are commonly reported to a 95% confidence level so will be multiplied by 1.96 respectively.</p>
 <p><strong>MDC_95</strong> = TE * sqrt(2) * 1.96<br>
 <strong>MCID_95</strong> = MDC_95 + <strong>SWC</strong></p>
-<p>Whilst there are may ways we can identify a value considered the <strong>smallest worthwhile change (SWC)</strong>, a commonly used method is to multiply the between subject SD by some factor. In exercise and sport science a commonly used factor is 0.2.</p>
-<p>So SWC = SD * 0.2</p>
+<p>Whilst there are may ways we can identify a value considered the <strong>smallest worthwhile change (SWC)</strong>, a commonly used method is to multiply the between subject SD by some factor. In exercise and sport science a commonly used factor is 0.2 therefore;</p>
+<p><strong>SWC<sub>sml</sub></strong> = SD * 0.2 (Small)<br>
+<strong>SWC<sub>mdr</sub></strong> = SD * 0.6 (Moderate)<br>
+<strong>SWC<sub>lrg</sub></strong> = SD * 0.6 (Large)</p>
 </section>
 </section>
 <section id="test-your-learning" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.6</span> Test your learning</h2>
 <p><br></p>
 What does a Bland-Altman plot show?
-<div id="radio_EWTWWGGMMP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWTWWGGMMP" value=""> <span>The mean of both measurements plotted against time</span></label>
+<div id="radio_IGOVIJQEHT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value=""> <span>The mean of both measurements plotted against time</span></label>
 </div>
 What does the mean difference line (bias) in a Bland-Altman plot represent?
-<div id="radio_UEYRKMOGGP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_UEYRKMOGGP" value=""> <span>The reliability of the measurement</span></label>
+<div id="radio_YZPXICZRAE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value=""> <span>The reliability of the measurement</span></label>
 </div>
 What does the Typical Error (TE) represent?
-<div id="radio_XNGCOSCJOR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_XNGCOSCJOR" value=""> <span>The correlation between measurements</span></label>
+<div id="radio_CJKRZOKNTT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value=""> <span>The correlation between measurements</span></label>
 </div>
 If you have a single measurement (e.g., 45 kg) and know the Typical Error (TE) is 2 kg, how would you construct a 95% confidence interval around this measurement?
-<div id="radio_PDESKVODUK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_PDESKVODUK" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
+<div id="radio_BXGMZIDFKL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
 </div>
 If you measure an athlete’s max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?
-<div id="radio_QVLVNXTKVZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_QVLVNXTKVZ" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
+<div id="radio_IAJWMXBOQM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
 </div>
 What does the Minimum Detectable Change (MDC95) represent?
-<div id="radio_IQEFDCOAYG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_IQEFDCOAYG" value=""> <span>The typical error multiplied by 0.68</span></label>
+<div id="radio_WQFYWOUULF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value=""> <span>The typical error multiplied by 0.68</span></label>
 </div>
 When monitoring an individual’s changes over time, which criterion should you use to determine if a real change has occurred?
-<div id="radio_UHZJXHDHSI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_UHZJXHDHSI" value=""> <span>The change is significant if it exceeds the CV</span></label>
+<div id="radio_QYVEYOALAV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value=""> <span>The change is significant if it exceeds the CV</span></label>
 </div>
 Why is the Coefficient of Variation (CVTE%) useful?
-<div id="radio_SJPTTREFBY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_SJPTTREFBY" value="answer"> <span>All of the above</span></label>
+<div id="radio_IIPGHHLHUT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value="answer"> <span>All of the above</span></label>
 </div>
 If you want to construct a 95% confidence interval around an individual’s measurement, you should use:
-<div id="radio_TECDKOSKCY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_TECDKOSKCY" value=""> <span>±2 × CV from the measured value</span></label>
+<div id="radio_MZUTYZPCNH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value=""> <span>±2 × CV from the measured value</span></label>
 </div>
 
 
