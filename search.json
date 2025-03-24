@@ -146,7 +146,7 @@
     "href": "Practical2.html#example-case-study",
     "title": "2  Week 3 - Practical",
     "section": "2.3 Example case study",
-    "text": "2.3 Example case study\nYou are hired by an elite sporting organization to help them decide whether they should invest in the purchase of a force plate ($20,000+). The organization currently has access to a range of other measures that can give indications of vertical jump ($400 to $2000) height but the company they are thinking of purchasing the force plate from has loaned them a force plate for two weeks to test it out.\nWhat are some important factors that you might consider when helping the organization make this decision?\n\n\n2.3.1 Bland-Altman plot\nOne of the key ways we look to assess the ability to interchange between testing technologies that are attempting to measure the same trait is use of a Bland-Altman plot.\nWe will discuss Bland-Altman plots in more detail in the lecture in Week 4 but quite simply all the Bland-Altman plot attempts to show us is the difference between one test compared to another test measuring the same thing/\nFor example we might compare jump height collected from a force plate and linear position transducer. From this we are interested in knowing the mean difference between measures (BIAS) and limits of agreement (LOA). LOA is calculated by looking at the standard deviation of the differences between test and multiplying by 2 (technically 1.96).\n\nThe ULOA is then BIAS + LOA\nand\nLLOA calculated as BIAS - LOA\n\n\n\n\n\n\nClick for interactive Bland-Altman plot\n\n\n\n\n\n\n\n    \n\n    Interactive Bland-Altman Plot\n    \n        \n            \n                Bias: 0\n                \n            \n            \n                LOA Width: 2\n                \n            \n        \n        \n            \n                \n                Show Regression Line (for Proportional Bias)\n            \n        \n        \n        Download Data",
+    "text": "2.3 Example case study\nYou are hired by an elite sporting organization to help them decide whether they should invest in the purchase of a force plate ($20,000+). The organization currently has access to a range of other measures that can give indications of vertical jump ($400 to $2000) height but the company they are thinking of purchasing the force plate from has loaned them a force plate for two weeks to test it out.\nWhat are some important factors that you might consider when helping the organization make this decision?\n\n\n2.3.1 Bland-Altman plot\nOne of the key ways we look to assess the ability to interchange between testing technologies that are attempting to measure the same trait is use of a Bland-Altman plot.\nWe will discuss Bland-Altman plots in more detail in the lecture in Week 4 but quite simply all the Bland-Altman plot attempts to show us is the difference between one test compared to another test measuring the same thing/\nFor example we might compare jump height collected from a force plate and linear position transducer. From this we are interested in knowing the mean difference between measures (BIAS) and limits of agreement (LOA). LOA is calculated by looking at the standard deviation of the differences between test and multiplying by 2 (technically 1.96).\n\nThe ULOA is then BIAS + LOA\nand\nLLOA calculated as BIAS - LOA\n\n\n\n\n\n\nClick for interactive Bland-Altman plot\n\n\n\n\n\n\n\n    \n\n    Interactive Bland-Altman Plot\n    \n        \n            \n                Fixed Bias: 0\n                \n            \n            \n                LOA Width: 2\n                \n            \n            \n                Proportional Bias: 0\n                \n            \n            \n                Heteroscedasticity: 0\n                \n            \n        \n        \n            \n                \n                Show Regression Line (for Proportional Bias)\n            \n        \n        \n        Download Data",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 3 - Practical</span>"
     ]
@@ -169,6 +169,66 @@
     "text": "2.6 Test your learning\n\nWhat does a Bland-Altman plot show?\n\n The difference between measurements plotted against time The difference between measurements plotted against the mean of both measurements The correlation between two measurements The mean of both measurements plotted against time\n\nWhat does the mean difference line (bias) in a Bland-Altman plot represent?\n\n Random error in the measurements The standard deviation of the differences Systematic differences between measurements The reliability of the measurement\n\nWhat does the Typical Error (TE) represent?\n\n The average difference between measurements The typical variation in repeated measurements for an individual The minimum detectable change The correlation between measurements\n\nIf you have a single measurement (e.g., 45 kg) and know the Typical Error (TE) is 2 kg, how would you construct a 95% confidence interval around this measurement?\n\n Add and subtract 1×TE from the measurement Add and subtract 1.96×TE from the measurement Add and subtract 2×TE from the measurement Add and subtract the MDC95 from the measurement\n\nIf you measure an athlete’s max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?\n\n The athlete will score between 74.1-85.9 kg on 95% of future tests 95% of athletes with similar measured strength have a true strength in this range If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability\n\nWhat does the Minimum Detectable Change (MDC95) represent?\n\n The smallest change that could occur by chance The average change between measurements The minimum change needed to be confident a real change has occurred at the 95% confidence level The typical error multiplied by 0.68\n\nWhen monitoring an individual’s changes over time, which criterion should you use to determine if a real change has occurred?\n\n The change is significant if it exceeds the TE The change is significant if it exceeds the MDC95 The change is significant if it exceeds the mean bias The change is significant if it exceeds the CV\n\nWhy is the Coefficient of Variation (CVTE%) useful?\n\n It allows comparison of reliability between different units It expresses error relative to the mean It's useful when error increases with larger values All of the above\n\nIf you want to construct a 95% confidence interval around an individual’s measurement, you should use:\n\n ±1 × TE from the measured value ±1.96 × TE from the measured value ±1 × MDC from the measured value ±2 × CV from the measured value",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Week 3 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical3.html",
+    "href": "Practical3.html",
+    "title": "3  Week 4 - Practical",
+    "section": "",
+    "text": "3.1 Learning Outcome:",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical3.html#learning-outcome",
+    "href": "Practical3.html#learning-outcome",
+    "title": "3  Week 4 - Practical",
+    "section": "",
+    "text": "Understand measurement accuracy concepts and their application to exercise testing and measurement\nEvaluate the feasibility of different tests according to environmental conditions and client characteristics\nDemonstrate basic data processing and analytically techniques",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical3.html#practical-goals",
+    "href": "Practical3.html#practical-goals",
+    "title": "3  Week 4 - Practical",
+    "section": "3.2 Practical Goals:",
+    "text": "3.2 Practical Goals:\n\n3nd round of data collection for practical report 2\nPractice developing skills at running and collecting commonly used test for assessment of cardiovascular fitness and parasympathetic vs sympathetic activity.\nUnderstand how measures collected would be practically applied in the field, considering important limitations to the measures.\nUnderstand basic intuition around how correlation plots can be used as a measure of convergent validity between measures testing the same trait/construct.\nTime permitting; practise making Bland-Altman plots using data collected from previous weeks.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical3.html#example-case-study",
+    "href": "Practical3.html#example-case-study",
+    "title": "3  Week 4 - Practical",
+    "section": "3.3 Example case study",
+    "text": "3.3 Example case study\nYou hired by an organisation that are use different testing modalities to infer cardiovascular fitness. Namely, they are currently using a combination of a 3 minute step up test, 3 minute fixed wattage bike test and 3 minute run test at 9km.hr. The company/team want to know how related these test are. More explicitly they want to know if they knew the result of one test could they use it to infer what the individual may have got on one of the other test.\nHow might you go about answering this?\n\n3.3.1 Correlation and regression\nIn this situation the business/club is asking a question about how much does one test tell us about another test. Or put another way how correlated/associated is one test with another.\nWhilst, there are may different ways to get a measure of association/correlation, the most common method is via using simple linear regression (think line of best of fit), and calculating something called a correlation coefficient.\nWe will go over these measures in a lot more detail in the Week 5 lecture.\n\n\n\n\n\n\nClick for interactive Regression plot\n\n\n\n\n\n\n\n    \n\n    \n        \n            Correlation Strength:\n            \n            0.7\n        \n        \n        \n            Intercept (β₀):\n            \n            5\n            \n        \n        \n        \n            Slope (β₁):\n            \n            1\n            \n        \n        \n        \n            Generate New Data\n            Hide Regression Line\n            Show Residuals\n            Show Squared Errors\n            Show Optimal Line\n            Show Mean Lines\n            Download CSV\n        \n    \n    \n    \n        \n            y = 1x + 5",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical3.html#practical-procedures-part-1",
+    "href": "Practical3.html#practical-procedures-part-1",
+    "title": "3  Week 4 - Practical",
+    "section": "3.4 Practical Procedures (PART 1)",
+    "text": "3.4 Practical Procedures (PART 1)\n\nYour tutor will put you into groups of 3.\nWe are looking for individuals who think they could participate in at least two of the test mentioned above.\nDuring the 3 minute sub maximal task, you will track the individual Heart Rate at the end of each minute, and their RPE using the Borg scale.\nYou will additionally track there HR recovery or the heart rate after resting 60 seconds.\n\nEnter data into the Google form that will be provided on VUWS.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical3.html#section-2---bland-altman-plot",
+    "href": "Practical3.html#section-2---bland-altman-plot",
+    "title": "3  Week 4 - Practical",
+    "section": "3.5 Section 2 - Bland Altman plot",
+    "text": "3.5 Section 2 - Bland Altman plot\nIn week 3 practical we introduced the Bland-Altman plot, we then discussed use of this plot in more detail in the Week 4 seminar.\nSimilar to previous weeks you will now have time to practise making a Bland-Altman plot.\nDownload the from the below tab, and use the excel document used in this weeks seminar to see if you can replicate the results.\n\n\n\n\n\n\nClick for interactive Bland-Altman Plot\n\n\n\n\n\n\n    \n\n    Interactive Bland-Altman Plot\n    \n        \n            \n                Fixed Bias: 0\n                \n            \n            \n                LOA Width: 2\n                \n            \n            \n                Proportional Bias: 0\n                \n            \n            \n                Heteroscedasticity: 0\n                \n            \n        \n        \n            \n                \n                Show Regression Line (for Proportional Bias)\n            \n        \n        \n        Download Data",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
     ]
   }
 ]

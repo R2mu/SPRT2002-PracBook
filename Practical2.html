@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Practical3.html" rel="next">
 <link href="./Practical1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -140,6 +141,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./Practical2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 3 - Practical</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Practical3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 4 - Practical</span></span></a>
   </div>
 </li>
     </ul>
@@ -257,6 +264,7 @@ Click for interactive Bland-Altman plot
         }
         .ba-sliders {
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             align-items: center;
         }
@@ -264,9 +272,12 @@ Click for interactive Bland-Altman plot
             display: flex;
             align-items: center;
             gap: 10px;
+            min-width: 280px;
         }
         .ba-slider-label {
             min-width: 120px;
+            display: flex;
+            justify-content: space-between;
         }
         .ba-reference-line {
             stroke-dasharray: 5,5;
@@ -283,6 +294,8 @@ Click for interactive Bland-Altman plot
             border-radius: 4px;
             pointer-events: none;
             opacity: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         .ba-radio-container {
             margin: 10px 0;
@@ -314,12 +327,20 @@ Click for interactive Bland-Altman plot
     <div class="ba-controls">
         <div class="ba-sliders">
             <div class="ba-slider-container">
-                <span class="ba-slider-label">Bias: <span id="ba-biasValue">0</span></span>
+                <span class="ba-slider-label">Fixed Bias: <span id="ba-biasValue">0</span></span>
                 <input type="range" id="ba-biasSlider" min="-5" max="5" step="0.1" value="0">
             </div>
             <div class="ba-slider-container">
                 <span class="ba-slider-label">LOA Width: <span id="ba-loaValue">2</span></span>
-                <input type="range" id="ba-loaSlider" min="0.5" max="5" step="0.1" value="2">
+                <input type="range" id="ba-loaSlider" min="0.5" max="10" step="0.1" value="2">
+            </div>
+            <div class="ba-slider-container">
+                <span class="ba-slider-label">Proportional Bias: <span id="ba-propBiasValue">0</span></span>
+                <input type="range" id="ba-propBiasSlider" min="-0.5" max="0.5" step="0.01" value="0">
+            </div>
+            <div class="ba-slider-container">
+                <span class="ba-slider-label">Heteroscedasticity: <span id="ba-heteroValue">0</span></span>
+                <input type="range" id="ba-heteroSlider" min="0" max="0.5" step="0.01" value="0">
             </div>
         </div>
         <div class="ba-radio-container">
@@ -389,15 +410,26 @@ Click for interactive Bland-Altman plot
         }
 
         // Transform data based on slider values
-        function updateData(data, bias, loa) {
+        function updateData(data, bias, loa, propBias, hetero) {
             return data.map(d => {
-                const scaledDiff = d.baseDiff * loa + bias;
-                const methodB = d.methodA + scaledDiff;
+                // Apply proportional bias
+                const proportionalComponent = propBias * d.methodA;
+                
+                // Apply heteroscedasticity - variance increases with value
+                const heteroscedasticity = hetero * d.methodA * (Math.random() - 0.5);
+                
+                // Calculate new difference with fixed bias, proportional bias, and heteroscedasticity
+                const scaledBaseDiff = d.baseDiff * loa;
+                const newDiff = scaledBaseDiff + bias + proportionalComponent + heteroscedasticity;
+                
+                // Calculate new method B value
+                const methodB = d.methodA + newDiff;
+                
                 return {
                     ...d,
                     methodB: methodB,
                     mean: (d.methodA + methodB) / 2,
-                    diff: scaledDiff
+                    diff: newDiff
                 };
             });
         }
@@ -467,7 +499,7 @@ Click for interactive Bland-Altman plot
 
         // Generate initial data
         let baseData = generateInitialData();
-        let currentData = updateData(baseData, 0, 2);
+        let currentData = updateData(baseData, 0, 2, 0, 0);
 
         // Update plot function
         function updatePlot(data) {
@@ -623,7 +655,9 @@ Click for interactive Bland-Altman plot
             // Generate filename with current parameter values
             const bias = d3.select("#ba-biasValue").text();
             const loa = d3.select("#ba-loaValue").text();
-            link.setAttribute("download", `bland_altman_data_bias${bias}_loa${loa}.csv`);
+            const propBias = d3.select("#ba-propBiasValue").text();
+            const hetero = d3.select("#ba-heteroValue").text();
+            link.setAttribute("download", `bland_altman_data_bias${bias}_loa${loa}_prop${propBias}_hetero${hetero}.csv`);
             
             document.body.appendChild(link);
             link.click();
@@ -633,19 +667,40 @@ Click for interactive Bland-Altman plot
         // Initial plot
         updatePlot(currentData);
 
+        // Function to update data based on all slider values
+        function updateDataFromSliders() {
+            const bias = +d3.select("#ba-biasSlider").property("value");
+            const loa = +d3.select("#ba-loaSlider").property("value");
+            const propBias = +d3.select("#ba-propBiasSlider").property("value");
+            const hetero = +d3.select("#ba-heteroSlider").property("value");
+            
+            currentData = updateData(baseData, bias, loa, propBias, hetero);
+            updatePlot(currentData);
+        }
+
         // Slider event listeners
         d3.select("#ba-biasSlider").on("input", function() {
             const bias = +this.value;
             d3.select("#ba-biasValue").text(bias);
-            currentData = updateData(baseData, bias, +d3.select("#ba-loaSlider").property("value"));
-            updatePlot(currentData);
+            updateDataFromSliders();
         });
 
         d3.select("#ba-loaSlider").on("input", function() {
             const loa = +this.value;
             d3.select("#ba-loaValue").text(loa);
-            currentData = updateData(baseData, +d3.select("#ba-biasSlider").property("value"), loa);
-            updatePlot(currentData);
+            updateDataFromSliders();
+        });
+        
+        d3.select("#ba-propBiasSlider").on("input", function() {
+            const propBias = +this.value;
+            d3.select("#ba-propBiasValue").text(propBias);
+            updateDataFromSliders();
+        });
+        
+        d3.select("#ba-heteroSlider").on("input", function() {
+            const hetero = +this.value;
+            d3.select("#ba-heteroValue").text(hetero);
+            updateDataFromSliders();
         });
 
         // Regression toggle listener
@@ -1532,40 +1587,40 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
 <h2 data-number="2.6" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.6</span> Test your learning</h2>
 <p><br></p>
 What does a Bland-Altman plot show?
-<div id="radio_IGOVIJQEHT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_IGOVIJQEHT" value=""> <span>The mean of both measurements plotted against time</span></label>
+<div id="radio_BVOESFLYON" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value=""> <span>The mean of both measurements plotted against time</span></label>
 </div>
 What does the mean difference line (bias) in a Bland-Altman plot represent?
-<div id="radio_YZPXICZRAE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_YZPXICZRAE" value=""> <span>The reliability of the measurement</span></label>
+<div id="radio_TYXHBEEZNG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value=""> <span>The reliability of the measurement</span></label>
 </div>
 What does the Typical Error (TE) represent?
-<div id="radio_CJKRZOKNTT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_CJKRZOKNTT" value=""> <span>The correlation between measurements</span></label>
+<div id="radio_RDGIFHCUKN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value=""> <span>The correlation between measurements</span></label>
 </div>
 If you have a single measurement (e.g., 45 kg) and know the Typical Error (TE) is 2 kg, how would you construct a 95% confidence interval around this measurement?
-<div id="radio_BXGMZIDFKL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_BXGMZIDFKL" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
+<div id="radio_MAYLPEHNNM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
 </div>
 If you measure an athlete’s max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?
-<div id="radio_IAJWMXBOQM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_IAJWMXBOQM" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
+<div id="radio_TQQAMFPVSV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
 </div>
 What does the Minimum Detectable Change (MDC95) represent?
-<div id="radio_WQFYWOUULF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_WQFYWOUULF" value=""> <span>The typical error multiplied by 0.68</span></label>
+<div id="radio_WCQJKKDTTX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value=""> <span>The typical error multiplied by 0.68</span></label>
 </div>
 When monitoring an individual’s changes over time, which criterion should you use to determine if a real change has occurred?
-<div id="radio_QYVEYOALAV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_QYVEYOALAV" value=""> <span>The change is significant if it exceeds the CV</span></label>
+<div id="radio_XLAMLGHHBI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value=""> <span>The change is significant if it exceeds the CV</span></label>
 </div>
 Why is the Coefficient of Variation (CVTE%) useful?
-<div id="radio_IIPGHHLHUT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_IIPGHHLHUT" value="answer"> <span>All of the above</span></label>
+<div id="radio_VYGPDGQRKS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value="answer"> <span>All of the above</span></label>
 </div>
 If you want to construct a 95% confidence interval around an individual’s measurement, you should use:
-<div id="radio_MZUTYZPCNH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_MZUTYZPCNH" value=""> <span>±2 × CV from the measured value</span></label>
+<div id="radio_DLBWAHJZGF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value=""> <span>±2 × CV from the measured value</span></label>
 </div>
 
 
@@ -2204,6 +2259,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./Practical3.html" class="pagination-link" aria-label="Week 4 - Practical">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 4 - Practical</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
