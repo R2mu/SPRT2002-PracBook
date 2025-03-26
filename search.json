@@ -196,7 +196,7 @@
     "href": "Practical3.html#practical-goals",
     "title": "3  Week 4 - Practical",
     "section": "3.2 Practical Goals:",
-    "text": "3.2 Practical Goals:\n\n3nd round of data collection for practical report 2\nPractice developing skills at running and collecting commonly used test for assessment of cardiovascular fitness and parasympathetic vs sympathetic activity.\nUnderstand how measures collected would be practically applied in the field, considering important limitations to the measures.\nUnderstand basic intuition around how correlation plots can be used as a measure of convergent validity between measures testing the same trait/construct.\nTime permitting; practise making Bland-Altman plots using data collected from previous weeks.",
+    "text": "3.2 Practical Goals:\n\n3rd round of data collection for practical report 2\nPractice developing skills at running and collecting commonly used test for assessment of cardiovascular fitness and parasympathetic vs sympathetic activity.\nUnderstand how measures collected would be practically applied in the field, considering important limitations to the measures.\nUnderstand basic intuition around how correlation plots can be used as a measure of convergent validity between measures testing the same trait/construct.\nTime permitting; practise making Bland-Altman plots using data collected from previous weeks.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
     ]
@@ -225,8 +225,18 @@
     "objectID": "Practical3.html#section-2---bland-altman-plot",
     "href": "Practical3.html#section-2---bland-altman-plot",
     "title": "3  Week 4 - Practical",
-    "section": "3.5 Section 2 - Bland Altman plot",
-    "text": "3.5 Section 2 - Bland Altman plot\nIn week 3 practical we introduced the Bland-Altman plot, we then discussed use of this plot in more detail in the Week 4 seminar.\nSimilar to previous weeks you will now have time to practise making a Bland-Altman plot.\nDownload data from the below tab, and use the excel document used in this weeks seminar(1hr and 2minutes in) to see if you can replicate the results.\n\n\n\n\n\n\nSeminar content\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClick for interactive Bland-Altman Plot\n\n\n\n\n\n\n    \n\n    Interactive Bland-Altman Plot\n    \n        \n            \n                Fixed Bias: 0\n                \n            \n            \n                LOA Width: 2\n                \n            \n            \n                Proportional Bias: 0\n                \n            \n            \n                Heteroscedasticity: 0\n                \n            \n        \n        \n            \n                \n                Show Regression Line (for Proportional Bias)\n            \n        \n        \n        Download Data",
+    "section": "3.6 Section 2 - Bland Altman plot",
+    "text": "3.6 Section 2 - Bland Altman plot\nIn week 3 practical we introduced the Bland-Altman plot, we then discussed use of this plot in more detail in the Week 4 seminar.\nSimilar to previous weeks you will now have time to practise making a Bland-Altman plot.\nDownload data from the below tab, and use the excel document used in this weeks seminar(1hr and 2minutes in) to see if you can replicate the results.\n\n\n\n\n\n\nSeminar content\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClick for interactive Bland-Altman Plot\n\n\n\n\n\n\n    \n\n    Interactive Bland-Altman Plot\n    \n        \n            \n                Fixed Bias: 0\n                \n            \n            \n                LOA Width: 2\n                \n            \n            \n                Proportional Bias: 0\n                \n            \n            \n                Heteroscedasticity: 0\n                \n            \n        \n        \n            \n                \n                Show Regression Line (for Proportional Bias)\n            \n        \n        \n        Download Data",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical3.html#reflection",
+    "href": "Practical3.html#reflection",
+    "title": "3  Week 4 - Practical",
+    "section": "3.5 Reflection",
+    "text": "3.5 Reflection\nHow could have we better controlled for potential sources of noise/error in the testing procedure we did today?\nWhy would using a Bland-Altman plot not be appropriate to compare HR’s in this situation?",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Week 4 - Practical</span>"
     ]
