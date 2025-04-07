@@ -42,17 +42,18 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -99,45 +100,71 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="custom.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Practical2.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 3 - Practical</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">SPRT2002 Prac Book</a> 
-        <div class="sidebar-tools-main">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">SPRT2002 Prac Book</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practicals" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Practicals</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-practicals">    
+        <li>
+    <a class="dropdown-item" href="./Practical1.html">
+ <span class="dropdown-text">Practical 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical2.html">
+ <span class="dropdown-text">Practical 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical3.html">
+ <span class="dropdown-text">Practical 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical4.html">
+ <span class="dropdown-text">Practical 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical5.html">
+ <span class="dropdown-text">Practical 5</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./SPRT2002-Prac-Book.pdf">
+            <a class="dropdown-item quarto-navbar-tools-item" href="./SPRT2002-Prac-Book.pdf">
               <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./SPRT2002-Prac-Book.epub">
+            <a class="dropdown-item quarto-navbar-tools-item" href="./SPRT2002-Prac-Book.epub">
               <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
@@ -145,53 +172,16 @@ window.Quarto = {
       </ul>
     </div>
 </div>
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Week 2 - Practical</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 3 - Practical</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 4 - Practical</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 5 - Practical</span></span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span class="header-section-number">2.1</span> Learning Outcome:</a></li>
@@ -1722,40 +1712,40 @@ Click for interactive Bland-Altman plot
 <h2 data-number="2.6" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.6</span> Test your learning</h2>
 <p><br></p>
 What does a Bland-Altman plot show?
-<div id="radio_DIGCKDVPGL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value=""> <span>The mean of both measurements plotted against time</span></label>
+<div id="radio_GTRSMUUVOW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GTRSMUUVOW" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_GTRSMUUVOW" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_GTRSMUUVOW" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_GTRSMUUVOW" value=""> <span>The mean of both measurements plotted against time</span></label>
 </div>
 What does the mean difference line (bias) in a Bland-Altman plot represent?
-<div id="radio_EWBCAZAAOQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value=""> <span>The reliability of the measurement</span></label>
+<div id="radio_QXJIJHUUYL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QXJIJHUUYL" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_QXJIJHUUYL" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_QXJIJHUUYL" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_QXJIJHUUYL" value=""> <span>The reliability of the measurement</span></label>
 </div>
 What does the Typical Error (TE) represent?
-<div id="radio_NUJYODDALN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value=""> <span>The correlation between measurements</span></label>
+<div id="radio_DVPANWOKUJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DVPANWOKUJ" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_DVPANWOKUJ" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_DVPANWOKUJ" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_DVPANWOKUJ" value=""> <span>The correlation between measurements</span></label>
 </div>
 If you have a single measurement (e.g., 45 kg) and know the Typical Error (TE) is 2 kg, how would you construct a 95% confidence interval around this measurement?
-<div id="radio_WOGDLGGGNF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
+<div id="radio_GDMGJGLBRY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GDMGJGLBRY" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_GDMGJGLBRY" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_GDMGJGLBRY" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_GDMGJGLBRY" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
 </div>
 If you measure an athlete’s max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?
-<div id="radio_XGHXIHMJRU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
+<div id="radio_XHEUSQTTWK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XHEUSQTTWK" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_XHEUSQTTWK" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_XHEUSQTTWK" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_XHEUSQTTWK" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
 </div>
 What does the Minimum Detectable Change (MDC95) represent?
-<div id="radio_AOKWNKAIRJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value=""> <span>The typical error multiplied by 0.68</span></label>
+<div id="radio_OYURFBQNCT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OYURFBQNCT" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_OYURFBQNCT" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_OYURFBQNCT" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_OYURFBQNCT" value=""> <span>The typical error multiplied by 0.68</span></label>
 </div>
 When monitoring an individual’s changes over time, which criterion should you use to determine if a real change has occurred?
-<div id="radio_WPRRZEATWB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value=""> <span>The change is significant if it exceeds the CV</span></label>
+<div id="radio_PHRAODRQAE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PHRAODRQAE" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_PHRAODRQAE" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_PHRAODRQAE" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_PHRAODRQAE" value=""> <span>The change is significant if it exceeds the CV</span></label>
 </div>
 Why is the Coefficient of Variation (CVTE%) useful?
-<div id="radio_UVIGXHNPGI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value="answer"> <span>All of the above</span></label>
+<div id="radio_ZEVWWNDOCR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZEVWWNDOCR" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_ZEVWWNDOCR" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_ZEVWWNDOCR" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_ZEVWWNDOCR" value="answer"> <span>All of the above</span></label>
 </div>
 If you want to construct a 95% confidence interval around an individual’s measurement, you should use:
-<div id="radio_BPTVBGDHZV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value=""> <span>±2 × CV from the measured value</span></label>
+<div id="radio_JTXWMCDSYE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JTXWMCDSYE" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_JTXWMCDSYE" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_JTXWMCDSYE" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_JTXWMCDSYE" value=""> <span>±2 × CV from the measured value</span></label>
 </div>
 
 

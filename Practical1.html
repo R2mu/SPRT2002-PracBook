@@ -40,19 +40,20 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b343bb23504f009ddf7b24643a6af19a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -73,44 +74,68 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="custom.css">
 </head>
 
-<body class="nav-sidebar docked">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Practical1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Week 2 - Practical</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
-    <div class="sidebar-title mb-0 py-0">
-      <a href="./">SPRT2002 Prac Book</a> 
-        <div class="sidebar-tools-main">
-    <a href="./index.html" title="Home" class="quarto-navigation-tool px-1" aria-label="Home"><i class="bi bi-house-fill"></i></a>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">SPRT2002 Prac Book</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-practicals" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Practicals</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-practicals">    
+        <li>
+    <a class="dropdown-item" href="./Practical1.html">
+ <span class="dropdown-text">Practical 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical2.html">
+ <span class="dropdown-text">Practical 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical3.html">
+ <span class="dropdown-text">Practical 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical4.html">
+ <span class="dropdown-text">Practical 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical5.html">
+ <span class="dropdown-text">Practical 5</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./SPRT2002-Prac-Book.pdf">
+            <a class="dropdown-item quarto-navbar-tools-item" href="./SPRT2002-Prac-Book.pdf">
               <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="./SPRT2002-Prac-Book.epub">
+            <a class="dropdown-item quarto-navbar-tools-item" href="./SPRT2002-Prac-Book.epub">
               <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
@@ -118,53 +143,16 @@ ul.task-list li input[type="checkbox"] {
       </ul>
     </div>
 </div>
-    </div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Week 2 - Practical</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Week 3 - Practical</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 4 - Practical</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Practical4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 5 - Practical</span></span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span class="header-section-number">1.1</span> Learning Outcome:</a>
@@ -1514,32 +1502,32 @@ Hint
 <section id="test-your-learning" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.1</span> Test your learning</h2>
 If you calculate a mean from a sample of 100 participants, this mean is:
-<div id="radio_SUEDPPMFMD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SUEDPPMFMD" value=""> <span>Always exactly equal to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_SUEDPPMFMD" value=""> <span>Always lower than the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_SUEDPPMFMD" value=""> <span>Not related to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_SUEDPPMFMD" value="answer"> <span>An estimate of the true population mean</span></label>
+<div id="radio_SKSKWTFPRM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SKSKWTFPRM" value=""> <span>Always exactly equal to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_SKSKWTFPRM" value=""> <span>Always lower than the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_SKSKWTFPRM" value=""> <span>Not related to the true population mean</span></label><label><input type="radio" autocomplete="off" name="radio_SKSKWTFPRM" value="answer"> <span>An estimate of the true population mean</span></label>
 </div>
 When the population standard deviation increases, what happens to the standard error of the mean?
-<div id="radio_KFAMCEUOFV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KFAMCEUOFV" value=""> <span>It decreases</span></label><label><input type="radio" autocomplete="off" name="radio_KFAMCEUOFV" value=""> <span>It stays the same</span></label><label><input type="radio" autocomplete="off" name="radio_KFAMCEUOFV" value=""> <span>It becomes zero</span></label><label><input type="radio" autocomplete="off" name="radio_KFAMCEUOFV" value="answer"> <span>It increases</span></label>
+<div id="radio_EVIKOQSLSU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EVIKOQSLSU" value=""> <span>It decreases</span></label><label><input type="radio" autocomplete="off" name="radio_EVIKOQSLSU" value=""> <span>It stays the same</span></label><label><input type="radio" autocomplete="off" name="radio_EVIKOQSLSU" value=""> <span>It becomes zero</span></label><label><input type="radio" autocomplete="off" name="radio_EVIKOQSLSU" value="answer"> <span>It increases</span></label>
 </div>
 A researcher collects vertical jump data from 25 athletes and calculates a 95% confidence interval of [45cm, 55cm]. This means:
-<div id="radio_TPXUWGORVZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TPXUWGORVZ" value=""> <span>95% of all athletes' jumps fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_TPXUWGORVZ" value=""> <span>The true population mean definitely lies between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_TPXUWGORVZ" value=""> <span>95% of individual jump heights in this sample fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_TPXUWGORVZ" value="answer"> <span>If we repeated this sampling process many times, about 95% of the calculated intervals would contain the true population mean</span></label>
+<div id="radio_SVGNJPAKGL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SVGNJPAKGL" value=""> <span>95% of all athletes' jumps fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_SVGNJPAKGL" value=""> <span>The true population mean definitely lies between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_SVGNJPAKGL" value=""> <span>95% of individual jump heights in this sample fall between 45cm and 55cm</span></label><label><input type="radio" autocomplete="off" name="radio_SVGNJPAKGL" value="answer"> <span>If we repeated this sampling process many times, about 95% of the calculated intervals would contain the true population mean</span></label>
 </div>
 If you have a sample mean of 50 and a standard error of 2, what is the 68% confidence interval?
-<div id="radio_OHTGUEZSNG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OHTGUEZSNG" value=""> <span>[46, 54]</span></label><label><input type="radio" autocomplete="off" name="radio_OHTGUEZSNG" value=""> <span>[47, 53]</span></label><label><input type="radio" autocomplete="off" name="radio_OHTGUEZSNG" value=""> <span>[49, 51]</span></label><label><input type="radio" autocomplete="off" name="radio_OHTGUEZSNG" value="answer"> <span>[48, 52]</span></label>
+<div id="radio_DEQVRWBRFN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DEQVRWBRFN" value=""> <span>[46, 54]</span></label><label><input type="radio" autocomplete="off" name="radio_DEQVRWBRFN" value=""> <span>[47, 53]</span></label><label><input type="radio" autocomplete="off" name="radio_DEQVRWBRFN" value=""> <span>[49, 51]</span></label><label><input type="radio" autocomplete="off" name="radio_DEQVRWBRFN" value="answer"> <span>[48, 52]</span></label>
 </div>
 Which of the following would NOT reduce the standard error of the mean?
-<div id="radio_ISSHPGEYMR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ISSHPGEYMR" value=""> <span>Increasing the sample size</span></label><label><input type="radio" autocomplete="off" name="radio_ISSHPGEYMR" value=""> <span>Reducing measurement error</span></label><label><input type="radio" autocomplete="off" name="radio_ISSHPGEYMR" value=""> <span>Using more precise equipment</span></label><label><input type="radio" autocomplete="off" name="radio_ISSHPGEYMR" value="answer"> <span>Calculating the median instead of the mean</span></label>
+<div id="radio_RWSYLZUWVE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RWSYLZUWVE" value=""> <span>Increasing the sample size</span></label><label><input type="radio" autocomplete="off" name="radio_RWSYLZUWVE" value=""> <span>Reducing measurement error</span></label><label><input type="radio" autocomplete="off" name="radio_RWSYLZUWVE" value=""> <span>Using more precise equipment</span></label><label><input type="radio" autocomplete="off" name="radio_RWSYLZUWVE" value="answer"> <span>Calculating the median instead of the mean</span></label>
 </div>
 The coefficient of variation (CV%) is 15% for a group of athletes’ sprint times. This indicates:
-<div id="radio_CGWFVAZELU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CGWFVAZELU" value=""> <span>The data varies by exactly 15 seconds</span></label><label><input type="radio" autocomplete="off" name="radio_CGWFVAZELU" value=""> <span>15% of the data points are outliers</span></label><label><input type="radio" autocomplete="off" name="radio_CGWFVAZELU" value=""> <span>The confidence interval is 15% wide</span></label><label><input type="radio" autocomplete="off" name="radio_CGWFVAZELU" value="answer"> <span>The standard deviation is 15% of the mean value</span></label>
+<div id="radio_FFDZFVFLTQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FFDZFVFLTQ" value=""> <span>The data varies by exactly 15 seconds</span></label><label><input type="radio" autocomplete="off" name="radio_FFDZFVFLTQ" value=""> <span>15% of the data points are outliers</span></label><label><input type="radio" autocomplete="off" name="radio_FFDZFVFLTQ" value=""> <span>The confidence interval is 15% wide</span></label><label><input type="radio" autocomplete="off" name="radio_FFDZFVFLTQ" value="answer"> <span>The standard deviation is 15% of the mean value</span></label>
 </div>
 Assuming a normal distribution (Bell curve) what proportion of the observations are contained between -1 to +1SD units around the mean?
-<div id="radio_DOWYUIIVNT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DOWYUIIVNT" value=""> <span>95%</span></label><label><input type="radio" autocomplete="off" name="radio_DOWYUIIVNT" value=""> <span>34%</span></label><label><input type="radio" autocomplete="off" name="radio_DOWYUIIVNT" value=""> <span>99%</span></label><label><input type="radio" autocomplete="off" name="radio_DOWYUIIVNT" value="answer"> <span>68%</span></label>
+<div id="radio_RMNFSENBRH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RMNFSENBRH" value=""> <span>95%</span></label><label><input type="radio" autocomplete="off" name="radio_RMNFSENBRH" value=""> <span>34%</span></label><label><input type="radio" autocomplete="off" name="radio_RMNFSENBRH" value=""> <span>99%</span></label><label><input type="radio" autocomplete="off" name="radio_RMNFSENBRH" value="answer"> <span>68%</span></label>
 </div>
 
 
