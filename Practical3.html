@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b343bb23504f009ddf7b24643a6af19a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -93,11 +93,12 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">SPRT2002 Prac Book</a> 
         <div class="sidebar-tools-main">
+    <a href="./index.html" title="Home" class="quarto-navigation-tool px-1" aria-label="Home"><i class="bi bi-house-fill"></i></a>
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
@@ -153,6 +154,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./Practical4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 5 - Practical</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Practical5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Week 6 - Practical</span></span></a>
   </div>
 </li>
     </ul>
@@ -229,13 +236,13 @@ ul.task-list li input[type="checkbox"] {
 <p>In this situation the business/club is asking a question about how much does one test tell us about another test. Or put another way how correlated/associated is one test with another.</p>
 <p>Whilst, there are may different ways to get a measure of association/correlation, the most common method is via using simple linear regression (think line of best of fit), and calculating something called a correlation coefficient.</p>
 <p>We will go over these measures in a lot more detail in the Week 5 lecture. <br></p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Click for interactive Regression plot">
+<div class="callout callout-style-default callout-tip callout-titled" title="Interactive regression">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click for interactive Regression plot
+Interactive regression
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -245,7 +252,7 @@ Click for interactive Regression plot
 <div class="lr-container">
     <style>
         .lr-container {
-            max-width: 800px;
+            max-width: 100%;
             margin: 0 auto;
             font-family: 'Roboto', sans-serif;
         }
@@ -267,6 +274,8 @@ Click for interactive Regression plot
             padding: 10px 15px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.05);
             margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .lr-controls {
@@ -275,6 +284,8 @@ Click for interactive Regression plot
             border-radius: 12px;
             padding: 12px 15px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .lr-slider-container {
@@ -327,7 +338,7 @@ Click for interactive Regression plot
         
         .lr-value-display {
             display: inline-block;
-            width: 45px;
+            width: 60px;
             text-align: center;
             font-weight: 500;
             color: #4361ee;
@@ -338,7 +349,7 @@ Click for interactive Regression plot
         
         .lr-optimal-value {
             display: inline-block;
-            margin-left: 10px;
+            margin-left: 5px;
             color: #2dc653;
             font-weight: 500;
         }
@@ -435,6 +446,32 @@ Click for interactive Regression plot
             stroke-width: 1.5;
         }
         
+        .lr-stats-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .lr-stats {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #212529;
+        }
+        
+        .lr-stats p {
+            margin: 3px 0;
+        }
+        
+        .lr-stats-highlight {
+            font-weight: 600;
+            color: #2dc653;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .lr-slider-container {
@@ -470,17 +507,15 @@ Click for interactive Regression plot
         </div>
         
         <div class="lr-slider-container">
-            <span class="lr-slider-label">Intercept (β₀):</span>
+            <span class="lr-slider-label">Intercept (β₀):<span class="lr-optimal-value" id="lr-optimal-intercept-value"></span></span>
             <input type="range" id="lr-intercept" class="lr-slider" min="0" max="100" step="0.1" value="5">
             <span class="lr-value-display" id="lr-intercept-value">5</span>
-            <span class="lr-optimal-value" id="lr-optimal-intercept-value"></span>
         </div>
         
         <div class="lr-slider-container">
-            <span class="lr-slider-label">Slope (β₁):</span>
+            <span class="lr-slider-label">Slope (β₁):<span class="lr-optimal-value" id="lr-optimal-slope-value"></span></span>
             <input type="range" id="lr-slope" class="lr-slider" min="-3" max="3" step="0.05" value="1">
             <span class="lr-value-display" id="lr-slope-value">1</span>
-            <span class="lr-optimal-value" id="lr-optimal-slope-value"></span>
         </div>
         
         <div class="lr-button-container">
@@ -488,7 +523,7 @@ Click for interactive Regression plot
             <button id="lr-toggle-line" class="lr-button">Hide Regression Line</button>
             <button id="lr-show-residuals" class="lr-button lr-button-residuals">Show Residuals</button>
             <button id="lr-show-squares" class="lr-button lr-button-squares">Show Squared Errors</button>
-            <button id="lr-show-optimal" class="lr-button lr-button-optimal">Show Optimal Line</button>
+            <button id="lr-show-optimal" class="lr-button lr-button-optimal">Hide Optimal Line</button>
             <button id="lr-show-means" class="lr-button">Show Mean Lines</button>
             <button id="lr-download-csv" class="lr-button lr-button-download">Download CSV</button>
         </div>
@@ -501,6 +536,11 @@ Click for interactive Regression plot
         </div>
         <div id="lr-scatter-plot"></div>
     </div>
+    
+    <!-- New container for optimal regression statistics -->
+    <div class="lr-stats-container">
+        <div class="lr-stats" id="lr-optimal-stats"></div>
+    </div>
 
     <script>
         // IIFE to avoid global scope pollution
@@ -508,9 +548,9 @@ Click for interactive Regression plot
             // Configuration
             const lrConfig = {
                 mainChart: {
-                    width: 700,
-                    height: 450,
-                    margin: { top: 30, right: 30, bottom: 50, left: 60 }
+                    width: 400,
+                    height: 320, // Reduced height from 450 to 320
+                    margin: { top: 25, right: 30, bottom: 40, left: 60 } // Slightly reduced top/bottom margins
                 },
                 pointCount: 40,
                 xRange: [0, 100],
@@ -525,29 +565,21 @@ Click for interactive Regression plot
             let lrShowResiduals = false;
             let lrShowSquares = false;
             let lrShowLine = true;
-            let lrShowOptimalLine = false;
+            let lrShowOptimalLine = true; // Changed to true by default
             let lrShowMeanLines = false;
             let lrOptimalParams = { intercept: 0, slope: 0 };
 
-                            // Initialize the main chart
+            // Initialize the main chart with responsive design
             const lrSvg = d3.select("#lr-scatter-plot")
                 .append("svg")
-                .attr("width", lrConfig.mainChart.width)
-                .attr("height", lrConfig.mainChart.height);
+                .attr("width", "100%") // Set width to 100% for responsiveness
+                .attr("height", "100%") // Set height to 100% for responsiveness
+                .attr("viewBox", `0 0 ${lrConfig.mainChart.width} ${lrConfig.mainChart.height}`) // Use viewBox for scaling
+                .attr("preserveAspectRatio", "xMidYMid meet"); // Maintain aspect ratio
                 
             // Create tooltip
             const lrTooltip = d3.select(".lr-container").append("div")
                 .attr("class", "lr-tooltip")
-                .style("position", "absolute")
-                .style("background-color", "rgba(33, 37, 41, 0.9)")
-                .style("color", "white")
-                .style("padding", "8px 12px")
-                .style("border-radius", "6px")
-                .style("font-size", "14px")
-                .style("font-weight", "400")
-                .style("pointer-events", "none")
-                .style("z-index", "1000")
-                .style("box-shadow", "0 4px 12px rgba(0, 0, 0, 0.15)")
                 .style("opacity", 0);
 
             // Set up scales
@@ -847,6 +879,37 @@ Click for interactive Regression plot
                     `Optimal: y = ${lrOptimalParams.slope.toFixed(2)}x ${optSign} ${lrOptimalParams.intercept.toFixed(1)} (r = ${actualCorrelation.toFixed(2)}, r² = ${optimalRSquared.toFixed(2)}, SEE = ${optimalSEE.toFixed(2)})`
                 );
             }
+            
+            // New function to update the optimal stats section below the chart
+            function updateLrOptimalStats() {
+                const actualCorrelation = calculateLrCorrelation(lrData);
+                const optimalRSquared = calculateLrRSquared(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                const optimalSEE = calculateLrSEE(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                const optimalSSE = calculateLrSSE(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                
+                const sign = lrOptimalParams.slope >= 0 ? "+" : "";
+                
+                // Create a more informative but still compact explanation
+                const statsHTML = `
+                    <p><strong class="lr-stats-highlight">Optimal Regression Statistics:</strong> y = ${lrOptimalParams.slope.toFixed(2)}x ${sign} ${lrOptimalParams.intercept.toFixed(1)}</p>
+                    <p><strong>r = ${actualCorrelation.toFixed(2)}</strong> (${getCorrelationInterpretation(actualCorrelation)}) | 
+                    <strong>r² = ${optimalRSquared.toFixed(2)}</strong> (${(optimalRSquared * 100).toFixed(1)}% of Y variation explained)</p>
+                    <p><strong>SEE = ${optimalSEE.toFixed(2)}</strong> (average distance of points from line) | 
+                    <strong>SSE = ${optimalSSE.toFixed(1)}</strong> (sum of squared errors, minimized by optimal line)</p>
+                `;
+                
+                d3.select("#lr-optimal-stats").html(statsHTML);
+            }
+            
+            // Helper function to interpret correlation strength
+            function getCorrelationInterpretation(r) {
+                const absR = Math.abs(r);
+                if (absR > 0.9) return r > 0 ? "Very strong positive relationship" : "Very strong negative relationship";
+                if (absR > 0.7) return r > 0 ? "Strong positive relationship" : "Strong negative relationship";
+                if (absR > 0.5) return r > 0 ? "Moderate positive relationship" : "Moderate negative relationship";
+                if (absR > 0.3) return r > 0 ? "Weak positive relationship" : "Weak negative relationship";
+                return "Little to no linear relationship";
+            }
 
             // Update the main chart
             function updateLrMainChart() {
@@ -954,7 +1017,24 @@ Click for interactive Regression plot
                 
                 // Update mean lines
                 updateLrMeanLines();
+                
+                // Update the detailed stats section
+                updateLrOptimalStats();
             }
+
+            // Function to handle window resize events
+            function handleResize() {
+                const containerWidth = d3.select("#lr-scatter-plot").node().getBoundingClientRect().width;
+                if (containerWidth > 0) {  // Ensure container is visible
+                    // Update the svg's viewBox if needed for better scaling
+                    lrSvg.attr("viewBox", `0 0 ${lrConfig.mainChart.width} ${lrConfig.mainChart.height}`);
+                    // Redraw the chart
+                    updateLrMainChart();
+                }
+            }
+            
+            // Add window resize event listener
+            window.addEventListener("resize", handleResize);
 
             // Initialize the visualization
             function initLr() {
@@ -962,17 +1042,31 @@ Click for interactive Regression plot
                 lrData = generateLrData(lrCorrelation);
                 lrOptimalParams = calculateLrOptimalParams(lrData);
                 
+                // Initialize sliders with optimal values
+                lrIntercept = lrOptimalParams.intercept;
+                lrSlope = lrOptimalParams.slope;
+                
+                // Update slider values in the DOM
+                d3.select("#lr-intercept").property("value", lrIntercept);
+                d3.select("#lr-slope").property("value", lrSlope);
+                
                 // Update main chart
                 updateLrMainChart();
                 
                 // Update value displays
-                d3.select("#lr-correlation-value").text(lrCorrelation);
-                d3.select("#lr-intercept-value").text(lrIntercept);
-                d3.select("#lr-slope-value").text(lrSlope);
+                d3.select("#lr-correlation-value").text(lrCorrelation.toFixed(2));
+                d3.select("#lr-intercept-value").text(lrIntercept.toFixed(1));
+                d3.select("#lr-slope-value").text(lrSlope.toFixed(2));
                 
                 // Display optimal values
-                d3.select("#lr-optimal-intercept-value").text(` (optimal: ${lrOptimalParams.intercept.toFixed(1)})`);
-                d3.select("#lr-optimal-slope-value").text(` (optimal: ${lrOptimalParams.slope.toFixed(2)})`);
+                d3.select("#lr-optimal-intercept-value").text(` (opt: ${lrOptimalParams.intercept.toFixed(1)})`);
+                d3.select("#lr-optimal-slope-value").text(` (opt: ${lrOptimalParams.slope.toFixed(2)})`);
+                
+                // Update button text to reflect current state
+                d3.select("#lr-show-optimal").text("Hide Optimal Line");
+                
+                // Make sure the container is properly sized
+                handleResize();
             }
 
             // Set up event listeners
@@ -983,8 +1077,8 @@ Click for interactive Regression plot
                 lrOptimalParams = calculateLrOptimalParams(lrData);
                 
                 // Update optimal values display
-                d3.select("#lr-optimal-intercept-value").text(` (optimal: ${lrOptimalParams.intercept.toFixed(1)})`);
-                d3.select("#lr-optimal-slope-value").text(` (optimal: ${lrOptimalParams.slope.toFixed(2)})`);
+                d3.select("#lr-optimal-intercept-value").text(` (opt: ${lrOptimalParams.intercept.toFixed(1)})`);
+                d3.select("#lr-optimal-slope-value").text(` (opt: ${lrOptimalParams.slope.toFixed(2)})`);
                 
                 updateLrMainChart();
             });
@@ -1011,12 +1105,24 @@ Click for interactive Regression plot
                 lrData = generateLrData(lrCorrelation);
                 lrOptimalParams = calculateLrOptimalParams(lrData);
                 
+                // Reset sliders to optimal values
+                lrIntercept = lrOptimalParams.intercept;
+                lrSlope = lrOptimalParams.slope;
+                
+                // Update slider values in the DOM
+                d3.select("#lr-intercept").property("value", lrIntercept);
+                d3.select("#lr-slope").property("value", lrSlope);
+                
                 // Update main chart
                 updateLrMainChart();
                 
+                // Update value displays
+                d3.select("#lr-intercept-value").text(lrIntercept.toFixed(1));
+                d3.select("#lr-slope-value").text(lrSlope.toFixed(2));
+                
                 // Update optimal values display
-                d3.select("#lr-optimal-intercept-value").text(` (optimal: ${lrOptimalParams.intercept.toFixed(1)})`);
-                d3.select("#lr-optimal-slope-value").text(` (optimal: ${lrOptimalParams.slope.toFixed(2)})`);
+                d3.select("#lr-optimal-intercept-value").text(` (opt: ${lrOptimalParams.intercept.toFixed(1)})`);
+                d3.select("#lr-optimal-slope-value").text(` (opt: ${lrOptimalParams.slope.toFixed(2)})`);
             });
 
             d3.select("#lr-show-residuals").on("click", function() {

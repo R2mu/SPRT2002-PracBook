@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -147,6 +176,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./Practical3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Week 4 - Practical</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Practical4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Week 5 - Practical</span></span></a>
   </div>
 </li>
     </ul>
@@ -741,7 +776,7 @@ Click for interactive Bland-Altman plot
 </section>
 <section id="section-2---typical-error-of-measurement" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="section-2---typical-error-of-measurement"><span class="header-section-number">2.5</span> Section 2 - Typical Error of Measurement</h2>
-<p>In the following section the aim is to try and calculate the typical error (<strong>TE</strong>), <strong>CV<sub>TE</sub>%</strong>, minimal detectable change (<strong>MDC95</strong>).</p>
+<p>In the following section the aim is to try and calculate the Typical Error (<strong>TE</strong>), <strong>CV<sub>TE</sub>%</strong>, minimal detectable change (<strong>MDC95</strong>).</p>
 <p><strong>In the visual below, set the number of trials to 2 and then download the data.</strong></p>
 <p>See if you are able to replicate the results in the text box above the visual (hint,the back end of this weeks lecture will help you figure out how to do this)</p>
 <section id="visual-1" class="level3" data-number="2.5.1">
@@ -1160,16 +1195,15 @@ Click for interactive Bland-Altman plot
 </section>
 <section id="visual-2" class="level3" data-number="2.5.2">
 <h3 data-number="2.5.2" class="anchored"><span class="header-section-number">2.5.2</span> Visual 2</h3>
-<p>The visual below looks to highlight the importance of wanting to minimise typical error. You hopefully feel comfortable with the idea that any measurement we collect has some uncertainty around it. That uncertainty may be due to biological variation, technology and or methodology error, which all limit our confidence in reporting a “true” measurement. We aim to represent this uncertainty in a similar fashion to what we did last week with the 95% Confidence interval.</p>
-<p>To calculate the CI around the score values (point A and B), we use a similar procedure that we did last week when calculate the 95% CI around a sample mean, with the only difference being instead of using a standard error, we will use something called the typical error.</p>
+<p>The visual below looks to highlight the importance of wanting to minimise Typical Error. You hopefully feel comfortable with the idea that any measurement we collect has some uncertainty around it. That uncertainty may be due to biological variation, technology and or methodology error, which all limit our confidence in reporting a “true” measurement. We aim to represent this uncertainty in a similar fashion to what we did last week with the 95% <strong>Confidence Interval (CI)</strong>.</p>
+<p>To calculate the <strong>CI</strong> around the observed scores (point A and B), we use a similar formula that we did last week when we calculated the 95% CI around a sample mean, the only difference being instead of using a standard error, we will use the <strong>Typical Error (TE)</strong>.</p>
 <p>For example,</p>
 <p>Point A score = 50. For a given value of the Typical Error slider, e.g.&nbsp;3 the 95 % CI would be</p>
-<p>50 - (3 * 1.96) = <strong>44.1</strong> to 50 + (3 * 1.96) = <strong>55.9</strong></p>
+<p>50 - (3 <span class="math inline">\(\times\)</span> 1.96) = <strong>44.1</strong> to 50 + (3 <span class="math inline">\(\times\)</span> 1.96) = <strong>55.9</strong></p>
 <p>This interval represents our uncertainty around where we believe the true measurement might be. From an interpretation perspective we <strong>can’t</strong> say the probability of the true value being between the lower limit and upper limit is 95%, rather that the method we used to create the interval has a 95% success rate in capturing true values over the long run.</p>
-<p>We can also calculate an uncertainty around the change score observed between these two measurements (A and B). Now that we are comparing two measurements that both come with uncertainty we have to consider that when calculating a CI for a change score we do so with the equation below.</p>
-<p>Change 95% LL (Point B - Point A observed values) - sqrt(2) * TE * 1.96<br>
-Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
-<p>The sqrt(2) is included because we now have two trials that both have a potential source of uncertainty. The addition of the sqrt(2) as you can see makes the CI larger for change scores than for individual observations.</p>
+<p>We can also calculate an uncertainty around the change score observed between these two measurements (A and B). Now that we are comparing two measurements that both come with uncertainty we have to adjust our calculation slightly to account for this when calculating a CI for a change score we do so with the equation below.</p>
+<p>Change 95% LL = (Point B - Point A observed values) - <span class="math inline">\(\sqrt{2}\)</span> <span class="math inline">\(\times\)</span> TE <span class="math inline">\(\times\)</span> 1.96 Change 95% UL = (Point B - Point A observed values) + <span class="math inline">\(\sqrt{2}\)</span> <span class="math inline">\(\times\)</span> TE <span class="math inline">\(\times\)</span> 1.96</p>
+<p>The <span class="math inline">\(\sqrt{2}\)</span> is included because we now have two trials that both have a potential source of uncertainty. The addition of the <span class="math inline">\(\sqrt{2}\)</span> as you can see makes the CI larger for change scores than for individual observations.</p>
 <div class="diff-container" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
   <div id="diff-visualization">
     <h2 style="text-align: center; margin-bottom: 15px;" class="anchored" data-anchor-id="visual-2">Interactive Difference Plot</h2>
@@ -1207,9 +1241,19 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
       <label style="font-size: 0.9em;">
         <input type="checkbox" id="diff-show-swc-toggle" checked=""> Show SWC
       </label>
+      <label style="font-size: 0.9em;">
+        <input type="checkbox" id="diff-show-mdc-toggle"> Show MDC Lines
+      </label>
+      <label style="font-size: 0.9em;">
+        <input type="checkbox" id="diff-show-mcid-toggle"> Show MCID Lines
+      </label>
     </div>
     
     <div id="diff-chart" style="width: 100%; height: 400px; margin-bottom: 20px;"></div>
+    
+    <div id="diff-interpretation" style="text-align: center; margin-top: 15px; padding: 10px; border: 1px solid #ddd; background-color: #f9f9f9; border-radius: 4px;">
+      <!-- Interpretation text will be inserted here dynamically -->
+    </div>
   </div>
 
   <script>
@@ -1252,6 +1296,34 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
         return [-swc, swc];
       };
       
+      // Function to update interpretation text
+      function updateInterpretation(changeScore, mdc, mcid) {
+        let interpretationText = "";
+        
+        if (Math.abs(changeScore) < mdc) {
+          interpretationText = "Unclear - within measurement error";
+        } else if (changeScore >= mcid) {
+          interpretationText = "Effect of training intervention is positive and clinically significant";
+        } else if (changeScore >= mdc) {
+          interpretationText = "Effect of training intervention is considered positive";
+        } else if (changeScore <= -mcid) {
+          interpretationText = "Effect of training intervention is negative and clinically significant";
+        } else if (changeScore <= -mdc) {
+          interpretationText = "Effect of training intervention is considered negative";
+        } else {
+          interpretationText = "Trivial change";
+        }
+        
+        // Update the interpretation box with colored values
+        d3.select("#diff-interpretation").html(`
+          <strong>Interpretation:</strong> ${interpretationText}<br>
+          <span style="font-size: 0.9em;">
+            <span style="color: #dc3545; font-weight: bold;">MDC: ${mdc.toFixed(1)}</span> | 
+            <span style="color: #007bff; font-weight: bold;">MCID: ${mcid.toFixed(1)}</span>
+          </span>
+        `);
+      }
+      
       function updateVisualization() {
         // Get current values from sliders
         const changeScore = +d3.select("#diff-change-score-slider").property("value");
@@ -1260,6 +1332,8 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
         const sdMultiplier = +d3.select("#diff-sd-multiplier-slider").property("value");
         const showCI = d3.select("#diff-show-ci-toggle").property("checked");
         const showSWC = d3.select("#diff-show-swc-toggle").property("checked");
+        const showMDC = d3.select("#diff-show-mdc-toggle").property("checked");
+        const showMCID = d3.select("#diff-show-mcid-toggle").property("checked");
         
         // Calculate score B from change score
         const scoreB = scoreA + changeScore;
@@ -1268,6 +1342,12 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
         const ciA = calculateCI(scoreA, typicalError);
         const ciB = calculateCI(scoreB, typicalError);
         const ciDiff = calculateDifferenceCI(changeScore, typicalError);
+        
+        // Calculate MDC and MCID
+        const mdc = calculateMDC(typicalError);
+        const swc = calculateSWC(betweenSubjectSD, sdMultiplier);
+        const swcPositive = Math.abs(swc[1]);
+        const mcid = mdc + swcPositive;
         
         // Clear previous elements
         svg.selectAll("*").remove();
@@ -1357,6 +1437,60 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
             .attr("dominant-baseline", "middle")
             .style("font-size", "10px")
             .text(`${swcRange[0].toFixed(1)}`);
+        }
+        
+        // Add MDC lines if toggled on
+        if (showMDC) {
+          const xDiff = xScale('Difference') + xScale.bandwidth() / 2;
+          
+          // Positive MDC line
+          svg.append("line")
+            .attr("x1", xDiff - 10)
+            .attr("x2", width)
+            .attr("y1", yScaleRight(mdc))
+            .attr("y2", yScaleRight(mdc))
+            .attr("stroke", "#dc3545")
+            .attr("stroke-width", 1.5)
+            .attr("stroke-dasharray", "4");
+          
+          // Negative MDC line
+          svg.append("line")
+            .attr("x1", xDiff - 10)
+            .attr("x2", width)
+            .attr("y1", yScaleRight(-mdc))
+            .attr("y2", yScaleRight(-mdc))
+            .attr("stroke", "#dc3545")
+            .attr("stroke-width", 1.5)
+            .attr("stroke-dasharray", "4");
+          
+          // Removing the MDC labels on the lines as requested
+        }
+        
+        // Add MCID lines if toggled on
+        if (showMCID) {
+          const xDiff = xScale('Difference') + xScale.bandwidth() / 2;
+          
+          // Positive MCID line
+          svg.append("line")
+            .attr("x1", xDiff - 10)
+            .attr("x2", width)
+            .attr("y1", yScaleRight(mcid))
+            .attr("y2", yScaleRight(mcid))
+            .attr("stroke", "#007bff")
+            .attr("stroke-width", 1.5)
+            .attr("stroke-dasharray", "4");
+          
+          // Negative MCID line
+          svg.append("line")
+            .attr("x1", xDiff - 10)
+            .attr("x2", width)
+            .attr("y1", yScaleRight(-mcid))
+            .attr("y2", yScaleRight(-mcid))
+            .attr("stroke", "#007bff")
+            .attr("stroke-width", 1.5)
+            .attr("stroke-dasharray", "4");
+          
+          // Removing the MCID labels on the lines as requested
         }
         
         // Add data points and error bars for A & B
@@ -1524,27 +1658,27 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
           .attr("stroke-dasharray", "3,3");
           
         if (showCI) {
-          // Add MDC value text - just the value
-          const mdc = calculateMDC(typicalError);
+          // Add MDC value text with matching color
           svg.append("text")
             .attr("x", width - 10)
             .attr("y", 20)
             .attr("text-anchor", "end")
             .style("font-size", "12px")
+            .style("fill", "#dc3545")  // Red to match MDC lines
             .text(`MDC95: ${mdc.toFixed(1)}`);
           
-         const swc = calculateSWC(betweenSubjectSD, sdMultiplier);
           const swcPositive = Math.abs(swc[1]); 
           svg.append("text")
             .attr("x", width - 10)
             .attr("y", 40)
             .attr("text-anchor", "end")
             .style("font-size", "12px")
-            .text(`MCID95: ${(mdc + swcPositive).toFixed(1)}`);
-            
-            
-            
+            .style("fill", "#007bff")  // Blue to match MCID lines
+            .text(`MCID95: ${mcid.toFixed(1)}`);
         }
+        
+        // Update interpretation text
+        updateInterpretation(changeScore, mdc, mcid);
           
         // Update slider value displays
         d3.select("#diff-change-score-value").text(changeScore);
@@ -1574,53 +1708,54 @@ Change 95% UL (Point B - Point A observed values) + sqrt(2) * TE * 1.96</p>
     })();
   </script>
 </div>
-<p>Two more measures we discussed in the lecture that can also be calculated from an understanding of TE are the minimal detectable change <strong>MDC</strong> and minimal clinically import difference <strong>MCID</strong>. Both of these are commonly reported to a 95% confidence level so will be multiplied by 1.96 respectively.</p>
-<p><strong>MDC_95</strong> = TE * sqrt(2) * 1.96<br>
+<p>Two more measures we discussed in the lecture that can also be calculated from an understanding of TE are the minimal detectable change <strong>MDC</strong> and minimal clinically import difference <strong>MCID</strong>. Both of these are commonly reported to a 95% confidence level so will be multiplied by 1.96 respectively. The key take away is that the <strong>MDC</strong> is looking to tell you how the large the change would need to be for you to be confident at the 95% level that the observed change wasn’t due to measurement noise. However the <strong>MDC</strong> only tells you whether a change is statistically different from zero which may not indicate that the change is meaningful in a practical sense. The <strong>MCID</strong> however, aims to let you know whether the change observed is greater than some magnitude of importance often termed the <strong>smallest worthwhile change (SWC)</strong>.</p>
+<p><strong>MDC_95</strong> = TE <span class="math inline">\(\times\)</span> <span class="math inline">\(\sqrt{2}\)</span> <span class="math inline">\(\times\)</span> 1.96<br>
 <strong>MCID_95</strong> = MDC_95 + <strong>SWC</strong></p>
-<p>Whilst there are may ways we can identify a value considered the <strong>smallest worthwhile change (SWC)</strong>, a commonly used method is to multiply the between subject SD by some factor. In exercise and sport science a commonly used factor is 0.2 therefore;</p>
-<p><strong>SWC<sub>sml</sub></strong> = SD * 0.2 (Small)<br>
-<strong>SWC<sub>mdr</sub></strong> = SD * 0.6 (Moderate)<br>
-<strong>SWC<sub>lrg</sub></strong> = SD * 0.6 (Large)</p>
+<p>Whilst there are may ways we can identify a value considered the <strong>SWC</strong>, a commonly used method is to multiply the between subject SD by some factor. In exercise and sport science a commonly used factor is 0.2 therefore;</p>
+<p><strong>SWC<sub>sml</sub></strong> = SD <span class="math inline">\(\times\)</span> 0.2 (Small)<br>
+<strong>SWC<sub>mdr</sub></strong> = SD <span class="math inline">\(\times\)</span> 0.6 (Moderate)<br>
+<strong>SWC<sub>lrg</sub></strong> = SD <span class="math inline">\(\times\)</span> 1.2 (Large)<br>
+</p>
 </section>
 </section>
 <section id="test-your-learning" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">2.6</span> Test your learning</h2>
 <p><br></p>
 What does a Bland-Altman plot show?
-<div id="radio_BVOESFLYON" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_BVOESFLYON" value=""> <span>The mean of both measurements plotted against time</span></label>
+<div id="radio_DIGCKDVPGL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value=""> <span>The difference between measurements plotted against time</span></label><label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value="answer"> <span>The difference between measurements plotted against the mean of both measurements</span></label><label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value=""> <span>The correlation between two measurements</span></label><label><input type="radio" autocomplete="off" name="radio_DIGCKDVPGL" value=""> <span>The mean of both measurements plotted against time</span></label>
 </div>
 What does the mean difference line (bias) in a Bland-Altman plot represent?
-<div id="radio_TYXHBEEZNG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_TYXHBEEZNG" value=""> <span>The reliability of the measurement</span></label>
+<div id="radio_EWBCAZAAOQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value=""> <span>Random error in the measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value=""> <span>The standard deviation of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value="answer"> <span>Systematic differences between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_EWBCAZAAOQ" value=""> <span>The reliability of the measurement</span></label>
 </div>
 What does the Typical Error (TE) represent?
-<div id="radio_RDGIFHCUKN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_RDGIFHCUKN" value=""> <span>The correlation between measurements</span></label>
+<div id="radio_NUJYODDALN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value=""> <span>The average difference between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value="answer"> <span>The typical variation in repeated measurements for an individual</span></label><label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value=""> <span>The minimum detectable change</span></label><label><input type="radio" autocomplete="off" name="radio_NUJYODDALN" value=""> <span>The correlation between measurements</span></label>
 </div>
 If you have a single measurement (e.g., 45 kg) and know the Typical Error (TE) is 2 kg, how would you construct a 95% confidence interval around this measurement?
-<div id="radio_MAYLPEHNNM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_MAYLPEHNNM" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
+<div id="radio_WOGDLGGGNF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value=""> <span>Add and subtract 1×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value="answer"> <span>Add and subtract 1.96×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value=""> <span>Add and subtract 2×TE from the measurement</span></label><label><input type="radio" autocomplete="off" name="radio_WOGDLGGGNF" value=""> <span>Add and subtract the MDC95 from the measurement</span></label>
 </div>
 If you measure an athlete’s max strength as 80 kg with a TE of 3 kg and calculate a 95% confidence interval of 74.1-85.9 kg, what does this interval represent?
-<div id="radio_TQQAMFPVSV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_TQQAMFPVSV" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
+<div id="radio_XGHXIHMJRU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value=""> <span>The athlete will score between 74.1-85.9 kg on 95% of future tests</span></label><label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value=""> <span>95% of athletes with similar measured strength have a true strength in this range</span></label><label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value="answer"> <span>If we could measure this athlete's strength at this exact moment repeatedly without fatigue, 95% of the confidence intervals calculated using the above procedure would contain their true strength</span></label><label><input type="radio" autocomplete="off" name="radio_XGHXIHMJRU" value=""> <span>The athlete's strength will improve by up to 5.9 kg or decrease by up to 5.9 kg with 95% probability</span></label>
 </div>
 What does the Minimum Detectable Change (MDC95) represent?
-<div id="radio_WCQJKKDTTX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_WCQJKKDTTX" value=""> <span>The typical error multiplied by 0.68</span></label>
+<div id="radio_AOKWNKAIRJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value=""> <span>The smallest change that could occur by chance</span></label><label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value=""> <span>The average change between measurements</span></label><label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value="answer"> <span>The minimum change needed to be confident a real change has occurred at the 95% confidence level</span></label><label><input type="radio" autocomplete="off" name="radio_AOKWNKAIRJ" value=""> <span>The typical error multiplied by 0.68</span></label>
 </div>
 When monitoring an individual’s changes over time, which criterion should you use to determine if a real change has occurred?
-<div id="radio_XLAMLGHHBI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_XLAMLGHHBI" value=""> <span>The change is significant if it exceeds the CV</span></label>
+<div id="radio_WPRRZEATWB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value=""> <span>The change is significant if it exceeds the TE</span></label><label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value="answer"> <span>The change is significant if it exceeds the MDC95</span></label><label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value=""> <span>The change is significant if it exceeds the mean bias</span></label><label><input type="radio" autocomplete="off" name="radio_WPRRZEATWB" value=""> <span>The change is significant if it exceeds the CV</span></label>
 </div>
 Why is the Coefficient of Variation (CVTE%) useful?
-<div id="radio_VYGPDGQRKS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_VYGPDGQRKS" value="answer"> <span>All of the above</span></label>
+<div id="radio_UVIGXHNPGI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value=""> <span>It allows comparison of reliability between different units</span></label><label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value=""> <span>It expresses error relative to the mean</span></label><label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value=""> <span>It's useful when error increases with larger values</span></label><label><input type="radio" autocomplete="off" name="radio_UVIGXHNPGI" value="answer"> <span>All of the above</span></label>
 </div>
 If you want to construct a 95% confidence interval around an individual’s measurement, you should use:
-<div id="radio_DLBWAHJZGF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_DLBWAHJZGF" value=""> <span>±2 × CV from the measured value</span></label>
+<div id="radio_BPTVBGDHZV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value=""> <span>±1 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value="answer"> <span>±1.96 × TE from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value=""> <span>±1 × MDC from the measured value</span></label><label><input type="radio" autocomplete="off" name="radio_BPTVBGDHZV" value=""> <span>±2 × CV from the measured value</span></label>
 </div>
 
 
