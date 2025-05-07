@@ -412,5 +412,49 @@
       "Home",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Week 6 - Practical</span>"
     ]
+  },
+  {
+    "objectID": "Practical6.html",
+    "href": "Practical6.html",
+    "title": "6  Week 10 - Practical",
+    "section": "",
+    "text": "6.1 Learning Outcome:",
+    "crumbs": [
+      "Home",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Week 10 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical6.html#learning-outcome",
+    "href": "Practical6.html#learning-outcome",
+    "title": "6  Week 10 - Practical",
+    "section": "",
+    "text": "Understand measurement accuracy concepts and their application to exercise testing and measurement\nEvaluate the feasibility of different tests according to environmental conditions and client characteristics\nDemonstrate basic data processing and analytical techniques\nCommunicate test results and their implications to hypothetical client scenarios",
+    "crumbs": [
+      "Home",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Week 10 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical6.html#practical-goals",
+    "href": "Practical6.html#practical-goals",
+    "title": "6  Week 10 - Practical",
+    "section": "6.2 Practical Goals:",
+    "text": "6.2 Practical Goals:\n\nDevelop understanding of internal vs objective markers of training load\nTime permitting quick overview of more advanced techniques for performing systematic search strategies",
+    "crumbs": [
+      "Home",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Week 10 - Practical</span>"
+    ]
+  },
+  {
+    "objectID": "Practical6.html#background",
+    "href": "Practical6.html#background",
+    "title": "6  Week 10 - Practical",
+    "section": "6.3 Background:",
+    "text": "6.3 Background:\nOver the last two weeks in seminar material we have discussed the construct of “Training Load”. Importantly we can think of training load being made up of two sub dimensions Internal and External load. Internal Load can be further subdivided into Objective and Subjective markers.\nExternal load: Can quite simply just been thought of as a measure of how much work was done. e.g. 5km of running, 1000 steps, 100m swim.\nInternal load: Is a measure of the bodies response to performing the external load. Most commonly used measures are Heart rate based indices that were discussed in Week 4. Internal load can also represent biochemical markers (Creatine Kinase, Lactic Acid), Hormonal responses (Testosterone, Cortisol) or Immunological markers (IGA, IL1,6). The above would be considered objective internal load makers whilst measures based on perception of effort of assessing mood such as Borg,Session RPE, Profile of Mood States, DALDA would be considered subjective makers of internal load.\n\n6.3.1 Activity\nIn this weeks activity we are going to use a combination of external load and internal load markers as measured via integrated GPS/IMU and HR device from the Polar Team System. This should help build your intuition around how interpreting both internal and external load can be useful in both categorising intensity of drills but also how",
+    "crumbs": [
+      "Home",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Week 10 - Practical</span>"
+    ]
   }
 ]

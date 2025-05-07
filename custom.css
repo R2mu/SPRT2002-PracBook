@@ -29,7 +29,7 @@
 /* Target nested lists (sections within chapters, etc.) */
 /* Ensure they still have some indentation relative to their parent */
 #quarto-sidebar nav.sidebar-navigation ul ul {
-  padding-left: 15px; /* Adjust for desired sub-item indentation */
+  padding-left: 10px; /* Adjust for desired sub-item indentation */
 }
 
 /* You might need to target nested items more specifically */
