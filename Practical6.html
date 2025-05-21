@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Practical7.html" rel="next">
 <link href="./Practical5.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -123,6 +124,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./Practical6.html">
  <span class="dropdown-text">Practical 6</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./Practical7.html">
+ <span class="dropdown-text">Practical 7</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -212,20 +217,603 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="6.3" class="anchored" data-anchor-id="background"><span class="header-section-number">6.3</span> Background:</h2>
 <p>Over the last two weeks in seminar material we have discussed the construct of <strong>“Training Load”</strong>. Importantly we can think of training load being made up of two sub dimensions <strong>Internal</strong> and <strong>External</strong> load. <strong>Internal Load</strong> can be further subdivided into <strong>Objective</strong> and <strong>Subjective</strong> markers.</p>
 <p><strong>External load</strong>: Can quite simply just been thought of as a measure of how much work was done. e.g.&nbsp;5km of running, 1000 steps, 100m swim.</p>
-<p><strong>Internal load</strong>: Is a measure of the bodies response to performing the external load. Most commonly used measures are Heart rate based indices that were discussed in Week 4. Internal load can also represent biochemical markers (Creatine Kinase, Lactic Acid), Hormonal responses (Testosterone, Cortisol) or Immunological markers (IGA, IL1,6). The above would be considered <strong>objective</strong> internal load makers whilst measures based on perception of effort of assessing mood such as Borg,Session RPE, Profile of Mood States, DALDA would be considered <strong>subjective</strong> makers of internal load.</p>
+<p><strong>Internal load</strong>: Is a measure of the bodies response to performing the external load. Most commonly used measures are Heart rate based indices that were discussed in Week 4. Internal load can also represent biochemical markers (Creatine Kinase, Lactic Acid), Hormonal responses (Testosterone, Cortisol) or Immunological markers (IGA, IL1,6). The above would be considered <strong>objective</strong> internal load makers whilst measures based on perception of effort assessing mood such as Borg,Session RPE, Profile of Mood States, DALDA or simply Athlete Reported Outcome Measures would be considered <strong>subjective</strong> makers of internal load.</p>
 <section id="activity" class="level3" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="activity"><span class="header-section-number">6.3.1</span> Activity</h3>
-<p>In this weeks activity we are going to use a combination of external load and internal load markers as measured via integrated GPS/IMU and HR device from the Polar Team System. This should help build your intuition around how interpreting both internal and external load can be useful in both categorising intensity of drills.</p>
-<p><strong>Task 1:</strong> Wellness Questionnaire Athlete wellness questionnaires (typically refers to Athlete Reported Outcome Measures) are now commonplace across various sporting environments. These simple tools aim to capture the athlete’s perception of their readiness and recovery status across a number of different wellness constructs, such as sleep, mood, fatigue, and soreness.</p>
-<p>Please used the document to complete a Wellness Questionnaire.</p>
-<p><strong>Task 2:</strong> Technology and equipment After completing the wellness questionnaire, your supervisor will introduce the technology used to collect external and internal training loads throughout the workshop session.</p>
-<p><strong>Task 3:</strong> Exercise 1 (Continuous protocol) In this exercise, you will complete a running task, performing ~3 minutes of submaximal intensity running across 20-meter shuttles. One group member will be assigned to guide the pacing using a stopwatch and guide paper that indicates the required time to reach each cone. After completing the exercise, please submit your rating of perceived exertion (RPE).</p>
+<p>In this weeks activity we are going to use a combination of external load and internal load markers as measured via integrated GPS/IMU and HR device from the Polar Team System and subjective outcome measures. This should help build your intuition around how interpreting both internal and external load can be useful in both categorising intensity of drills.</p>
+<p><strong>Task 1:</strong> Please used the document to complete a Wellness Questionnaire.</p>
+<p><strong>Task 2:</strong> After completing the wellness questionnaire, your supervisor will introduce the technology used to collect external and internal training loads throughout the workshop session.</p>
+<p><strong>Task 3:</strong> Exercise 1 (Continuous protocol) In this exercise, you will complete a running task, performing ~3 minutes of sub-maximal intensity running across 20-meter shuttles. One group member will be assigned to guide the pacing using a stopwatch and guide paper that indicates the required time to reach each cone. After completing the exercise, please submit your rating of perceived exertion (RPE).</p>
 <p><strong>Task 4:</strong> Exercise 2 (Intermittent protocol) In this exercise, you and your group will perform an intermittent activity consisting of 3 sets of 4 back-and-forth shuttles (each shuttle being 40 m long). The intensity should be self-paced at approximately 80% of maximal effort. Recovery periods between repetitions are self-chosen based on perceived exertion. After completing each set (i.e., 4 back-and-forth repetitions), there is a mandatory of 1-min rest at minimum. After completing the exercise, submit your RPE.</p>
 <p><strong>Task 5:</strong> Exercise 3 (Cross-training) In this exercise, you will complete 3 sets of burpees followed by jump rope. For each set perform 2 to 4 burpees (depending on your ability). Immediately follow the burpees with 30 seconds of jump rope. After each set, you will have a 45 second recovery period. Repeat this sequence for 3 to 4 rounds. After completing the exercise, submit your RPE.</p>
-<p>###RPE</p>
-<p><img src="SRPE.jpg" class="img-fluid"></p>
+<p><br></p>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compact RPE Scale</title>
+  <style>
+    .rpe-container {
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      width: 100%;
+      max-width: 450px;
+      margin: 0 auto;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+    
+    .rpe-title {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      text-align: center;
+    }
+    
+    .slider-area {
+      display: flex;
+      height: 300px;
+      width: 100%;
+      position: relative;
+    }
+    
+    .scale-labels {
+      position: relative;
+      height: 100%;
+      width: 40%;
+      margin-right: 0.5rem;
+    }
+    
+    .scale-label {
+      position: absolute;
+      right: 0.5rem;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      text-align: right;
+      font-size: 0.8rem;
+    }
+    
+    /* Position the descriptors */
+    .label-100 { top: 0%; }
+    .label-90 { top: 10%; }
+    .label-70 { top: 30%; }
+    .label-50 { top: 50%; }
+    .label-30 { top: 70%; }
+    .label-20 { top: 80%; }
+    .label-10 { top: 90%; }
+    .label-5 { top: 95%; }
+    .label-0 { top: 100%; }
+    
+    .bullet {
+      display: inline-block;
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: black;
+      border-radius: 50%;
+      margin-left: 0.3rem;
+    }
+    
+    .sliders-container {
+      display: flex;
+      width: 60%;
+      height: 100%;
+    }
+    
+    .slider-track {
+      position: relative;
+      height: 100%;
+      flex: 1;
+      margin: 0 0.25rem;
+    }
+    
+    .track-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      height: 100%;
+      width: 1px;
+      background-color: #000;
+      transform: translateX(-50%);
+    }
+    
+    .thumb {
+      position: absolute;
+      left: 50%;
+      bottom: 0%;
+      width: 1rem;
+      height: 1rem;
+      background-color: #4285f4;
+      border-radius: 50%;
+      transform: translate(-50%, 50%);
+      cursor: pointer;
+      z-index: 10;
+    }
+    
+    .thumb-1 { background-color: #4285f4; }
+    .thumb-2 { background-color: #ea4335; }
+    .thumb-3 { background-color: #34a853; }
+    
+    .controls {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .slider-control {
+      flex: 1;
+      min-width: 100px;
+      margin: 0.25rem;
+      text-align: center;
+    }
+    
+    .result {
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    
+    .numeric-value {
+      display: none;
+      margin-left: 0.25rem;
+    }
+    
+    .numeric-value-1 { color: #4285f4; }
+    .numeric-value-2 { color: #ea4335; }
+    .numeric-value-3 { color: #34a853; }
+    
+    button {
+      padding: 0.3rem 0.5rem;
+      font-size: 0.8rem;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    .button-1 { background: #4285f4; }
+    .button-1:hover { background: #3367d6; }
+    
+    .button-2 { background: #ea4335; }
+    .button-2:hover { background: #d62516; }
+    
+    .button-3 { background: #34a853; }
+    .button-3:hover { background: #2e8b57; }
+  </style>
 
 
+  <div class="rpe-container">
+    <h3 class="rpe-title anchored">Rating of Perceived Exertion</h3>
+    
+    <div class="slider-area">
+      <div class="scale-labels">
+        <div class="scale-label label-100">Absolute maximum<span class="bullet"></span></div>
+        <div class="scale-label label-90">Extremely strong</div>
+        <div class="scale-label label-70">Very strong</div>
+        <div class="scale-label label-50">Strong</div>
+        <div class="scale-label label-30">Moderate</div>
+        <div class="scale-label label-20">Weak</div>
+        <div class="scale-label label-10">Very weak</div>
+        <div class="scale-label label-5">Extremely weak</div>
+        <div class="scale-label label-0">Nothing at all</div>
+      </div>
+      
+      <div class="sliders-container">
+        <!-- Slider 1 -->
+        <div class="slider-track" id="track-1">
+          <div class="track-line"></div>
+          <div class="thumb thumb-1" id="slider-thumb-1"></div>
+        </div>
+        
+        <!-- Slider 2 -->
+        <div class="slider-track" id="track-2">
+          <div class="track-line"></div>
+          <div class="thumb thumb-2" id="slider-thumb-2"></div>
+        </div>
+        
+        <!-- Slider 3 -->
+        <div class="slider-track" id="track-3">
+          <div class="track-line"></div>
+          <div class="thumb thumb-3" id="slider-thumb-3"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="controls">
+      <!-- Slider 1 Controls -->
+      <div class="slider-control">
+        <div class="result">
+          <span>1: </span>
+          <span id="descriptor-1">Nothing at all</span>
+          <span id="numeric-value-1" class="numeric-value numeric-value-1">0</span>
+        </div>
+        <button id="toggle-btn-1" class="button-1">Show</button>
+      </div>
+      
+      <!-- Slider 2 Controls -->
+      <div class="slider-control">
+        <div class="result">
+          <span>2: </span>
+          <span id="descriptor-2">Nothing at all</span>
+          <span id="numeric-value-2" class="numeric-value numeric-value-2">0</span>
+        </div>
+        <button id="toggle-btn-2" class="button-2">Show</button>
+      </div>
+      
+      <!-- Slider 3 Controls -->
+      <div class="slider-control">
+        <div class="result">
+          <span>3: </span>
+          <span id="descriptor-3">Nothing at all</span>
+          <span id="numeric-value-3" class="numeric-value numeric-value-3">0</span>
+        </div>
+        <button id="toggle-btn-3" class="button-3">Show</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Create slider objects to organize our code
+    const sliders = [
+      {
+        id: 1,
+        thumb: document.getElementById('slider-thumb-1'),
+        track: document.getElementById('track-1'),
+        descriptor: document.getElementById('descriptor-1'),
+        numericValue: document.getElementById('numeric-value-1'),
+        toggleBtn: document.getElementById('toggle-btn-1'),
+        value: 0,
+        showValue: false
+      },
+      {
+        id: 2,
+        thumb: document.getElementById('slider-thumb-2'),
+        track: document.getElementById('track-2'),
+        descriptor: document.getElementById('descriptor-2'),
+        numericValue: document.getElementById('numeric-value-2'),
+        toggleBtn: document.getElementById('toggle-btn-2'),
+        value: 0,
+        showValue: false
+      },
+      {
+        id: 3,
+        thumb: document.getElementById('slider-thumb-3'),
+        track: document.getElementById('track-3'),
+        descriptor: document.getElementById('descriptor-3'),
+        numericValue: document.getElementById('numeric-value-3'),
+        toggleBtn: document.getElementById('toggle-btn-3'),
+        value: 0,
+        showValue: false
+      }
+    ];
+    
+    // Initialize all sliders
+    sliders.forEach(slider => {
+      positionThumb(slider, 0);
+      
+      // Toggle button event listener
+      slider.toggleBtn.addEventListener('click', function() {
+        slider.showValue = !slider.showValue;
+        slider.numericValue.style.display = slider.showValue ? 'inline' : 'none';
+        slider.toggleBtn.textContent = slider.showValue ? 'Hide' : 'Show';
+      });
+    });
+    
+    // Function to position a thumb
+    function positionThumb(slider, value) {
+      // Calculate bottom position (0 = bottom, 100 = top)
+      const position = value; // % from bottom
+      const thumbPosition = (position / 100) * slider.track.clientHeight;
+      slider.thumb.style.bottom = `${thumbPosition}px`;
+      slider.value = value;
+      
+      // Update descriptor and numeric value display
+      slider.descriptor.textContent = getDescriptor(value);
+      slider.numericValue.textContent = value.toFixed(1);
+    }
+    
+    // Function to get the appropriate descriptor based on slider value
+    function getDescriptor(value) {
+      if (value >= 100) return "Absolute maximum";
+      if (value >= 90) return "Extremely strong";
+      if (value >= 70) return "Very strong";
+      if (value >= 50) return "Strong";
+      if (value >= 30) return "Moderate";
+      if (value >= 20) return "Weak";
+      if (value >= 10) return "Very weak";
+      if (value >= 5) return "Extremely weak";
+      return "Nothing at all";
+    }
+    
+    // Add mouse/touch events for all sliders
+    sliders.forEach(slider => {
+      let isDragging = false;
+      
+      // Start drag
+      slider.thumb.addEventListener('mousedown', function(e) {
+        e.preventDefault();
+        isDragging = true;
+        
+        const handleMove = function(e) {
+          if (!isDragging) return;
+          
+          // Get mouse/touch position
+          let clientY = e.clientY;
+          if (e.type === 'touchmove') {
+            clientY = e.touches[0].clientY;
+          }
+          
+          // Get track position
+          const trackRect = slider.track.getBoundingClientRect();
+          const trackBottom = trackRect.bottom;
+          const trackHeight = trackRect.height;
+          
+          // Calculate position within track (from bottom)
+          let posY = trackBottom - clientY;
+          
+          // Constrain to track
+          posY = Math.max(0, Math.min(posY, trackHeight));
+          
+          // Convert position to value (0-100)
+          const value = (posY / trackHeight) * 100;
+          
+          // Round to nearest 0.1
+          const roundedValue = Math.round(value * 10) / 10;
+          
+          // Update thumb position
+          positionThumb(slider, roundedValue);
+        };
+        
+        const handleEnd = function() {
+          isDragging = false;
+          document.removeEventListener('mousemove', handleMove);
+          document.removeEventListener('touchmove', handleMove);
+          document.removeEventListener('mouseup', handleEnd);
+          document.removeEventListener('touchend', handleEnd);
+        };
+        
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('touchmove', handleMove);
+        document.addEventListener('mouseup', handleEnd);
+        document.addEventListener('touchend', handleEnd);
+      });
+      
+      slider.thumb.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        const mouseEvent = new MouseEvent('mousedown', {
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+        slider.thumb.dispatchEvent(mouseEvent);
+      });
+      
+      // Click on track
+      slider.track.addEventListener('click', function(e) {
+        // Only handle if it's a direct click on the track (not on the thumb)
+        if (e.target !== slider.thumb) {
+          const trackRect = slider.track.getBoundingClientRect();
+          const trackBottom = trackRect.bottom;
+          const trackHeight = trackRect.height;
+          
+          // Calculate position within track (from bottom)
+          const posY = trackBottom - e.clientY;
+          
+          // Constrain to track
+          const constrainedPosY = Math.max(0, Math.min(posY, trackHeight));
+          
+          // Convert position to value (0-100)
+          const value = (constrainedPosY / trackHeight) * 100;
+          
+          // Round to nearest 0.1
+          const roundedValue = Math.round(value * 10) / 10;
+          
+          // Update thumb position
+          positionThumb(slider, roundedValue);
+        }
+      });
+    });
+  </script>
+
+<p><br> <br></p>
+<section id="save-results" class="level4" data-number="6.3.1.1">
+<h4 data-number="6.3.1.1" class="anchored" data-anchor-id="save-results"><span class="header-section-number">6.3.1.1</span> Save Results</h4>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compact Protocol Table</title>
+  <style>
+    .protocol-container {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.5rem;
+    }
+    
+    th, td {
+      padding: 0.35rem 0.5rem;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #4285f4;
+      color: white;
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+    
+    .protocol-cell {
+      font-weight: bold;
+      font-size: 0.8rem;
+    }
+    
+    input {
+      width: 100%;
+      padding: 0.25rem;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      box-sizing: border-box;
+      font-size: 0.8rem;
+    }
+    
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    button {
+      padding: 0.25rem 0.5rem;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+    
+    #clearBtn {
+      background-color: #ea4335;
+    }
+    
+    .feedback {
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      display: none;
+      font-size: 0.75rem;
+    }
+  </style>
+
+
+  <div class="protocol-container">
+    
+<table id="data-table" class="caption-top table" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Protocol</th>
+<th data-quarto-table-cell-role="th">Distance</th>
+<th data-quarto-table-cell-role="th">HR</th>
+<th data-quarto-table-cell-role="th">RPE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="protocol-cell">Continuous</td>
+<td><input type="number" class="distance" min="0"></td>
+<td><input type="number" class="hr" min="0" max="220"></td>
+<td><input type="number" class="rpe" min="0" max="100" step="0.1"></td>
+</tr>
+<tr class="even">
+<td class="protocol-cell">Intermittent</td>
+<td><input type="number" class="distance" min="0"></td>
+<td><input type="number" class="hr" min="0" max="220"></td>
+<td><input type="number" class="rpe" min="0" max="100" step="0.1"></td>
+</tr>
+<tr class="odd">
+<td class="protocol-cell">Cross Training</td>
+<td><input type="number" class="distance" min="0"></td>
+<td><input type="number" class="hr" min="0" max="220"></td>
+<td><input type="number" class="rpe" min="0" max="100" step="0.1"></td>
+</tr>
+</tbody>
+</table>
+
+    
+    <div class="buttons">
+      <button id="saveBtn">Save CSV</button>
+      <button id="clearBtn">Clear</button>
+    </div>
+    
+    <div id="feedback" class="feedback"></div>
+  </div>
+
+  <script>
+    const saveBtn = document.getElementById('saveBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const feedback = document.getElementById('feedback');
+    
+    // Generate and download CSV data
+    saveBtn.addEventListener('click', function() {
+      const rows = document.querySelectorAll('#data-table tbody tr');
+      let csvContent = "Protocol,Distance,HR,RPE\n";
+      let hasData = false;
+      
+      rows.forEach(row => {
+        const protocol = row.querySelector('.protocol-cell').textContent;
+        const distance = row.querySelector('.distance').value || '';
+        const hr = row.querySelector('.hr').value || '';
+        const rpe = row.querySelector('.rpe').value || '';
+        
+        if (distance || hr || rpe) {
+          hasData = true;
+        }
+        
+        csvContent += `"${protocol}",${distance},${hr},${rpe}\n`;
+      });
+      
+      if (!hasData) {
+        showFeedback('Enter at least one value', false);
+        return;
+      }
+      
+      // Create and download CSV
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'protocol_data.csv');
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      showFeedback('CSV downloaded', true);
+    });
+    
+    // Clear all form fields
+    clearBtn.addEventListener('click', function() {
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        input.value = '';
+      });
+      
+      feedback.style.display = 'none';
+    });
+    
+    // Show feedback message
+    function showFeedback(message, isSuccess) {
+      feedback.textContent = message;
+      feedback.className = 'feedback';
+      
+      if (isSuccess) {
+        feedback.classList.add('success');
+        feedback.style.backgroundColor = '#d4edda';
+        feedback.style.color = '#155724';
+      } else {
+        feedback.style.backgroundColor = '#f8d7da';
+        feedback.style.color = '#721c24';
+      }
+      
+      feedback.style.display = 'block';
+      
+      // Auto-hide after 3 seconds
+      setTimeout(() => {
+        feedback.style.display = 'none';
+      }, 3000);
+    }
+  </script>
+
+
+
+</section>
 </section>
 </section>
 
@@ -862,6 +1450,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./Practical7.html" class="pagination-link" aria-label="Week 12 - Practical">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Week 12 - Practical</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
