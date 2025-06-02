@@ -194,10 +194,12 @@ window.Quarto = {
   <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome"><span class="header-section-number">7.1</span> Learning Outcome:</a></li>
   <li><a href="#practical-goals" id="toc-practical-goals" class="nav-link" data-scroll-target="#practical-goals"><span class="header-section-number">7.2</span> Practical Goals:</a></li>
   <li><a href="#example-case-study" id="toc-example-case-study" class="nav-link" data-scroll-target="#example-case-study"><span class="header-section-number">7.3</span> Example case study</a></li>
-  <li><a href="#but-what-is-a-p-value" id="toc-but-what-is-a-p-value" class="nav-link" data-scroll-target="#but-what-is-a-p-value"><span class="header-section-number">7.4</span> But what is a p-value</a>
+  <li><a href="#hypothesis-testing-recap" id="toc-hypothesis-testing-recap" class="nav-link" data-scroll-target="#hypothesis-testing-recap"><span class="header-section-number">7.4</span> Hypothesis testing recap</a></li>
+  <li><a href="#but-what-is-a-p-value" id="toc-but-what-is-a-p-value" class="nav-link" data-scroll-target="#but-what-is-a-p-value"><span class="header-section-number">7.5</span> But what is a p-value</a>
   <ul class="collapse">
-  <li><a href="#what-a-p-value-isnt" id="toc-what-a-p-value-isnt" class="nav-link" data-scroll-target="#what-a-p-value-isnt"><span class="header-section-number">7.4.1</span> What a p-value isn’t</a></li>
+  <li><a href="#what-a-p-value-isnt" id="toc-what-a-p-value-isnt" class="nav-link" data-scroll-target="#what-a-p-value-isnt"><span class="header-section-number">7.5.1</span> What a p-value isn’t</a></li>
   </ul></li>
+  <li><a href="#test-your-learning" id="toc-test-your-learning" class="nav-link" data-scroll-target="#test-your-learning"><span class="header-section-number">7.6</span> Test your learning</a></li>
   </ul>
 </nav>
     </div>
@@ -241,6 +243,7 @@ window.Quarto = {
 <ol type="1">
 <li><p>Build intuition around Hypothesis testing by performing your own hypothesis test</p></li>
 <li><p>Practice interpreting results of your findings make sure to give context to the size of your effect, the precision around the effect you observed and confidence that these results may be reproducible in the future.</p></li>
+<li><p>Professional report 2 overview <br></p></li>
 </ol>
 </section>
 <section id="example-case-study" class="level2" data-number="7.3">
@@ -249,7 +252,10 @@ window.Quarto = {
 <p>In groups your goal is to come up with a question in which you want to test a hypothesis on?</p>
 <p>You need to formally decide ahead of time what expected result it? e.g.&nbsp;Whether you think it will have an effect or not have an effect.</p>
 <p>Using material discussed in Week 11 and 12 seminar your job is to test this hypothesis and report the results of your finding.</p>
-<p><br> ## Hypothesis testing recap</p>
+<p><br></p>
+</section>
+<section id="hypothesis-testing-recap" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="hypothesis-testing-recap"><span class="header-section-number">7.4</span> Hypothesis testing recap</h2>
 <p>A quick recap of the main points discussed in lecture material. When we perform a hypothesis test, we are effectively trying to identify whether the signal (mean difference) we have observed can be considered an interesting result or could easily be explained via random variation. For this unit, we are going to focus on the T-statistic calculated from a paired t-test design (effectively comparing the same individuals pre and post some intervention). The T-statistic is calculated as:</p>
 <p><span class="math display">\[
 T = \frac{\text{mean diff}}{\frac{\text{sd(differences)}}{\sqrt{N}}}
@@ -917,11 +923,11 @@ T = \frac{\text{mean diff}}{\frac{\text{sd(differences)}}{\sqrt{N}}}
         if (absD < 0.2) {
             dInterpretation = "negligible effect (d < 0.2)";
         } else if (absD < 0.5) {
-            dInterpretation = "small effect (0.2 ≤ d < 0.5)";
+            dInterpretation = "small effect (0.2 ≤ d < 0.6)";
         } else if (absD < 0.8) {
-            dInterpretation = "medium effect (0.5 ≤ d < 0.8)";
+            dInterpretation = "medium effect (0.6 ≤ d < 1.2)";
         } else {
-            dInterpretation = "large effect (d ≥ 0.8)";
+            dInterpretation = "large effect (d ≥ 1.2)";
         }
         
         // Calculate confidence interval for mean difference
@@ -1255,13 +1261,13 @@ Cohens D = \frac{\text{mean diff}}{\text{Pooled SD}}
 <p><span class="math display">\[ CLES = \Phi\left(\frac{\text{mean diff}}{\text{sd diff}}\right) \]</span></p>
 <p>Okay lets talk through this a little more slowly as there is a scary looking symbol in there. We first compute what is called the signal to noise ratio <span class="math inline">\((SNR)\)</span> which is calculated via <span class="math inline">\(\frac{\text{mean diff}}{\text{sd diff}}\)</span>. This is then put into a function with a scary looking symbol <span class="math inline">\(\Phi(\text{SNR})\)</span> however all this function does is convert the SNR into a probability for us. This probability can be thought of a randomly drawn person from this sample having a higher score vs lower score.</p>
 </section>
-<section id="but-what-is-a-p-value" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="but-what-is-a-p-value"><span class="header-section-number">7.4</span> But what is a p-value</h2>
+<section id="but-what-is-a-p-value" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="but-what-is-a-p-value"><span class="header-section-number">7.5</span> But what is a p-value</h2>
 <p>A p-value can be thought of as the probability of observing the test statistic we did assuming that there is no difference between testing occasions. Put differently, that any effect you observed is explained via pure random sampling variation. Effectively, all we are doing when we calculate a p-value is comparing the test statistic we observed to a distribution of test statistics that can be created via random sampling variation. If we observe a test statistic that can very rarely be created under random sampling variation, let’s say less than 5% of the time, we deem this a statistically significant result. That is, we observed a test statistic that is very rarely observed under the null hypothesis so we will treat our result as interesting.</p>
 <p>The simulation below will hopefully build your intuition around the null distribution and p-values.</p>
 <p><a href="https://r2mu.github.io/tvalSim/" class="uri">https://r2mu.github.io/tvalSim/</a></p>
-<section id="what-a-p-value-isnt" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="what-a-p-value-isnt"><span class="header-section-number">7.4.1</span> What a p-value isn’t</h3>
+<section id="what-a-p-value-isnt" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="what-a-p-value-isnt"><span class="header-section-number">7.5.1</span> What a p-value isn’t</h3>
 <ul>
 <li><p><strong>Represent the probability that the null hypothesis is true</strong></p>
 <ul>
@@ -1281,9 +1287,52 @@ Cohens D = \frac{\text{mean diff}}{\text{Pooled SD}}
 <li>A significant result (p &lt; .05) does not mean there’s a 95% chance of replication; replication probability depends on many other factors (sample size and size of the effect)</li>
 </ul></li>
 </ul>
-
-
 </section>
+</section>
+<section id="test-your-learning" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">7.6</span> Test your learning</h2>
+What does the T-statistic represent in a paired t-test?
+<div id="radio_OQFZZWNFQN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OQFZZWNFQN" value=""> <span>The correlation between pre and post measurements</span></label><label><input type="radio" autocomplete="off" name="radio_OQFZZWNFQN" value=""> <span>The standard deviation of individual scores</span></label><label><input type="radio" autocomplete="off" name="radio_OQFZZWNFQN" value="answer"> <span>The mean difference divided by the standard error of the differences</span></label><label><input type="radio" autocomplete="off" name="radio_OQFZZWNFQN" value=""> <span>The p-value multiplied by the sample size</span></label>
+</div>
+How does increasing sample size (N) affect the T-statistic?
+<div id="radio_SDZEDOHDPE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SDZEDOHDPE" value="answer"> <span>Larger sample sizes increase the T-value by reducing the penalty for sampling variation</span></label><label><input type="radio" autocomplete="off" name="radio_SDZEDOHDPE" value=""> <span>Larger sample sizes decrease the T-value by increasing noise</span></label><label><input type="radio" autocomplete="off" name="radio_SDZEDOHDPE" value=""> <span>Sample size has no effect on the T-statistic</span></label><label><input type="radio" autocomplete="off" name="radio_SDZEDOHDPE" value=""> <span>Larger sample sizes only affect the p-value, not the T-statistic</span></label>
+</div>
+What does Cohen’s D measure?
+<div id="radio_HCELJGDZFU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HCELJGDZFU" value=""> <span>The p-value adjusted for sample size</span></label><label><input type="radio" autocomplete="off" name="radio_HCELJGDZFU" value=""> <span>The probability of replicating the study</span></label><label><input type="radio" autocomplete="off" name="radio_HCELJGDZFU" value="answer"> <span>The mean difference divided by the pooled standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_HCELJGDZFU" value=""> <span>The correlation between pre and post measurements</span></label>
+</div>
+What does the Common Language Effect Size (CLES) represent?
+<div id="radio_XFXYPTOZLK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XFXYPTOZLK" value=""> <span>The percentage of participants who showed improvement</span></label><label><input type="radio" autocomplete="off" name="radio_XFXYPTOZLK" value="answer"> <span>The probability that a randomly selected person will have a higher post-intervention score</span></label><label><input type="radio" autocomplete="off" name="radio_XFXYPTOZLK" value=""> <span>The correlation between individual differences and group means</span></label><label><input type="radio" autocomplete="off" name="radio_XFXYPTOZLK" value=""> <span>The statistical power of the test</span></label>
+</div>
+Which of the following is NOT what a p-value represents?
+<div id="radio_VULRYHZNHY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VULRYHZNHY" value=""> <span>The probability of observing the test statistic assuming no true difference</span></label><label><input type="radio" autocomplete="off" name="radio_VULRYHZNHY" value="answer"> <span>The probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_VULRYHZNHY" value=""> <span>How often you would see results this extreme if there was no real effect</span></label><label><input type="radio" autocomplete="off" name="radio_VULRYHZNHY" value=""> <span>The likelihood of the observed data under the null hypothesis</span></label>
+</div>
+In the T-statistic equation, what represents the ‘signal’ and what represents the ‘noise’?
+<div id="radio_PORGQOJMQZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PORGQOJMQZ" value=""> <span>Mean difference is signal, sample size is noise</span></label><label><input type="radio" autocomplete="off" name="radio_PORGQOJMQZ" value="answer"> <span>Mean difference is signal, standard deviation of differences is noise</span></label><label><input type="radio" autocomplete="off" name="radio_PORGQOJMQZ" value=""> <span>P-value is signal, confidence interval is noise</span></label><label><input type="radio" autocomplete="off" name="radio_PORGQOJMQZ" value=""> <span>Effect size is signal, p-value is noise</span></label>
+</div>
+What potential issue can arise with extremely large sample sizes in hypothesis testing?
+<div id="radio_JZQPUQGTTH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JZQPUQGTTH" value=""> <span>Large samples always produce more accurate results</span></label><label><input type="radio" autocomplete="off" name="radio_JZQPUQGTTH" value=""> <span>Large samples reduce the need for effect size calculations</span></label><label><input type="radio" autocomplete="off" name="radio_JZQPUQGTTH" value="answer"> <span>Large samples can make trivially small differences appear statistically significant</span></label><label><input type="radio" autocomplete="off" name="radio_JZQPUQGTTH" value=""> <span>Large samples eliminate the need for hypothesis testing</span></label>
+</div>
+What three components are needed to calculate a T-statistic for a paired t-test?
+<div id="radio_CSKAYHSBYG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CSKAYHSBYG" value=""> <span>Pre-test scores, post-test scores, and population standard deviation</span></label><label><input type="radio" autocomplete="off" name="radio_CSKAYHSBYG" value="answer"> <span>Mean difference, standard deviation of differences, and sample size</span></label><label><input type="radio" autocomplete="off" name="radio_CSKAYHSBYG" value=""> <span>Effect size, p-value, and confidence interval</span></label><label><input type="radio" autocomplete="off" name="radio_CSKAYHSBYG" value=""> <span>Correlation coefficient, regression slope, and intercept</span></label>
+</div>
+If a test statistic occurs less than _____ of the time under random sampling variation, it is typically considered statistically significant.
+<div id="radio_WNIDTSZNGD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WNIDTSZNGD" value=""> <span>1%</span></label><label><input type="radio" autocomplete="off" name="radio_WNIDTSZNGD" value=""> <span>10%</span></label><label><input type="radio" autocomplete="off" name="radio_WNIDTSZNGD" value="answer"> <span>5%</span></label><label><input type="radio" autocomplete="off" name="radio_WNIDTSZNGD" value=""> <span>0.1%</span></label>
+</div>
+To test whether a warm-up influences flexibility screening using a paired t-test design, you would:
+<div id="radio_IQYBIJMOSO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IQYBIJMOSO" value=""> <span>Measure flexibility once and compare to population norms</span></label><label><input type="radio" autocomplete="off" name="radio_IQYBIJMOSO" value="answer"> <span>Measure flexibility before and after warm-up in the same individuals</span></label><label><input type="radio" autocomplete="off" name="radio_IQYBIJMOSO" value=""> <span>Measure flexibility in two different groups of people</span></label><label><input type="radio" autocomplete="off" name="radio_IQYBIJMOSO" value=""> <span>Measure flexibility at multiple time points across several weeks</span></label>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

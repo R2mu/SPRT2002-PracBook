@@ -168,6 +168,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background"><span class="header-section-number">6.3</span> Background:</a>
   <ul class="collapse">
   <li><a href="#activity" id="toc-activity" class="nav-link" data-scroll-target="#activity"><span class="header-section-number">6.3.1</span> Activity</a></li>
+  <li><a href="#test-your-learning" id="toc-test-your-learning" class="nav-link" data-scroll-target="#test-your-learning"><span class="header-section-number">6.3.2</span> Test your learning</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -232,6 +233,11 @@ ul.task-list li input[type="checkbox"] {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compact RPE Scale</title>
   <style>
+    /* Scope all RPE styles to avoid conflicts with webexercises */
+    .rpe-container * {
+      box-sizing: border-box;
+    }
+    
     .rpe-container {
       font-family: Arial, sans-serif;
       font-size: 0.9rem;
@@ -248,16 +254,15 @@ ul.task-list li input[type="checkbox"] {
       text-align: center;
     }
     
-    .slider-area {
+    .main-area {
       display: flex;
-      height: 300px;
       width: 100%;
       position: relative;
     }
     
     .scale-labels {
       position: relative;
-      height: 100%;
+      height: 300px;
       width: 40%;
       margin-right: 0.5rem;
     }
@@ -294,14 +299,21 @@ ul.task-list li input[type="checkbox"] {
     .sliders-container {
       display: flex;
       width: 60%;
-      height: 100%;
+      gap: 0.5rem;
+    }
+    
+    .slider-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
     .slider-track {
       position: relative;
-      height: 100%;
-      flex: 1;
-      margin: 0 0.25rem;
+      height: 300px;
+      width: 100%;
+      margin-bottom: 0.5rem;
     }
     
     .track-line {
@@ -331,24 +343,17 @@ ul.task-list li input[type="checkbox"] {
     .thumb-2 { background-color: #ea4335; }
     .thumb-3 { background-color: #34a853; }
     
-    .controls {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 0.5rem;
-      flex-wrap: wrap;
-    }
-    
     .slider-control {
-      flex: 1;
-      min-width: 100px;
-      margin: 0.25rem;
+      width: 100%;
       text-align: center;
+      min-height: 60px;
     }
     
     .result {
       font-size: 0.8rem;
       font-weight: bold;
       margin-bottom: 0.25rem;
+      line-height: 1.2;
     }
     
     .numeric-value {
@@ -360,30 +365,32 @@ ul.task-list li input[type="checkbox"] {
     .numeric-value-2 { color: #ea4335; }
     .numeric-value-3 { color: #34a853; }
     
-    button {
+    .rpe-container button {
       padding: 0.3rem 0.5rem;
       font-size: 0.8rem;
       color: white;
       border: none;
       border-radius: 3px;
       cursor: pointer;
+      width: 80%;
+      max-width: 80px;
     }
     
-    .button-1 { background: #4285f4; }
-    .button-1:hover { background: #3367d6; }
+    .rpe-container .button-1 { background: #4285f4; }
+    .rpe-container .button-1:hover { background: #3367d6; }
     
-    .button-2 { background: #ea4335; }
-    .button-2:hover { background: #d62516; }
+    .rpe-container .button-2 { background: #ea4335; }
+    .rpe-container .button-2:hover { background: #d62516; }
     
-    .button-3 { background: #34a853; }
-    .button-3:hover { background: #2e8b57; }
+    .rpe-container .button-3 { background: #34a853; }
+    .rpe-container .button-3:hover { background: #2e8b57; }
   </style>
 
 
   <div class="rpe-container">
     <h3 class="rpe-title anchored">Rating of Perceived Exertion</h3>
     
-    <div class="slider-area">
+    <div class="main-area">
       <div class="scale-labels">
         <div class="scale-label label-100">Absolute maximum<span class="bullet"></span></div>
         <div class="scale-label label-90">Extremely strong</div>
@@ -397,55 +404,53 @@ ul.task-list li input[type="checkbox"] {
       </div>
       
       <div class="sliders-container">
-        <!-- Slider 1 -->
-        <div class="slider-track" id="track-1">
-          <div class="track-line"></div>
-          <div class="thumb thumb-1" id="slider-thumb-1"></div>
+        <!-- Slider 1 Column -->
+        <div class="slider-column">
+          <div class="slider-track" id="track-1">
+            <div class="track-line"></div>
+            <div class="thumb thumb-1" id="slider-thumb-1"></div>
+          </div>
+          <div class="slider-control">
+            <div class="result">
+              <span>1: </span>
+              <span id="descriptor-1">Nothing at all</span>
+              <span id="numeric-value-1" class="numeric-value numeric-value-1">0</span>
+            </div>
+            <button id="toggle-btn-1" class="button-1">Show</button>
+          </div>
         </div>
         
-        <!-- Slider 2 -->
-        <div class="slider-track" id="track-2">
-          <div class="track-line"></div>
-          <div class="thumb thumb-2" id="slider-thumb-2"></div>
+        <!-- Slider 2 Column -->
+        <div class="slider-column">
+          <div class="slider-track" id="track-2">
+            <div class="track-line"></div>
+            <div class="thumb thumb-2" id="slider-thumb-2"></div>
+          </div>
+          <div class="slider-control">
+            <div class="result">
+              <span>2: </span>
+              <span id="descriptor-2">Nothing at all</span>
+              <span id="numeric-value-2" class="numeric-value numeric-value-2">0</span>
+            </div>
+            <button id="toggle-btn-2" class="button-2">Show</button>
+          </div>
         </div>
         
-        <!-- Slider 3 -->
-        <div class="slider-track" id="track-3">
-          <div class="track-line"></div>
-          <div class="thumb thumb-3" id="slider-thumb-3"></div>
+        <!-- Slider 3 Column -->
+        <div class="slider-column">
+          <div class="slider-track" id="track-3">
+            <div class="track-line"></div>
+            <div class="thumb thumb-3" id="slider-thumb-3"></div>
+          </div>
+          <div class="slider-control">
+            <div class="result">
+              <span>3: </span>
+              <span id="descriptor-3">Nothing at all</span>
+              <span id="numeric-value-3" class="numeric-value numeric-value-3">0</span>
+            </div>
+            <button id="toggle-btn-3" class="button-3">Show</button>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <div class="controls">
-      <!-- Slider 1 Controls -->
-      <div class="slider-control">
-        <div class="result">
-          <span>1: </span>
-          <span id="descriptor-1">Nothing at all</span>
-          <span id="numeric-value-1" class="numeric-value numeric-value-1">0</span>
-        </div>
-        <button id="toggle-btn-1" class="button-1">Show</button>
-      </div>
-      
-      <!-- Slider 2 Controls -->
-      <div class="slider-control">
-        <div class="result">
-          <span>2: </span>
-          <span id="descriptor-2">Nothing at all</span>
-          <span id="numeric-value-2" class="numeric-value numeric-value-2">0</span>
-        </div>
-        <button id="toggle-btn-2" class="button-2">Show</button>
-      </div>
-      
-      <!-- Slider 3 Controls -->
-      <div class="slider-control">
-        <div class="result">
-          <span>3: </span>
-          <span id="descriptor-3">Nothing at all</span>
-          <span id="numeric-value-3" class="numeric-value numeric-value-3">0</span>
-        </div>
-        <button id="toggle-btn-3" class="button-3">Show</button>
       </div>
     </div>
   </div>
@@ -629,19 +634,21 @@ ul.task-list li input[type="checkbox"] {
       padding: 0;
     }
     
-    table {
+    /* Scope all styles to only affect the protocol container */
+    .protocol-container table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 0.5rem;
     }
     
-    th, td {
+    .protocol-container th, 
+    .protocol-container td {
       padding: 0.35rem 0.5rem;
       text-align: left;
       border: 1px solid #ddd;
     }
     
-    th {
+    .protocol-container th {
       background-color: #4285f4;
       color: white;
       font-weight: bold;
@@ -653,7 +660,8 @@ ul.task-list li input[type="checkbox"] {
       font-size: 0.8rem;
     }
     
-    input {
+    /* Only affect input elements inside the protocol container */
+    .protocol-container input[type="number"] {
       width: 100%;
       padding: 0.25rem;
       border: 1px solid #ddd;
@@ -668,7 +676,8 @@ ul.task-list li input[type="checkbox"] {
       margin-top: 0.5rem;
     }
     
-    button {
+    /* Only affect buttons inside the protocol container */
+    .protocol-container button {
       padding: 0.25rem 0.5rem;
       background-color: #4285f4;
       color: white;
@@ -678,7 +687,7 @@ ul.task-list li input[type="checkbox"] {
       font-size: 0.75rem;
     }
     
-    #clearBtn {
+    .protocol-container #clearBtn {
       background-color: #ea4335;
     }
     
@@ -811,9 +820,52 @@ ul.task-list li input[type="checkbox"] {
     }
   </script>
 
-
-
 </section>
+</section>
+<section id="test-your-learning" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="test-your-learning"><span class="header-section-number">6.3.2</span> Test your learning</h3>
+What is the key difference between external and internal load?
+<div id="radio_YRFZKMHIRI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YRFZKMHIRI" value=""> <span>External load measures the body's response, internal load measures work done</span></label><label><input type="radio" autocomplete="off" name="radio_YRFZKMHIRI" value="answer"> <span>External load measures work done, internal load measures the body's response</span></label><label><input type="radio" autocomplete="off" name="radio_YRFZKMHIRI" value=""> <span>Both external and internal load measure the same thing</span></label><label><input type="radio" autocomplete="off" name="radio_YRFZKMHIRI" value=""> <span>External load is always higher than internal load</span></label>
+</div>
+Which of the following are examples of external load measures?
+<div id="radio_YYHYPYNDUA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YYHYPYNDUA" value=""> <span>Heart rate and RPE</span></label><label><input type="radio" autocomplete="off" name="radio_YYHYPYNDUA" value=""> <span>Testosterone and cortisol levels</span></label><label><input type="radio" autocomplete="off" name="radio_YYHYPYNDUA" value="answer"> <span>Distance covered and number of steps</span></label><label><input type="radio" autocomplete="off" name="radio_YYHYPYNDUA" value=""> <span>Mood state and wellness scores</span></label>
+</div>
+Which of the following are examples of objective internal load markers?
+<div id="radio_DVJAIILOHP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DVJAIILOHP" value=""> <span>RPE and mood questionnaires</span></label><label><input type="radio" autocomplete="off" name="radio_DVJAIILOHP" value=""> <span>Distance and speed</span></label><label><input type="radio" autocomplete="off" name="radio_DVJAIILOHP" value="answer"> <span>Heart rate and creatine kinase</span></label><label><input type="radio" autocomplete="off" name="radio_DVJAIILOHP" value=""> <span>GPS coordinates and accelerometer data</span></label>
+</div>
+Which of the following are examples of subjective internal load markers?
+<div id="radio_UAJALGAACH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UAJALGAACH" value=""> <span>Heart rate variability</span></label><label><input type="radio" autocomplete="off" name="radio_UAJALGAACH" value=""> <span>Blood lactate levels</span></label><label><input type="radio" autocomplete="off" name="radio_UAJALGAACH" value="answer"> <span>Session RPE and Profile of Mood States</span></label><label><input type="radio" autocomplete="off" name="radio_UAJALGAACH" value=""> <span>Distance covered and jump height</span></label>
+</div>
+How does technology like the Polar Team System contribute to load monitoring?
+<div id="radio_XAIYJXSMJJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XAIYJXSMJJ" value=""> <span>Only external load can be measured with technology</span></label><label><input type="radio" autocomplete="off" name="radio_XAIYJXSMJJ" value=""> <span>Technology can only measure subjective responses</span></label><label><input type="radio" autocomplete="off" name="radio_XAIYJXSMJJ" value="answer"> <span>Technology can measure both external load (GPS/IMU) and objective internal load (heart rate)</span></label><label><input type="radio" autocomplete="off" name="radio_XAIYJXSMJJ" value=""> <span>Technology cannot be used for load monitoring</span></label>
+</div>
+When comparing the three exercise protocols (continuous running, intermittent shuttles, cross-training), what would you expect?
+<div id="radio_LUNSCGXNTC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LUNSCGXNTC" value=""> <span>All three protocols will produce identical load profiles</span></label><label><input type="radio" autocomplete="off" name="radio_LUNSCGXNTC" value=""> <span>Only the continuous protocol produces meaningful data</span></label><label><input type="radio" autocomplete="off" name="radio_LUNSCGXNTC" value="answer"> <span>Different protocols (continuous, intermittent, cross-training) will likely produce different internal and external load responses</span></label><label><input type="radio" autocomplete="off" name="radio_LUNSCGXNTC" value=""> <span>External load is the same regardless of protocol type</span></label>
+</div>
+When should Rating of Perceived Exertion (RPE) be collected during the practical session?
+<div id="radio_NFGKLCRUPQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NFGKLCRUPQ" value=""> <span>RPE should be collected before starting exercise</span></label><label><input type="radio" autocomplete="off" name="radio_NFGKLCRUPQ" value=""> <span>RPE is only useful for continuous exercise</span></label><label><input type="radio" autocomplete="off" name="radio_NFGKLCRUPQ" value="answer"> <span>RPE should be collected after each exercise protocol to assess subjective internal load</span></label><label><input type="radio" autocomplete="off" name="radio_NFGKLCRUPQ" value=""> <span>RPE is an external load measure</span></label>
+</div>
+What is the primary purpose of monitoring both external and internal load in athletes?
+<div id="radio_XSPTJGZWNH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XSPTJGZWNH" value=""> <span>To make exercises more difficult for athletes</span></label><label><input type="radio" autocomplete="off" name="radio_XSPTJGZWNH" value=""> <span>To reduce the amount of training athletes do</span></label><label><input type="radio" autocomplete="off" name="radio_XSPTJGZWNH" value="answer"> <span>To optimize training by understanding both the work done and the body's response to that work</span></label><label><input type="radio" autocomplete="off" name="radio_XSPTJGZWNH" value=""> <span>To replace traditional coaching methods entirely</span></label>
+</div>
+What role do wellness questionnaires play in load monitoring?
+<div id="radio_EKRYSONCVC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EKRYSONCVC" value=""> <span>They measure external load</span></label><label><input type="radio" autocomplete="off" name="radio_EKRYSONCVC" value=""> <span>They are objective biochemical markers</span></label><label><input type="radio" autocomplete="off" name="radio_EKRYSONCVC" value="answer"> <span>They provide subjective internal load data about an athlete's readiness to train</span></label><label><input type="radio" autocomplete="off" name="radio_EKRYSONCVC" value=""> <span>They are only used after exercise sessions</span></label>
+</div>
+How should external and internal load measures be used together in practice?
+<div id="radio_HJNUIERGYB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HJNUIERGYB" value=""> <span>External load measures are more important than internal load measures</span></label><label><input type="radio" autocomplete="off" name="radio_HJNUIERGYB" value=""> <span>Internal load measures are more important than external load measures</span></label><label><input type="radio" autocomplete="off" name="radio_HJNUIERGYB" value="answer"> <span>Both external and internal load measures provide complementary information for comprehensive athlete monitoring</span></label><label><input type="radio" autocomplete="off" name="radio_HJNUIERGYB" value=""> <span>Only one type of load measure is needed for effective monitoring</span></label>
+</div>
+
+
 </section>
 </section>
 
