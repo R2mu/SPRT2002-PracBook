@@ -1,0 +1,1487 @@
+---
+title: "Week 4 - Practical"
+sidebar: false
+---
+
+## Learning Outcome:
+
+```{=html}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+```
+
+1.  Understand measurement accuracy concepts and their application to exercise testing and measurement
+
+2.  Evaluate the feasibility of different tests according to environmental conditions and client characteristics
+
+3.  Demonstrate basic data processing and analytically techniques
+
+<br>
+
+## Practical Goals:
+
+1.  3rd round of data collection for practical report 2
+
+2.  Practice developing skills at running and collecting commonly used test for assessment of cardiovascular fitness and parasympathetic vs sympathetic activity.
+
+3.  Understand how measures collected would be practically applied in the field, considering important limitations to the measures.
+
+4.  Understand basic intuition around how correlation plots can be used as a measure of convergent validity between measures testing the same trait/construct.
+
+5.  Time permitting; practise making Bland-Altman plots using data collected from previous weeks.
+
+<br>
+
+## Example case study
+
+You hired by an organisation that are use different testing modalities to infer cardiovascular fitness. Namely, they are currently using a combination of a 3 minute step up test, 4 minute fixed wattage bike test and 4 minute run test at 8.5km.hr. The company/team want to know how related these test are. More explicitly they want to know if they knew the result of one test could they use it to infer what the individual may have got on one of the other test.
+
+How might you go about answering this? <br>
+
+### Correlation and regression
+
+In this situation the business/club is asking a question about how much does one test tell us about another test. Or put another way how correlated/associated is one test with another.
+
+Whilst, there are may different ways to get a measure of association/correlation, the most common method is via using simple linear regression (think line of best of fit), and calculating something called a correlation coefficient.
+
+We will go over these measures in a lot more detail in the Week 5 lecture. <br>
+
+::: {.callout-tip title="Interactive regression" collapse="true"}
+```{=html}
+<!-- Linear Regression Visualization with namespaced classes and IDs to avoid conflicts -->
+<div class="lr-container">
+    <style>
+        .lr-container {
+            max-width: 100%;
+            margin: 0 auto;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .lr-container h1 {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: #3a0ca3;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            font-weight: 600;
+            font-size: 1.5em;
+            display: none; /* Hide any h1 tags */
+        }
+        
+        .lr-chart-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .lr-controls {
+            margin-bottom: 12px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .lr-slider-container {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .lr-button-container {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .lr-slider-label {
+            display: inline-block;
+            width: 180px;
+            font-weight: 500;
+            color: #212529;
+        }
+        
+        .lr-slider {
+            flex: 1;
+            max-width: 350px;
+            height: 5px;
+            background: linear-gradient(to right, #d8e2ef, #4361ee);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+            margin: 0 15px;
+        }
+        
+        .lr-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4361ee;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .lr-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+        
+        .lr-value-display {
+            display: inline-block;
+            width: 60px;
+            text-align: center;
+            font-weight: 500;
+            color: #4361ee;
+            background: #eef1ff;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        
+        .lr-optimal-value {
+            display: inline-block;
+            margin-left: 5px;
+            color: #2dc653;
+            font-weight: 500;
+        }
+        
+        .lr-button {
+            padding: 10px 16px;
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .lr-button:hover {
+            background-color: #3a0ca3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .lr-button-optimal {
+            background-color: #2dc653;
+        }
+        
+        .lr-button-optimal:hover {
+            background-color: #25a244;
+        }
+        
+        .lr-button-residuals, .lr-button-squares {
+            background-color: #f9c74f;
+            color: #212529;
+        }
+        
+        .lr-button-residuals:hover, .lr-button-squares:hover {
+            background-color: #f0b429;
+        }
+        
+        .lr-button-download {
+            background-color: #6c757d;
+        }
+        
+        .lr-button-download:hover {
+            background-color: #5a6268;
+        }
+        
+        .lr-tooltip {
+            position: absolute;
+            background-color: rgba(33, 37, 41, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 400;
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .lr-equations-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 6px 10px;
+            background-color: #f8f9ff;
+            border-radius: 6px;
+            gap: 10px;
+        }
+        
+        .lr-equation {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .lr-manual-equation {
+            color: #ef476f;
+        }
+        
+        .lr-optimal-equation {
+            color: #2dc653;
+            font-size: 16px;
+        }
+        
+        .lr-mean-line {
+            stroke-dasharray: 5,5;
+            stroke-width: 1.5;
+        }
+        
+        .lr-stats-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .lr-stats {
+            font-size: 12px;
+            line-height: 1.4;
+            color: #212529;
+        }
+        
+        .lr-stats p {
+            margin: 3px 0;
+        }
+        
+        .lr-stats-highlight {
+            font-weight: 600;
+            color: #2dc653;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .lr-slider-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .lr-slider-label {
+                margin-bottom: 8px;
+                width: 100%;
+            }
+            
+            .lr-slider {
+                width: 100%;
+                margin: 0 0 15px 0;
+            }
+            
+            .lr-button-container {
+                justify-content: center;
+            }
+            
+            .lr-button {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
+    <div class="lr-controls">
+        <div class="lr-slider-container">
+            <span class="lr-slider-label">Correlation Strength:</span>
+            <input type="range" id="lr-correlation" class="lr-slider" min="-1" max="1" step="0.05" value="0.7">
+            <span class="lr-value-display" id="lr-correlation-value">0.7</span>
+        </div>
+        
+        <div class="lr-slider-container">
+            <span class="lr-slider-label">Intercept (β₀):<span class="lr-optimal-value" id="lr-optimal-intercept-value"></span></span>
+            <input type="range" id="lr-intercept" class="lr-slider" min="0" max="100" step="0.1" value="5">
+            <span class="lr-value-display" id="lr-intercept-value">5</span>
+        </div>
+        
+        <div class="lr-slider-container">
+            <span class="lr-slider-label">Slope (β₁):<span class="lr-optimal-value" id="lr-optimal-slope-value"></span></span>
+            <input type="range" id="lr-slope" class="lr-slider" min="-3" max="3" step="0.05" value="1">
+            <span class="lr-value-display" id="lr-slope-value">1</span>
+        </div>
+        
+        <div class="lr-button-container">
+            <button id="lr-generate-data" class="lr-button">Generate New Data</button>
+            <button id="lr-toggle-line" class="lr-button">Hide Regression Line</button>
+            <button id="lr-show-residuals" class="lr-button lr-button-residuals">Show Residuals</button>
+            <button id="lr-show-squares" class="lr-button lr-button-squares">Show Squared Errors</button>
+            <button id="lr-show-optimal" class="lr-button lr-button-optimal">Hide Optimal Line</button>
+            <button id="lr-show-means" class="lr-button">Show Mean Lines</button>
+            <button id="lr-download-csv" class="lr-button lr-button-download">Download CSV</button>
+        </div>
+    </div>
+    
+    <div class="lr-chart-container">
+        <div class="lr-equations-container">
+            <div class="lr-equation lr-manual-equation" id="lr-equation-display">y = 1x + 5</div>
+            <div class="lr-equation lr-optimal-equation" id="lr-optimal-equation-display"></div>
+        </div>
+        <div id="lr-scatter-plot"></div>
+    </div>
+    
+    <!-- New container for optimal regression statistics -->
+    <div class="lr-stats-container">
+        <div class="lr-stats" id="lr-optimal-stats"></div>
+    </div>
+
+    <script>
+        // IIFE to avoid global scope pollution
+        (function() {
+            // Configuration
+            const lrConfig = {
+                mainChart: {
+                    width: 400,
+                    height: 290, // Reduced height from 450 to 320
+                    margin: { top: 20, right: 30, bottom: 35, left: 60 } // Slightly reduced top/bottom margins
+                },
+                pointCount: 40,
+                xRange: [0, 100],
+                yRange: [0, 100]
+            };
+
+            // State variables
+            let lrData = [];
+            let lrCorrelation = 0.7;
+            let lrIntercept = 5;
+            let lrSlope = 1;
+            let lrShowResiduals = false;
+            let lrShowSquares = false;
+            let lrShowLine = true;
+            let lrShowOptimalLine = true; // Changed to true by default
+            let lrShowMeanLines = false;
+            let lrOptimalParams = { intercept: 0, slope: 0 };
+
+            // Initialize the main chart with responsive design
+            const lrSvg = d3.select("#lr-scatter-plot")
+                .append("svg")
+                .attr("width", "100%") // Set width to 100% for responsiveness
+                .attr("height", "100%") // Set height to 100% for responsiveness
+                .attr("viewBox", `0 0 ${lrConfig.mainChart.width} ${lrConfig.mainChart.height}`) // Use viewBox for scaling
+                .attr("preserveAspectRatio", "xMidYMid meet"); // Maintain aspect ratio
+                
+            // Create tooltip
+            const lrTooltip = d3.select(".lr-container").append("div")
+                .attr("class", "lr-tooltip")
+                .style("opacity", 0);
+
+            // Set up scales
+            const lrXScale = d3.scaleLinear()
+                .domain(lrConfig.xRange)
+                .range([lrConfig.mainChart.margin.left, lrConfig.mainChart.width - lrConfig.mainChart.margin.right]);
+                
+            const lrYScale = d3.scaleLinear()
+                .domain(lrConfig.yRange)
+                .range([lrConfig.mainChart.height - lrConfig.mainChart.margin.bottom, lrConfig.mainChart.margin.top]);
+
+            // Create axes
+            const lrXAxis = lrSvg.append("g")
+                .attr("transform", `translate(0, ${lrConfig.mainChart.height - lrConfig.mainChart.margin.bottom})`)
+                .call(d3.axisBottom(lrXScale));
+                
+            const lrYAxis = lrSvg.append("g")
+                .attr("transform", `translate(${lrConfig.mainChart.margin.left}, 0)`)
+                .call(d3.axisLeft(lrYScale));
+                
+            // Add axis labels
+            lrSvg.append("text")
+                .attr("text-anchor", "middle")
+                .attr("x", lrConfig.mainChart.width / 2)
+                .attr("y", lrConfig.mainChart.height - 10)
+                .text("X");
+                
+            lrSvg.append("text")
+                .attr("text-anchor", "middle")
+                .attr("transform", `translate(${lrConfig.mainChart.margin.left / 3}, ${lrConfig.mainChart.height / 2}) rotate(-90)`)
+                .text("Y");
+
+            // Groups for different elements
+            const lrPointsGroup = lrSvg.append("g").attr("class", "lr-points");
+            const lrLineGroup = lrSvg.append("g").attr("class", "lr-regression-line");
+            const lrOptimalLineGroup = lrSvg.append("g").attr("class", "lr-optimal-line");
+            const lrResidualsGroup = lrSvg.append("g").attr("class", "lr-residuals");
+            const lrSquaresGroup = lrSvg.append("g").attr("class", "lr-squares");
+            const lrMeanLinesGroup = lrSvg.append("g").attr("class", "lr-mean-lines");
+
+            // Improved function to generate correlated data with the specified correlation
+            function generateLrData(targetCorrelation, n = lrConfig.pointCount) {
+                // Generate X values evenly distributed across the range
+                const xValues = Array.from({ length: n }, (_, i) => {
+                    const proportion = i / (n - 1);
+                    // Add some randomness but keep within plot range
+                    const x = lrConfig.xRange[0] + proportion * (lrConfig.xRange[1] - lrConfig.xRange[0]) + 
+                            (Math.random() - 0.5) * 20;
+                    return Math.max(lrConfig.xRange[0] + 5, Math.min(lrConfig.xRange[1] - 5, x));
+                });
+                
+                // Calculate mean and std dev for X
+                const meanX = xValues.reduce((sum, x) => sum + x, 0) / n;
+                const varX = xValues.reduce((sum, x) => sum + (x - meanX) ** 2, 0) / n;
+                const stdDevX = Math.sqrt(varX);
+                
+                // Generate independent Y values (random normal distribution)
+                const independentYValues = Array.from({ length: n }, () => {
+                    // Box-Muller transform for normal distribution
+                    const u1 = Math.random();
+                    const u2 = Math.random();
+                    const z = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+                    return z;
+                });
+                
+                // Calculate mean and std dev for independent Y
+                const meanIndepY = independentYValues.reduce((sum, y) => sum + y, 0) / n;
+                const varIndepY = independentYValues.reduce((sum, y) => sum + (y - meanIndepY) ** 2, 0) / n;
+                const stdDevIndepY = Math.sqrt(varIndepY);
+                
+                // Normalize independent Y values
+                const normalizedIndepY = independentYValues.map(y => (y - meanIndepY) / stdDevIndepY);
+                
+                // Normalize X values
+                const normalizedX = xValues.map(x => (x - meanX) / stdDevX);
+                
+                // Generate correlated Y values
+                const yValues = normalizedX.map((nx, i) => {
+                    const correlated = targetCorrelation * nx + 
+                                    Math.sqrt(1 - targetCorrelation * targetCorrelation) * normalizedIndepY[i];
+                                    
+                    // Scale back to desired range (centered around 50, std dev around 15)
+                    const targetMeanY = 50;
+                    const targetStdDevY = 15;
+                    return targetMeanY + correlated * targetStdDevY;
+                });
+                
+                // Ensure Y values stay within plot range
+                const clampedYValues = yValues.map(y => 
+                    Math.max(lrConfig.yRange[0] + 5, Math.min(lrConfig.yRange[1] - 5, y))
+                );
+                
+                // Create final data points
+                return xValues.map((x, i) => ({ x, y: clampedYValues[i] }));
+            }
+
+            // Calculate predictions based on intercept and slope
+            function getLrPrediction(x, intercept, slope) {
+                return intercept + slope * x;
+            }
+
+            // Calculate sum of squared errors
+            function calculateLrSSE(data, intercept, slope) {
+                return data.reduce((sum, point) => {
+                    const predicted = getLrPrediction(point.x, intercept, slope);
+                    const residual = point.y - predicted;
+                    return sum + residual * residual;
+                }, 0);
+            }
+
+            // Calculate Standard Error of Estimate (SEE)
+            function calculateLrSEE(data, intercept, slope) {
+                const sse = calculateLrSSE(data, intercept, slope);
+                const n = data.length;
+                // Standard Error of Estimate formula: sqrt(SSE/(n-2))
+                return Math.sqrt(sse / (n - 2));
+            }
+
+            // Function to download data as CSV
+            function downloadLrCSV() {
+                // Create CSV content
+                let csvContent = "X,Y\n";
+                lrData.forEach(point => {
+                    csvContent += `${point.x.toFixed(2)},${point.y.toFixed(2)}\n`;
+                });
+                
+                // Create download link
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                
+                // Set up download attributes
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'regression_data.csv');
+                link.style.visibility = 'hidden';
+                
+                // Trigger download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+
+            // Calculate optimal parameters using least squares
+            function calculateLrOptimalParams(data) {
+                const n = data.length;
+                
+                const sumX = data.reduce((sum, p) => sum + p.x, 0);
+                const sumY = data.reduce((sum, p) => sum + p.y, 0);
+                const sumXY = data.reduce((sum, p) => sum + p.x * p.y, 0);
+                const sumXX = data.reduce((sum, p) => sum + p.x * p.x, 0);
+                
+                const meanX = sumX / n;
+                const meanY = sumY / n;
+                
+                const slope = (sumXY - sumX * sumY / n) / (sumXX - sumX * sumX / n);
+                const intercept = meanY - slope * meanX;
+                
+                return { intercept, slope };
+            }
+
+            // Update residuals and squares
+            function updateLrResidualsAndSquares() {
+                lrResidualsGroup.selectAll("line").remove();
+                lrSquaresGroup.selectAll("rect").remove();
+                
+                if (!lrShowResiduals && !lrShowSquares) {
+                    return;
+                }
+                
+                lrData.forEach(point => {
+                    const predicted = getLrPrediction(point.x, lrIntercept, lrSlope);
+                    const residual = point.y - predicted;
+                    
+                    if (lrShowResiduals) {
+                        lrResidualsGroup.append("line")
+                            .attr("x1", lrXScale(point.x))
+                            .attr("y1", lrYScale(point.y))
+                            .attr("x2", lrXScale(point.x))
+                            .attr("y2", lrYScale(predicted))
+                            .attr("stroke", "rgba(121, 80, 242, 0.8)")
+                            .attr("stroke-width", 1.5)
+                            .attr("stroke-dasharray", "4,3");
+                    }
+                    
+                    if (lrShowSquares) {
+                        const rectWidth = Math.abs(lrXScale(point.x) - lrXScale(point.x + Math.abs(residual) * Math.sign(residual)));
+                        const rectHeight = Math.abs(lrYScale(predicted) - lrYScale(point.y));
+                        
+                        lrSquaresGroup.append("rect")
+                            .attr("x", lrXScale(point.x))
+                            .attr("y", residual > 0 ? lrYScale(point.y) : lrYScale(predicted))
+                            .attr("width", rectWidth)
+                            .attr("height", rectHeight)
+                            .attr("fill", "rgba(249, 199, 79, 0.4)")
+                            .attr("stroke", "#f9c74f")
+                            .attr("stroke-width", 1.5);
+                    }
+                });
+            }
+
+            // Calculate correlation coefficient (r)
+            function calculateLrCorrelation(data) {
+                const n = data.length;
+                
+                const sumX = data.reduce((sum, p) => sum + p.x, 0);
+                const sumY = data.reduce((sum, p) => sum + p.y, 0);
+                const sumXY = data.reduce((sum, p) => sum + p.x * p.y, 0);
+                const sumXX = data.reduce((sum, p) => sum + p.x * p.x, 0);
+                const sumYY = data.reduce((sum, p) => sum + p.y * p.y, 0);
+                
+                const numerator = n * sumXY - sumX * sumY;
+                const denominator = Math.sqrt((n * sumXX - sumX * sumX) * (n * sumYY - sumY * sumY));
+                
+                return numerator / denominator;
+            }
+            
+            // Calculate coefficient of determination (r²) for given parameters
+            function calculateLrRSquared(data, intercept, slope) {
+                const meanY = data.reduce((sum, p) => sum + p.y, 0) / data.length;
+                
+                // Total sum of squares (proportional to variance of y)
+                const totalSS = data.reduce((sum, p) => sum + Math.pow(p.y - meanY, 2), 0);
+                
+                // Residual sum of squares
+                const residualSS = calculateLrSSE(data, intercept, slope);
+                
+                // R-squared = 1 - (residual sum of squares) / (total sum of squares)
+                return 1 - (residualSS / totalSS);
+            }
+            
+            // Calculate means of the data
+            function calculateLrMeans(data) {
+                const meanX = d3.mean(data, d => d.x);
+                const meanY = d3.mean(data, d => d.y);
+                return { meanX, meanY };
+            }
+            
+            // Update mean lines
+            function updateLrMeanLines() {
+                // Remove all previous mean lines and text
+                lrMeanLinesGroup.selectAll("*").remove();
+                
+                if (!lrShowMeanLines) return;
+                
+                const { meanX, meanY } = calculateLrMeans(lrData);
+                
+                // Add vertical mean line (for X)
+                lrMeanLinesGroup.append("line")
+                    .attr("x1", lrXScale(meanX))
+                    .attr("y1", lrYScale(lrConfig.yRange[0]))
+                    .attr("x2", lrXScale(meanX))
+                    .attr("y2", lrYScale(lrConfig.yRange[1]))
+                    .attr("stroke", "#4361ee")
+                    .attr("class", "lr-mean-line");
+                
+                // Add horizontal mean line (for Y)
+                lrMeanLinesGroup.append("line")
+                    .attr("x1", lrXScale(lrConfig.xRange[0]))
+                    .attr("y1", lrYScale(meanY))
+                    .attr("x2", lrXScale(lrConfig.xRange[1]))
+                    .attr("y2", lrYScale(meanY))
+                    .attr("stroke", "#4361ee")
+                    .attr("class", "lr-mean-line");
+                    
+                // Add text labels for the means
+                lrMeanLinesGroup.append("text")
+                    .attr("x", lrXScale(meanX) + 5)
+                    .attr("y", lrYScale(lrConfig.yRange[0]) - 10)
+                    .attr("fill", "#4361ee")
+                    .attr("text-anchor", "middle")
+                    .text(`x̄ = ${meanX.toFixed(1)}`);
+                    
+                lrMeanLinesGroup.append("text")
+                    .attr("x", lrXScale(lrConfig.xRange[0]) + 40)
+                    .attr("y", lrYScale(meanY) - 5)
+                    .attr("fill", "#4361ee")
+                    .attr("text-anchor", "start")
+                    .text(`ȳ = ${meanY.toFixed(1)}`);
+            }
+
+            // Update equation displays
+            function updateLrEquationDisplay() {
+                // Calculate actual correlation and r-squared values
+                const actualCorrelation = calculateLrCorrelation(lrData);
+                const currentSEE = calculateLrSEE(lrData, lrIntercept, lrSlope);
+                const optimalRSquared = calculateLrRSquared(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                const optimalSEE = calculateLrSEE(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                
+                // Current equation (with red color and only SEE value)
+                const sign = lrSlope >= 0 ? "+" : "";
+                d3.select("#lr-equation-display")
+                    .text(`y = ${lrSlope.toFixed(2)}x ${sign} ${lrIntercept.toFixed(1)} (SEE = ${currentSEE.toFixed(2)})`);
+                
+                // Optimal equation with r, r² and SEE
+                const optSign = lrOptimalParams.slope >= 0 ? "+" : "";
+                d3.select("#lr-optimal-equation-display").text(
+                    `Optimal: y = ${lrOptimalParams.slope.toFixed(2)}x ${optSign} ${lrOptimalParams.intercept.toFixed(1)} (r = ${actualCorrelation.toFixed(2)}, r² = ${optimalRSquared.toFixed(2)}, SEE = ${optimalSEE.toFixed(2)})`
+                );
+            }
+            
+            // New function to update the optimal stats section below the chart
+            function updateLrOptimalStats() {
+                const actualCorrelation = calculateLrCorrelation(lrData);
+                const optimalRSquared = calculateLrRSquared(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                const optimalSEE = calculateLrSEE(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                const optimalSSE = calculateLrSSE(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                
+                const sign = lrOptimalParams.slope >= 0 ? "+" : "";
+                
+                // Create a more informative but still compact explanation
+                const statsHTML = `
+                    <p><strong class="lr-stats-highlight">Optimal Regression Statistics:</strong> y = ${lrOptimalParams.slope.toFixed(2)}x ${sign} ${lrOptimalParams.intercept.toFixed(1)}</p>
+                    <p><strong>r = ${actualCorrelation.toFixed(2)}</strong> (${getCorrelationInterpretation(actualCorrelation)}) | 
+                    <strong>r² = ${optimalRSquared.toFixed(2)}</strong> (${(optimalRSquared * 100).toFixed(1)}% of Y variation explained)</p>
+                    <p><strong>SEE = ${optimalSEE.toFixed(2)}</strong> (average distance of points from line) | 
+                    <strong>SSE = ${optimalSSE.toFixed(1)}</strong> (sum of squared errors, minimized by optimal line)</p>
+                `;
+                
+                d3.select("#lr-optimal-stats").html(statsHTML);
+            }
+            
+            // Helper function to interpret correlation strength
+            function getCorrelationInterpretation(r) {
+                const absR = Math.abs(r);
+                if (absR > 0.9) return r > 0 ? "Very strong positive relationship" : "Very strong negative relationship";
+                if (absR > 0.7) return r > 0 ? "Strong positive relationship" : "Strong negative relationship";
+                if (absR > 0.5) return r > 0 ? "Moderate positive relationship" : "Moderate negative relationship";
+                if (absR > 0.3) return r > 0 ? "Weak positive relationship" : "Weak negative relationship";
+                return "Little to no linear relationship";
+            }
+
+            // Update the main chart
+            function updateLrMainChart() {
+                // Update equation display
+                updateLrEquationDisplay();
+                
+                // Update data points
+                const pointsSelection = lrPointsGroup.selectAll("circle")
+                    .data(lrData);
+                    
+                pointsSelection.enter()
+                    .append("circle")
+                    .merge(pointsSelection)
+                    .attr("cx", d => lrXScale(d.x))
+                    .attr("cy", d => lrYScale(d.y))
+                    .attr("r", 3)
+                    .attr("fill", "rgba(67, 97, 238, 0.7)")
+                    .attr("stroke", "#4361ee")
+                    .attr("stroke-width", 1)
+                    .on("mouseover", function(event, d) {
+                        d3.select(this)
+                            .attr("fill", "rgba(239, 71, 111, 0.9)")
+                            .attr("r", 8)
+                            .attr("stroke", "#ef476f")
+                            .attr("stroke-width", 2);
+                        lrTooltip.style("opacity", 0.9)
+                            .html(
+                                `<strong>X:</strong> ${d.x.toFixed(1)}<br>` +
+                                `<strong>Y:</strong> ${d.y.toFixed(1)}<br>` +
+                                `<strong>Residual:</strong> ${(d.y - getLrPrediction(d.x, lrIntercept, lrSlope)).toFixed(2)}`
+                            )
+                            .style("left", (event.pageX + 10) + "px")
+                            .style("top", (event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function() {
+                        d3.select(this)
+                            .attr("fill", "rgba(67, 97, 238, 0.7)")
+                            .attr("r", 6)
+                            .attr("stroke", "#4361ee")
+                            .attr("stroke-width", 1);
+                        lrTooltip.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    });
+                    
+                pointsSelection.exit().remove();
+                
+                // Update regression line
+                lrLineGroup.selectAll("line").remove();
+                if (lrShowLine) {
+                    const lineX1 = lrConfig.xRange[0];
+                    const lineY1 = getLrPrediction(lineX1, lrIntercept, lrSlope);
+                    const lineX2 = lrConfig.xRange[1];
+                    const lineY2 = getLrPrediction(lineX2, lrIntercept, lrSlope);
+                    
+                    lrLineGroup.append("line")
+                        .attr("x1", lrXScale(lineX1))
+                        .attr("y1", lrYScale(lineY1))
+                        .attr("x2", lrXScale(lineX2))
+                        .attr("y2", lrYScale(lineY2))
+                        .attr("stroke", "#ef476f")
+                        .attr("stroke-width", 3);
+                }
+                
+                // Calculate current SSE
+                const currentSSE = calculateLrSSE(lrData, lrIntercept, lrSlope);
+                lrSvg.selectAll(".lr-sse-text").remove();
+                lrSvg.append("text")
+                    .attr("class", "lr-sse-text")
+                    .attr("x", lrConfig.mainChart.width - lrConfig.mainChart.margin.right - 120)
+                    .attr("y", lrConfig.mainChart.margin.top + 20)
+                    .attr("font-weight", "bold")
+                    .style("font-size", "12px")
+                    .text(`SSE: ${currentSSE.toFixed(0)}`);
+                    
+                // Always calculate and show optimal SSE for comparison
+                const optimalSSE = calculateLrSSE(lrData, lrOptimalParams.intercept, lrOptimalParams.slope);
+                lrSvg.append("text")
+                    .attr("class", "lr-sse-text")
+                    .attr("x", lrConfig.mainChart.width - lrConfig.mainChart.margin.right - 120)
+                    .attr("y", lrConfig.mainChart.margin.top + 40)
+                    .attr("fill", "#2dc653")
+                    .attr("font-weight", "bold")
+                    .style("font-size", "12px")
+                    .text(`Optimal SSE: ${optimalSSE.toFixed(0)}`);
+                    
+                // Update optimal line
+                lrOptimalLineGroup.selectAll("line").remove();
+                if (lrShowOptimalLine) {
+                    const optLineX1 = lrConfig.xRange[0];
+                    const optLineY1 = getLrPrediction(optLineX1, lrOptimalParams.intercept, lrOptimalParams.slope);
+                    const optLineX2 = lrConfig.xRange[1];
+                    const optLineY2 = getLrPrediction(optLineX2, lrOptimalParams.intercept, lrOptimalParams.slope);
+                    
+                    lrOptimalLineGroup.append("line")
+                        .attr("x1", lrXScale(optLineX1))
+                        .attr("y1", lrYScale(optLineY1))
+                        .attr("x2", lrXScale(optLineX2))
+                        .attr("y2", lrYScale(optLineY2))
+                        .attr("stroke", "#2dc653")
+                        .attr("stroke-width", 3)
+                        .attr("stroke-dasharray", "6,4");
+                }
+                
+                // Update residuals and squares
+                updateLrResidualsAndSquares();
+                
+                // Update mean lines
+                updateLrMeanLines();
+                
+                // Update the detailed stats section
+                updateLrOptimalStats();
+            }
+
+            // Function to handle window resize events
+            function handleResize() {
+                const containerWidth = d3.select("#lr-scatter-plot").node().getBoundingClientRect().width;
+                if (containerWidth > 0) {  // Ensure container is visible
+                    // Update the svg's viewBox if needed for better scaling
+                    lrSvg.attr("viewBox", `0 0 ${lrConfig.mainChart.width} ${lrConfig.mainChart.height}`);
+                    // Redraw the chart
+                    updateLrMainChart();
+                }
+            }
+            
+            // Add window resize event listener
+            window.addEventListener("resize", handleResize);
+
+            // Initialize the visualization
+            function initLr() {
+                // Generate data and calculate optimal parameters
+                lrData = generateLrData(lrCorrelation);
+                lrOptimalParams = calculateLrOptimalParams(lrData);
+                
+                // Initialize sliders with optimal values
+                lrIntercept = lrOptimalParams.intercept;
+                lrSlope = lrOptimalParams.slope;
+                
+                // Update slider values in the DOM
+                d3.select("#lr-intercept").property("value", lrIntercept);
+                d3.select("#lr-slope").property("value", lrSlope);
+                
+                // Update main chart
+                updateLrMainChart();
+                
+                // Update value displays
+                d3.select("#lr-correlation-value").text(lrCorrelation.toFixed(2));
+                d3.select("#lr-intercept-value").text(lrIntercept.toFixed(1));
+                d3.select("#lr-slope-value").text(lrSlope.toFixed(2));
+                
+                // Display optimal values
+                d3.select("#lr-optimal-intercept-value").text(` (opt: ${lrOptimalParams.intercept.toFixed(1)})`);
+                d3.select("#lr-optimal-slope-value").text(` (opt: ${lrOptimalParams.slope.toFixed(2)})`);
+                
+                // Update button text to reflect current state
+                d3.select("#lr-show-optimal").text("Hide Optimal Line");
+                
+                // Make sure the container is properly sized
+                handleResize();
+            }
+
+            // Set up event listeners
+            d3.select("#lr-correlation").on("input", function() {
+                lrCorrelation = +this.value;
+                d3.select("#lr-correlation-value").text(lrCorrelation.toFixed(2));
+                lrData = generateLrData(lrCorrelation);
+                lrOptimalParams = calculateLrOptimalParams(lrData);
+                
+                // Update optimal values display
+                d3.select("#lr-optimal-intercept-value").text(` (opt: ${lrOptimalParams.intercept.toFixed(1)})`);
+                d3.select("#lr-optimal-slope-value").text(` (opt: ${lrOptimalParams.slope.toFixed(2)})`);
+                
+                updateLrMainChart();
+            });
+
+            d3.select("#lr-intercept").on("input", function() {
+                lrIntercept = +this.value;
+                d3.select("#lr-intercept-value").text(lrIntercept.toFixed(1));
+                updateLrMainChart();
+            });
+
+            d3.select("#lr-slope").on("input", function() {
+                lrSlope = +this.value;
+                d3.select("#lr-slope-value").text(lrSlope.toFixed(2));
+                updateLrMainChart();
+            });
+            
+            d3.select("#lr-toggle-line").on("click", function() {
+                lrShowLine = !lrShowLine;
+                this.innerHTML = lrShowLine ? "Hide Regression Line" : "Show Regression Line";
+                updateLrMainChart();
+            });
+
+            d3.select("#lr-generate-data").on("click", function() {
+                lrData = generateLrData(lrCorrelation);
+                lrOptimalParams = calculateLrOptimalParams(lrData);
+                
+                // Reset sliders to optimal values
+                lrIntercept = lrOptimalParams.intercept;
+                lrSlope = lrOptimalParams.slope;
+                
+                // Update slider values in the DOM
+                d3.select("#lr-intercept").property("value", lrIntercept);
+                d3.select("#lr-slope").property("value", lrSlope);
+                
+                // Update main chart
+                updateLrMainChart();
+                
+                // Update value displays
+                d3.select("#lr-intercept-value").text(lrIntercept.toFixed(1));
+                d3.select("#lr-slope-value").text(lrSlope.toFixed(2));
+                
+                // Update optimal values display
+                d3.select("#lr-optimal-intercept-value").text(` (opt: ${lrOptimalParams.intercept.toFixed(1)})`);
+                d3.select("#lr-optimal-slope-value").text(` (opt: ${lrOptimalParams.slope.toFixed(2)})`);
+            });
+
+            d3.select("#lr-show-residuals").on("click", function() {
+                lrShowResiduals = !lrShowResiduals;
+                this.innerHTML = lrShowResiduals ? "Hide Residuals" : "Show Residuals";
+                lrShowSquares = false;
+                d3.select("#lr-show-squares").html("Show Squared Errors");
+                updateLrResidualsAndSquares();
+            });
+
+            d3.select("#lr-show-squares").on("click", function() {
+                lrShowSquares = !lrShowSquares;
+                this.innerHTML = lrShowSquares ? "Hide Squared Errors" : "Show Squared Errors";
+                if (lrShowSquares) {
+                    lrShowResiduals = true;
+                    d3.select("#lr-show-residuals").html("Hide Residuals");
+                }
+                updateLrResidualsAndSquares();
+            });
+
+            d3.select("#lr-show-optimal").on("click", function() {
+                lrShowOptimalLine = !lrShowOptimalLine;
+                this.innerHTML = lrShowOptimalLine ? "Hide Optimal Line" : "Show Optimal Line";
+                updateLrMainChart();
+            });
+            
+            d3.select("#lr-show-means").on("click", function() {
+                lrShowMeanLines = !lrShowMeanLines;
+                this.innerHTML = lrShowMeanLines ? "Hide Mean Lines" : "Show Mean Lines";
+                updateLrMeanLines();
+            });
+            
+            d3.select("#lr-download-csv").on("click", function() {
+                downloadLrCSV();
+            });
+
+            // Initialize the visualization
+            initLr();
+        })(); // End of IIFE
+    </script>
+</div>
+```
+:::
+
+<br>
+
+## Practical Procedures (PART 1)
+
+1)  Your tutor will put you into groups of 3.
+2)  We are looking for individuals who think they could participate in at least two of the test mentioned above.
+3)  During the 3-4 minute sub maximal task, you will track the individual Heart Rate at the end of each minute and their HR at the end of 1 minute resting HR
+4)  You will additionally track there HR recovery or the heart rate after resting 60 seconds.
+
+Enter data into the Google form that will be provided on VUWS.
+
+1)  **4 minute run test**: this is done at speed of 9km.hr on the treadmill. (Make sure to monitor the participants HR, ideally we are aiming to see HR's no higher than 170 bpm)
+
+2)  **YMCA step test**: download a metronome app and set it 96 BPM, <https://www.metronomeonline.com/>
+
+-   Set the metronome to 96 beats per minute and turn the volume up loud enough that you can hear each beat.
+-   Stand facing your step.
+-   When ready to begin start the stopwatch or timer and begin stepping on and off the step to the metronome beat following a cadence of up, up, down, down.
+-   Continue for 3 minutes.
+-   As soon as you reach 3 minutes, stop immediately and sit down.
+
+3)  **4 minute Monark Bike test**: Cycle at 60 RPM and KP of 1.5 for 4 minutes. If at 2minutes the heart rate is below 100, increase speed to 70 RPM.
+
+    If for any reason you feel faint or ill during any of testing it is fine to stop.\
+    <br>
+
+## Reflection
+
+How could have we better controlled for potential sources of noise/error in the testing procedure we did today?
+
+Why would using a Bland-Altman plot not be appropriate to compare heart rates in this situation?
+
+<br>
+
+## Section 2 - Bland Altman plot
+
+In week 3 practical we introduced the Bland-Altman plot, we then discussed use of this plot in more detail in the Week 4 seminar (see 50 minutes in).
+
+Similar to previous weeks you will now have time to practice making a Bland-Altman plot.
+
+Download data from the below tab, and use the excel document used in this weeks seminar (1hr and 2minutes in) to see if you can replicate the results.
+
+::: {.callout-tip title="Seminar content" collapse="true"}
+{{< video https://www.youtube.com/watch?v=j21Y2eNotzE>}}
+:::
+
+::: {.callout-tip title="Click for interactive Bland-Altman Plot" collapse="true"}
+```{=html}
+<div class="ba-container">
+    <style>
+        .ba-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+        .ba-controls {
+            margin: 20px 0;
+        }
+        .ba-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .ba-sliders {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        .ba-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 280px;
+        }
+        .ba-slider-label {
+            min-width: 120px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .ba-reference-line {
+            stroke-dasharray: 5,5;
+        }
+        .ba-regression-line {
+            stroke: green;
+            stroke-width: 2;
+        }
+        .ba-tooltip {
+            position: absolute;
+            padding: 8px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .ba-radio-container {
+            margin: 10px 0;
+        }
+        .ba-regression-stats {
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .ba-download-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .ba-download-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+    <h4>Interactive Bland-Altman Plot</h4>
+    <div class="ba-controls">
+        <div class="ba-sliders">
+            <div class="ba-slider-container">
+                <span class="ba-slider-label">Fixed Bias: <span id="ba-biasValue">0</span></span>
+                <input type="range" id="ba-biasSlider" min="-5" max="5" step="0.1" value="0">
+            </div>
+            <div class="ba-slider-container">
+                <span class="ba-slider-label">LOA Width: <span id="ba-loaValue">2</span></span>
+                <input type="range" id="ba-loaSlider" min="0.5" max="10" step="0.1" value="2">
+            </div>
+            <div class="ba-slider-container">
+                <span class="ba-slider-label">Proportional Bias: <span id="ba-propBiasValue">0</span></span>
+                <input type="range" id="ba-propBiasSlider" min="-0.5" max="0.5" step="0.01" value="0">
+            </div>
+            <div class="ba-slider-container">
+                <span class="ba-slider-label">Heteroscedasticity: <span id="ba-heteroValue">0</span></span>
+                <input type="range" id="ba-heteroSlider" min="0" max="0.5" step="0.01" value="0">
+            </div>
+        </div>
+        <div class="ba-radio-container">
+            <label>
+                <input type="checkbox" id="ba-regressionToggle">
+                Show Regression Line (for Proportional Bias)
+            </label>
+        </div>
+        <div id="ba-regressionStats" class="ba-regression-stats"></div>
+        <button id="ba-downloadData" class="ba-download-btn">Download Data</button>
+    </div>
+    <div id="ba-plot"></div>
+
+    <script>
+        // Set up dimensions
+        const margin = {top: 40, right: 100, bottom: 60, left: 60};
+        const width = 550 - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
+
+        // Create SVG
+        const svg = d3.select("#ba-plot")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Add tooltip
+        const tooltip = d3.select(".ba-container").append("div")
+            .attr("class", "ba-tooltip");
+
+        // Calculate linear regression
+        function linearRegression(data) {
+            const xMean = d3.mean(data, d => d.mean);
+            const yMean = d3.mean(data, d => d.diff);
+            
+            const ssxy = d3.sum(data, d => (d.mean - xMean) * (d.diff - yMean));
+            const ssxx = d3.sum(data, d => (d.mean - xMean) * (d.mean - xMean));
+            
+            const slope = ssxy / ssxx;
+            const intercept = yMean - slope * xMean;
+            
+            // Calculate R-squared
+            const yPred = data.map(d => slope * d.mean + intercept);
+            const ssTot = d3.sum(data, d => Math.pow(d.diff - yMean, 2));
+            const ssRes = d3.sum(data.map((d, i) => Math.pow(d.diff - yPred[i], 2)));
+            const rSquared = 1 - (ssRes / ssTot);
+            
+            return { slope, intercept, rSquared };
+        }
+
+        // Generate initial random data
+        function generateInitialData(n = 100) {
+            return Array.from({length: n}, (_, i) => {
+                const methodA = 10 + 2 * (Math.random() - 0.5) * 5;
+                const baseDiff = (Math.random() - 0.5) * 2;
+                
+                return {
+                    id: i,
+                    methodA: methodA,
+                    baseDiff: baseDiff,
+                    methodB: methodA + baseDiff,
+                    mean: (methodA + methodA + baseDiff) / 2,
+                    diff: baseDiff
+                };
+            });
+        }
+
+        // Transform data based on slider values
+        function updateData(data, bias, loa, propBias, hetero) {
+            return data.map(d => {
+                // Apply proportional bias
+                const proportionalComponent = propBias * d.methodA;
+                
+                // Apply heteroscedasticity - variance increases with value
+                const heteroscedasticity = hetero * d.methodA * (Math.random() - 0.5);
+                
+                // Calculate new difference with fixed bias, proportional bias, and heteroscedasticity
+                const scaledBaseDiff = d.baseDiff * loa;
+                const newDiff = scaledBaseDiff + bias + proportionalComponent + heteroscedasticity;
+                
+                // Calculate new method B value
+                const methodB = d.methodA + newDiff;
+                
+                return {
+                    ...d,
+                    methodB: methodB,
+                    mean: (d.methodA + methodB) / 2,
+                    diff: newDiff
+                };
+            });
+        }
+
+        // Set up scales
+        const x = d3.scaleLinear().range([0, width]);
+        const y = d3.scaleLinear().range([height, 0])
+            .domain([-10, 10]); // Fixed y-axis range
+
+        // Add axes
+        const xAxis = svg.append("g")
+            .attr("transform", `translate(0,${height})`);
+        const yAxis = svg.append("g");
+
+        // Add axis labels
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("x", width/2)
+            .attr("y", height + 40)
+            .text("Mean of Methods");
+
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -40)
+            .attr("x", -height/2)
+            .text("Difference (B-A)");
+
+        // Add reference lines
+        const meanLine = svg.append("line")
+            .attr("class", "ba-reference-line")
+            .style("stroke", "red");
+                            
+        const upperLOA = svg.append("line")
+            .attr("class", "ba-reference-line")
+            .style("stroke", "blue");
+                          
+        const lowerLOA = svg.append("line")
+            .attr("class", "ba-reference-line")
+            .style("stroke", "blue");
+                              
+        const zeroLine = svg.append("line")
+            .attr("class", "ba-reference-line")
+            .style("stroke", "#111")
+            .style("stroke-width", "1px")
+            .style("stroke-dasharray", "3,3");
+        
+        const regressionLine = svg.append("line")
+            .attr("class", "ba-regression-line")
+            .style("opacity", 0);
+
+        // Add reference line labels
+        const meanLabel = svg.append("text")
+            .attr("x", width + 5)
+            .style("fill", "red")
+            .attr("dominant-baseline", "middle");
+
+        const upperLabel = svg.append("text")
+            .attr("x", width + 5)
+            .style("fill", "blue")
+            .attr("dominant-baseline", "middle");
+
+        const lowerLabel = svg.append("text")
+            .attr("x", width + 5)
+            .style("fill", "blue")
+            .attr("dominant-baseline", "middle");
+
+        // Generate initial data
+        let baseData = generateInitialData();
+        let currentData = updateData(baseData, 0, 2, 0, 0);
+
+        // Update plot function
+        function updatePlot(data) {
+            // Update x scale only (y scale is fixed)
+            x.domain([d3.min(data, d => d.mean) - 1, d3.max(data, d => d.mean) + 1]);
+
+            // Update axes
+            xAxis.call(d3.axisBottom(x));
+            yAxis.call(d3.axisLeft(y));
+
+            // Update or create points
+            const points = svg.selectAll("circle")
+                .data(data, d => d.id);
+
+            points.enter()
+                .append("circle")
+                .attr("r", 4)
+                .style("fill", "steelblue")
+                .style("opacity", 0.6)
+                .on("mouseover", function(event, d) {
+                    d3.select(this)
+                        .style("opacity", 1)
+                        .attr("r", 6);
+                    
+                    tooltip.style("opacity", 1)
+                        .html(`Method A: ${d.methodA.toFixed(2)}<br>` +
+                              `Method B: ${d.methodB.toFixed(2)}<br>` +
+                              `Mean: ${d.mean.toFixed(2)}<br>` +
+                              `Difference: ${d.diff.toFixed(2)}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 10) + "px");
+                })
+                .on("mouseout", function() {
+                    d3.select(this)
+                        .style("opacity", 0.6)
+                        .attr("r", 4);
+                    tooltip.style("opacity", 0);
+                })
+                .merge(points)
+                .transition()
+                .duration(200)
+                .attr("cx", d => x(d.mean))
+                .attr("cy", d => y(d.diff));
+
+            // Update reference lines
+            const bias = d3.mean(data, d => d.diff);
+            const sd = d3.deviation(data, d => d.diff);
+
+            zeroLine
+                .transition()
+                .duration(0)
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", y(0))
+                .attr("y2", y(0));
+
+            meanLine
+                .transition()
+                .duration(200)
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", y(bias))
+                .attr("y2", y(bias));
+
+            upperLOA
+                .transition()
+                .duration(200)
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", y(bias + 1.96 * sd))
+                .attr("y2", y(bias + 1.96 * sd));
+
+            lowerLOA
+                .transition()
+                .duration(200)
+                .attr("x1", 0)
+                .attr("x2", width)
+                .attr("y1", y(bias - 1.96 * sd))
+                .attr("y2", y(bias - 1.96 * sd));
+
+            // Update regression line if toggled
+            if (d3.select("#ba-regressionToggle").property("checked")) {
+                const reg = linearRegression(data);
+                const x1 = x.domain()[0];
+                const x2 = x.domain()[1];
+                const y1 = reg.slope * x1 + reg.intercept;
+                const y2 = reg.slope * x2 + reg.intercept;
+
+                regressionLine
+                    .transition()
+                    .duration(200)
+                    .style("opacity", 1)
+                    .attr("x1", x(x1))
+                    .attr("y1", y(y1))
+                    .attr("x2", x(x2))
+                    .attr("y2", y(y2));
+
+                // Update regression stats
+                d3.select("#ba-regressionStats")
+                    .html(`Slope: ${reg.slope.toFixed(3)}<br>` +
+                          `Intercept: ${reg.intercept.toFixed(3)}<br>` +
+                          `R²: ${reg.rSquared.toFixed(3)}`);
+            } else {
+                regressionLine.style("opacity", 0);
+                d3.select("#ba-regressionStats").html("");
+            }
+
+            // Update labels
+            meanLabel
+                .transition()
+                .duration(200)
+                .attr("y", y(bias))
+                .text(`BIAS: ${bias.toFixed(2)}`);
+
+            upperLabel
+                .transition()
+                .duration(200)
+                .attr("y", y(bias + 1.96 * sd))
+                .text(`ULOA: ${(bias + 1.96 * sd).toFixed(2)}`);
+
+            lowerLabel
+                .transition()
+                .duration(200)
+                .attr("y", y(bias - 1.96 * sd))
+                .text(`LLOA: ${(bias - 1.96 * sd).toFixed(2)}`);
+        }
+
+        // Function to download data as CSV
+        function downloadCSV(data) {
+            // Create CSV content
+            const headers = ["id", "methodA", "methodB", "mean", "diff"];
+            let csvContent = headers.join(",") + "\n";
+            
+            data.forEach(d => {
+                const row = [
+                    d.id,
+                    d.methodA.toFixed(4),
+                    d.methodB.toFixed(4),
+                    d.mean.toFixed(4),
+                    d.diff.toFixed(4)
+                ];
+                csvContent += row.join(",") + "\n";
+            });
+            
+            // Create download link
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            
+            // Create temporary link and trigger download
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            
+            // Generate filename with current parameter values
+            const bias = d3.select("#ba-biasValue").text();
+            const loa = d3.select("#ba-loaValue").text();
+            const propBias = d3.select("#ba-propBiasValue").text();
+            const hetero = d3.select("#ba-heteroValue").text();
+            link.setAttribute("download", `bland_altman_data_bias${bias}_loa${loa}_prop${propBias}_hetero${hetero}.csv`);
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Initial plot
+        updatePlot(currentData);
+
+        // Function to update data based on all slider values
+        function updateDataFromSliders() {
+            const bias = +d3.select("#ba-biasSlider").property("value");
+            const loa = +d3.select("#ba-loaSlider").property("value");
+            const propBias = +d3.select("#ba-propBiasSlider").property("value");
+            const hetero = +d3.select("#ba-heteroSlider").property("value");
+            
+            currentData = updateData(baseData, bias, loa, propBias, hetero);
+            updatePlot(currentData);
+        }
+
+        // Slider event listeners
+        d3.select("#ba-biasSlider").on("input", function() {
+            const bias = +this.value;
+            d3.select("#ba-biasValue").text(bias);
+            updateDataFromSliders();
+        });
+
+        d3.select("#ba-loaSlider").on("input", function() {
+            const loa = +this.value;
+            d3.select("#ba-loaValue").text(loa);
+            updateDataFromSliders();
+        });
+        
+        d3.select("#ba-propBiasSlider").on("input", function() {
+            const propBias = +this.value;
+            d3.select("#ba-propBiasValue").text(propBias);
+            updateDataFromSliders();
+        });
+        
+        d3.select("#ba-heteroSlider").on("input", function() {
+            const hetero = +this.value;
+            d3.select("#ba-heteroValue").text(hetero);
+            updateDataFromSliders();
+        });
+
+        // Regression toggle listener
+        d3.select("#ba-regressionToggle").on("change", function() {
+            updatePlot(currentData);
+        });
+
+        // Download button event listener
+        d3.select("#ba-downloadData").on("click", function() {
+            downloadCSV(currentData);
+        });
+    </script>
+</div>
+```
+:::
