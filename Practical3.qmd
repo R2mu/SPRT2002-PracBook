@@ -981,15 +981,15 @@ Enter data into the Google form that will be provided on VUWS.
 
 1)  **4 minute run test**: this is done at speed of 9km.hr on the treadmill. (Make sure to monitor the participants HR, ideally we are aiming to see HR's no higher than 170 bpm)
 
-2)  **YMCA step test**: download a metronome app and set it 96 BPM, <https://www.metronomeonline.com/>
+2)  **YMCA step test**: download a metronome app and set it 96 BPM males and 88 BPM female, <https://www.metronomeonline.com/>
 
--   Set the metronome to 96 beats per minute and turn the volume up loud enough that you can hear each beat.
+-   Set the metronome to 96 beats per minute etc and turn the volume up loud enough that you can hear each beat.
 -   Stand facing your step.
 -   When ready to begin start the stopwatch or timer and begin stepping on and off the step to the metronome beat following a cadence of up, up, down, down.
 -   Continue for 3 minutes.
 -   As soon as you reach 3 minutes, stop immediately and sit down.
 
-3)  **4 minute Monark Bike test**: Cycle at 60 RPM and KP of 1.5 for 4 minutes. If at 2minutes the heart rate is below 100, increase speed to 70 RPM.
+3)  **4 minute Monark Bike test**: Cycle at 70 RPM at 1.5 KP for female and 2 KP for male for 4 minutes.
 
     If for any reason you feel faint or ill during any of testing it is fine to stop.\
     <br>
